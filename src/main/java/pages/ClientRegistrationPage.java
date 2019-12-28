@@ -29,13 +29,13 @@ public class ClientRegistrationPage extends PageBase {
 	@FindBy(id = "user_screen_name")
 	public WebElement userNameTxtBox;
 
-	@FindBy(xpath = "//*label[for='user_type_1']")
+	@FindBy(xpath = "//label[@for='user_type_1']")
 	WebElement clientRadioBtn;
 
-	@FindBy(xpath = "//*label[for='user_type_2']")
+	@FindBy(xpath = "//label[@for='user_type_2']")
 	WebElement designerRadioBtn;
 
-	@FindBy(xpath = "//label[for='user_terms_and_conditions']")
+	@FindBy(xpath = "//label[@for='user_terms_and_conditions']")
 	WebElement termsAndConditionsCheckBox;
 
 	@FindBy(xpath = "//*[text()='يجب تحديد احد الخيارات ┊ احتاج الى تصميم ┊ انا مصمم/مصممة']")

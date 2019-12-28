@@ -1,5 +1,6 @@
 package tests;
 
+import java.awt.AWTException;
 import java.io.IOException;
 
 import org.testng.Assert;
@@ -21,8 +22,6 @@ public class AboutMeTest extends TestBase {
 	LoginPage loginPage;
 	HomePage homePage;
 	DesignsPage designsPage;
-	// String email = "ahmed.ali.rooya@gmail.com";
-	// String password = "11111111";
 	MyPagePage myPagePage;
 	AboutMePage aboutMePage;
 	Faker fakeData = new Faker();
@@ -30,10 +29,6 @@ public class AboutMeTest extends TestBase {
 	String lName = fakeData.name().lastName();
 	String city = fakeData.nation().capitalCity();
 	String phone = fakeData.phoneNumber().cellPhone();
-	// String cityOption = "إنغولا";
-	// String currentPass = "P@55word";
-	// String newPass = "P@55word";
-	// String confirmNewPass = "P@55word";
 
 	@Test(priority = 1)
 	public void openHomePageTest() throws IOException {
@@ -103,6 +98,15 @@ public class AboutMeTest extends TestBase {
 		aboutMePage.saveDataFun();
 		Assert.assertTrue(myPagePage.myCompetitionsLink.isDisplayed());
 		Assert.assertTrue(myPagePage.paymentsLink.isDisplayed());
+	}
+
+	@Test(priority = 7, dependsOnMethods = { "updateLoginDataTest" })
+	public void makeLogoutTest() throws AWTException {
+		homePage = new HomePage(driver);
+		defaultPage = new DefaultPage(driver);
+		homePage.openMainMenuFun();
+		homePage.logoutFun();
+		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
 	}
 
 }

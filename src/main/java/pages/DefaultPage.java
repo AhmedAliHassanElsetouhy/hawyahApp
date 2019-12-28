@@ -12,7 +12,7 @@ public class DefaultPage extends PageBase {
 	}
 
 	@FindBy(linkText = "تسجيل الدخول")
-	WebElement loginLink;
+	public WebElement loginLink;
 
 	@FindBy(linkText = "إنضم إلينا")
 	WebElement joinUsBtn;

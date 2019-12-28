@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class HomePage extends PageBase {
+public class HomeUserPage extends PageBase {
 
-	public HomePage(WebDriver driver) {
+	public HomeUserPage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
@@ -22,27 +22,6 @@ public class HomePage extends PageBase {
 		clickButton(startNowBtn);
 	}
 
-	@FindBy(xpath = "//*[text()='ما هو التصميم الذي تريده؟']")
-	public WebElement wantedDesignHeaderMsg;
-
-	@FindBy(xpath = "//*[text()='شعار وهوية']")
-	public WebElement logoAndIdentity;
-
-	@FindBy(xpath = "//*[text()='خط عربي']")
-	public WebElement arabicFont;
-
-	@FindBy(xpath = "//*[text()='تصميم واجهة موقع']")
-	public WebElement websiteInterfaceDesign;
-
-	@FindBy(xpath = "//*[text()='الملابس والتغليف']")
-	public WebElement clothesAndPackaging;
-
-	@FindBy(xpath = "//*[text()='أخرى']")
-	public WebElement other;
-
-	@FindBy(xpath = "//*[text()='كيف نعمل']")
-	public WebElement howWeWorkHeaderMsg;
-
 	@FindBy(xpath = "//*[text()='إشرح']")
 	public WebElement explain;
 
@@ -51,6 +30,41 @@ public class HomePage extends PageBase {
 
 	@FindBy(xpath = "//*[text()='اختر']")
 	public WebElement choose;
+	
+	@FindBy(partialLinkText="عني")
+	public WebElement aboutMeLink;
+	
+	public void openAboutMe() {
+		clickButton(aboutMeLink);
+	}
+	
+	@FindBy(partialLinkText="احصائياتي")
+	public WebElement myStatsLink;
+	
+	public void openMyStats() {
+		clickButton(myStatsLink);
+	}
+	
+	@FindBy(partialLinkText="الحسابات البنكية")
+	public WebElement myBankAccountLink;
+	
+	public void openMyBankAccount() {
+		clickButton(myBankAccountLink);
+	}
+	
+	@FindBy(partialLinkText="طلبات التحويل")
+	public WebElement myTransfersLink;
+	
+	public void openMyTransfers() {
+		clickButton(myTransfersLink);
+	}
+	
+	@FindBy(partialLinkText="أعمالي")
+	public WebElement myWorksLink;
+	
+	public void openMyWorks() {
+		clickButton(myWorksLink);
+	}
 
 	@FindBy(xpath = "//a[@class='dropdown-button grey-text text-darken-1']")
 	WebElement basicMenu;
@@ -90,4 +104,5 @@ public class HomePage extends PageBase {
 	public void logoutFun() {
 		clickButton(logoutBtn);
 	}
+
 }

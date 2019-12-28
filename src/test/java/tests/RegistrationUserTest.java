@@ -9,12 +9,12 @@ import org.testng.annotations.Test;
 import com.github.javafaker.Faker;
 
 import data.ExcelReader;
+import pages.ClientRegistrationPage;
 import pages.DefaultPage;
 import pages.HomePage;
 import pages.RegistrationConfirmationPage;
-import pages.ClientRegistrationPage;
 
-public class RegistrationTest extends TestBase {
+public class RegistrationUserTest extends TestBase {
 
 	ClientRegistrationPage registrationPage;
 	DefaultPage defaultPage;
@@ -57,13 +57,14 @@ public class RegistrationTest extends TestBase {
 	}
 
 	@Test(priority = 4, dependsOnMethods = { "invalidRegisterFormPageTest" })
-	public void clientRegisterFormPageTest() {
+	public void designerRegisterFormPageTest() {
 		defaultPage = new DefaultPage(driver);
 		registrationPage = new ClientRegistrationPage(driver);
 		registerConfirmPage = new RegistrationConfirmationPage(driver);
 		System.out.println(email);
-		registrationPage.clientRegister();
+		registrationPage.designerRegister();
 		registrationPage.submitRegisterfun();
-		Assert.assertTrue(registerConfirmPage.registerClientConfirmMsg.getText().contains("شكرا لتسجيلك في موقع هوية"));
+		System.out.println(registerConfirmPage.registerDesignerConfirmMsg.getText());
+		Assert.assertTrue(registerConfirmPage.registerDesignerConfirmMsg.getText().contains("كمصمم"));
 	}
 }

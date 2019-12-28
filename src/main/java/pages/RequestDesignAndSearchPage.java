@@ -64,10 +64,10 @@ public class RequestDesignAndSearchPage extends PageBase {
 		clickButton(activeStatusLst);
 	}
 
-	public void sendFromToPrice(int fromPrice, int toPrice) {
+	public void sendFromToPrice(String string, String string2) {
 		clickButton(moreTwoDaysOption);
-		setTextElementText(fromTxtBox, fromPrice);
-		setTextElementText(toTxtBox, toPrice);
+		setTextElementText(fromTxtBox, string);
+		setTextElementText(toTxtBox, string2);
 	}
 
 	public void searchBtnFun() {

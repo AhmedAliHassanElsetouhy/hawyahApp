@@ -7,23 +7,18 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import data.ExcelReader;
-import pages.AboutMePage;
 import pages.DefaultPage;
-import pages.DesignsPage;
 import pages.HomePage;
+import pages.HomeUserPage;
 import pages.LoginPage;
-import pages.MyPagePage;
 
-public class MyPageTest extends TestBase {
-
-	DefaultPage defaultPage;
+public class LoginUserTest extends TestBase {
 	LoginPage loginPage;
+	DefaultPage defaultPage;
 	HomePage homePage;
-	DesignsPage designsPage;
-	MyPagePage myPagePage;
-	AboutMePage aboutMePage;
+	HomeUserPage homeUserPage;
 
-	@Test(priority = 1)
+	@Test(priority = 1, alwaysRun = true)
 	public void openHomePageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
@@ -38,33 +33,19 @@ public class MyPageTest extends TestBase {
 		loginPage = new LoginPage(driver);
 		defaultPage = new DefaultPage(driver);
 		homePage = new HomePage(driver);
+		homeUserPage = new HomeUserPage(driver);
 		ExcelReader ER = new ExcelReader();
-		loginPage.loginFun(ER.getExcelData(0, 2)[1][1], ER.getExcelData(0, 2)[2][1]);
+		loginPage.loginFun(ER.getExcelData(5, 2)[1][1], ER.getExcelData(5, 2)[2][1]);
 		System.out.println(homePage.loginConfirmMsg.getText());
 		Assert.assertTrue(homePage.loginConfirmMsg.getText().contains("تم تسجيل الدخول بنجاح"));
+		Assert.assertTrue(homeUserPage.aboutMeLink.isDisplayed());
+		Assert.assertTrue(homeUserPage.myStatsLink.isDisplayed());
+		Assert.assertTrue(homeUserPage.myBankAccountLink.isDisplayed());
+		Assert.assertTrue(homeUserPage.myTransfersLink.isDisplayed());
+		Assert.assertTrue(homeUserPage.myWorksLink.isDisplayed());
 	}
 
 	@Test(priority = 3, dependsOnMethods = { "loginFun" })
-	public void openMyPageTest() {
-		homePage = new HomePage(driver);
-		myPagePage = new MyPagePage(driver);
-		homePage.openMainMenuFun();
-		myPagePage.openMyPageFun();
-		Assert.assertTrue(myPagePage.aboutMeLink.isDisplayed());
-		Assert.assertTrue(myPagePage.myCompetitionsLink.isDisplayed());
-		Assert.assertTrue(myPagePage.paymentsLink.isDisplayed());
-	}
-
-	@Test(priority = 4, dependsOnMethods = { "openMyPageTest" })
-	public void openEditMyAccountDataTest() {
-		homePage = new HomePage(driver);
-		myPagePage = new MyPagePage(driver);
-		aboutMePage = new AboutMePage(driver);
-		myPagePage.openUpdateMyAccountPageFun();
-		Assert.assertTrue(aboutMePage.personalDataLink.isDisplayed());
-	}
-
-	@Test(priority = 5, dependsOnMethods = { "openEditMyAccountDataTest" })
 	public void makeLogoutTest() throws AWTException {
 		homePage = new HomePage(driver);
 		defaultPage = new DefaultPage(driver);
@@ -72,4 +53,5 @@ public class MyPageTest extends TestBase {
 		homePage.logoutFun();
 		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
 	}
+
 }

@@ -79,7 +79,6 @@ public class AboutMePage extends PageBase {
 		setTextElementText(userPassTxtBox, newPass);
 		confirmPassTxtBox.clear();
 		setTextElementText(confirmPassTxtBox, confirmNewPass);
-
 	}
 
 	public void saveDataFun() {

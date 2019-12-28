@@ -1,10 +1,12 @@
 package tests;
 
+import java.awt.AWTException;
+import java.io.IOException;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.github.javafaker.Faker;
-
+import data.ExcelReader;
 import pages.AboutMePage;
 import pages.DefaultPage;
 import pages.DesignsPage;
@@ -19,26 +21,15 @@ public class MessagesTest extends TestBase {
 	LoginPage loginPage;
 	HomePage homePage;
 	DesignsPage designsPage;
-	String email = "ahmed.ali.rooya@gmail.com";
-	String password = "11111111";
 	MyPagePage myPagePage;
 	AboutMePage aboutMePage;
-	Faker fakeData = new Faker();
-	String fName = fakeData.name().firstName();
-	String lName = fakeData.name().lastName();
-	String city = fakeData.nation().capitalCity();
-	String phone = fakeData.phoneNumber().cellPhone();
-	String cityOption = "إنغولا";
-	String currentPass = "11111111";
-	String newPass = "11111111";
-	String confirmNewPass = "11111111";
 	MessagesPage messagePage;
 	MessageFormPage messageFormPage;
-	String body = "Body Body Body";
-	String title = "Title";
 
 	@Test(priority = 1)
-	public void openHomePageTest() {
+	public void openHomePageTest() throws IOException {
+		ExcelReader ER = new ExcelReader();
+		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
 		defaultPage = new DefaultPage(driver);
 		loginPage = new LoginPage(driver);
 		defaultPage.openLoginForm();
@@ -46,11 +37,12 @@ public class MessagesTest extends TestBase {
 	}
 
 	@Test(priority = 2, dependsOnMethods = { "openHomePageTest" })
-	public void loginFun() {
+	public void loginFun() throws IOException {
 		loginPage = new LoginPage(driver);
 		defaultPage = new DefaultPage(driver);
 		homePage = new HomePage(driver);
-		loginPage.loginFun(email, password);
+		ExcelReader ER = new ExcelReader();
+		loginPage.loginFun(ER.getExcelData(0, 2)[1][1], ER.getExcelData(0, 2)[2][1]);
 		System.out.println(homePage.loginConfirmMsg.getText());
 		Assert.assertTrue(homePage.loginConfirmMsg.getText().contains("تم تسجيل الدخول بنجاح"));
 	}
@@ -68,12 +60,22 @@ public class MessagesTest extends TestBase {
 	}
 
 	@Test(priority = 4, dependsOnMethods = { "openMyPageTest" })
-	public void openEditMyAccountDataTest() {
+	public void openEditMyAccountDataTest() throws IOException {
 		myPagePage = new MyPagePage(driver);
 		aboutMePage = new AboutMePage(driver);
+		ExcelReader ER = new ExcelReader();
 		messageFormPage.openAdminListFun();
 		messageFormPage.selectAdmin1Fun();
-		messageFormPage.sendMsgFun(body, title);
+		messageFormPage.sendMsgFun(ER.getExcelData(3, 2)[0][1], ER.getExcelData(3, 2)[1][1]);
 		Assert.assertTrue(messageFormPage.newMsgIcon.isDisplayed());
+	}
+
+	@Test(priority = 5, dependsOnMethods = { "openEditMyAccountDataTest" })
+	public void makeLogoutTest() throws AWTException {
+		homePage = new HomePage(driver);
+		defaultPage = new DefaultPage(driver);
+		homePage.openMainMenuFun();
+		homePage.logoutFun();
+		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
 	}
 }

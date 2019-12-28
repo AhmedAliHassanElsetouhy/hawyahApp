@@ -1,8 +1,12 @@
 package tests;
 
+import java.awt.AWTException;
+import java.io.IOException;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import data.ExcelReader;
 import pages.CompetitionsPage;
 import pages.DefaultPage;
 import pages.DesignsPage;
@@ -17,12 +21,12 @@ public class CompetitionsTest extends TestBase {
 	HomePage homePage;
 	RequestDesignAndSearchPage requestDesignPage;
 	DesignsPage designsPage;
-	String email = "ahmed.ali.rooya@gmail.com";
-	String password = "11111111";
 	CompetitionsPage competitionsPage;
 
 	@Test(priority = 1)
-	public void openHomePageTest() {
+	public void openHomePageTest() throws IOException {
+		ExcelReader ER = new ExcelReader();
+		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
 		defaultPage = new DefaultPage(driver);
 		loginPage = new LoginPage(driver);
 		defaultPage.openLoginForm();
@@ -30,11 +34,12 @@ public class CompetitionsTest extends TestBase {
 	}
 
 	@Test(priority = 2, dependsOnMethods = { "openHomePageTest" })
-	public void loginFun() {
+	public void loginFun() throws IOException {
 		loginPage = new LoginPage(driver);
 		defaultPage = new DefaultPage(driver);
 		homePage = new HomePage(driver);
-		loginPage.loginFun(email, password);
+		ExcelReader ER = new ExcelReader();
+		loginPage.loginFun(ER.getExcelData(0, 2)[1][1], ER.getExcelData(0, 2)[2][1]);
 		// loginPage.submitLoginFun();
 		System.out.println(homePage.loginConfirmMsg.getText());
 		Assert.assertTrue(homePage.loginConfirmMsg.getText().contains("تم تسجيل الدخول بنجاح"));
@@ -46,5 +51,14 @@ public class CompetitionsTest extends TestBase {
 		competitionsPage = new CompetitionsPage(driver);
 		homePage.openCompetitionFun();
 		System.out.println(competitionsPage.competitions.getText());
+	}
+
+	@Test(priority = 4, dependsOnMethods = { "openCompetitionsTest" })
+	public void makeLogoutTest() throws AWTException {
+		homePage = new HomePage(driver);
+		defaultPage = new DefaultPage(driver);
+		homePage.openMainMenuFun();
+		homePage.logoutFun();
+		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
 	}
 }

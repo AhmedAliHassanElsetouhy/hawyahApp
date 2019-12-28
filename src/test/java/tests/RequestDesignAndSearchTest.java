@@ -1,24 +1,27 @@
 package tests;
 
+import java.io.IOException;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.github.javafaker.Faker;
 
+import data.ExcelReader;
 import pages.DefaultPage;
+import pages.HomePage;
 import pages.RequestDesignAndSearchPage;
 
 public class RequestDesignAndSearchTest extends TestBase {
 
 	Faker fakeData = new Faker();
 	DefaultPage defaultPage;
+	HomePage homePage;
 	RequestDesignAndSearchPage requestDesignPage;
 	String searchText = fakeData.name().firstName();
 	// String selectDesignOption = "تصميم شعار";
 	// String selectActivityOption = "الزراعة";
 	// String orderOption = "الأحدث";
-	int fromPrice = 10000;
-	int toPrice = 20000;
 	String status = "منتهية";
 
 	int designIndex = 2;
@@ -26,7 +29,9 @@ public class RequestDesignAndSearchTest extends TestBase {
 	int orderIndex = 2;
 
 	@Test(priority = 1)
-	public void openRequestDesignTest() {
+	public void openRequestDesignTest() throws IOException {
+		ExcelReader ER = new ExcelReader();
+		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
 		defaultPage = new DefaultPage(driver);
 		requestDesignPage = new RequestDesignAndSearchPage(driver);
 		defaultPage.openRequestDesingFun();
@@ -63,12 +68,13 @@ public class RequestDesignAndSearchTest extends TestBase {
 	}
 
 	@Test(priority = 5, dependsOnMethods = { "prizeOptionSearchTest" })
-	public void prizePriceSearchTest() {
+	public void prizePriceSearchTest() throws IOException {
 		defaultPage = new DefaultPage(driver);
 		requestDesignPage = new RequestDesignAndSearchPage(driver);
+		ExcelReader ER = new ExcelReader();
 		requestDesignPage.advancedSearchFun();
 		requestDesignPage.searchTxtBox.clear();
-		requestDesignPage.sendFromToPrice(fromPrice, toPrice);
+		requestDesignPage.sendFromToPrice(ER.getExcelData(4, 2)[0][1], ER.getExcelData(4, 2)[1][1]);
 		requestDesignPage.searchBtnFun();
 		Assert.assertTrue(requestDesignPage.noResultTxtBox.isDisplayed());
 	}
@@ -84,7 +90,7 @@ public class RequestDesignAndSearchTest extends TestBase {
 		Assert.assertTrue(requestDesignPage.noResultTxtBox.isDisplayed());
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 7, dependsOnMethods = { "statusSearchTest" })
 	public void activeStatusSearchTest() {
 		defaultPage = new DefaultPage(driver);
 		requestDesignPage = new RequestDesignAndSearchPage(driver);

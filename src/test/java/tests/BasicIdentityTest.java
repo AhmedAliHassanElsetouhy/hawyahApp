@@ -132,7 +132,17 @@ public class BasicIdentityTest extends TestBase {
 		// paymentPage.silverPrize();
 		// jse.executeScript("scrollBy(0,2500)");
 		paymentPage.bankDepositFun();
+		// System.out.println(paymentPage.bankDeposit.getText());
 		// selectDesignsPage.nextFun();
 		// Assert.assertTrue(paymentPage.paymentPageHeader.isDisplayed());
 	}
+	
+//	@Test(priority = 10, dependsOnMethods = { "ValidPaymentTest" })
+//	public void makeLogoutTest() throws AWTException {
+//		homePage = new HomePage(driver);
+//		defaultPage = new DefaultPage(driver);
+//		homePage.openMainMenuFun();
+//		homePage.logoutFun();
+//		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
+//	}
 }

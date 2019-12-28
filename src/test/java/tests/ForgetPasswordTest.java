@@ -1,12 +1,14 @@
 package tests;
 
 import java.awt.AWTException;
+import java.io.IOException;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.github.javafaker.Faker;
 
+import data.ExcelReader;
 import pages.ClientRegistrationPage;
 import pages.ConfirmPasswordPage;
 import pages.DefaultPage;
@@ -23,12 +25,14 @@ public class ForgetPasswordTest extends TestBase {
 	LoginPage loginPage;
 	ConfirmPasswordPage confirmPasswordPage;
 	ClientRegistrationPage registrationPage;
-	String email = "ahmed.ali.rooya@gmail.com";
-	String password = "11111111";
+//	String email = "ahmed.ali.rooya@gmail.com";
+//	String password = "11111111";
 	String invalidEmail = fakeData.internet().emailAddress();
 
 	@Test(priority = 1)
-	public void openHomePageTest() {
+	public void openHomePageTest() throws IOException {
+		ExcelReader ER = new ExcelReader();
+		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
 		defaultPage = new DefaultPage(driver);
 		loginPage = new LoginPage(driver);
 		defaultPage.openLoginForm();
@@ -57,10 +61,11 @@ public class ForgetPasswordTest extends TestBase {
 	}
 
 	@Test(priority = 4, dependsOnMethods = { "invalidDataForgetPasswordFormTest" })
-	public void forgetPasswordFormTest() {
+	public void forgetPasswordFormTest() throws IOException {
 		forgetPasswordPage = new ForgetPasswordPage(driver);
 		confirmPasswordPage = new ConfirmPasswordPage(driver);
-		forgetPasswordPage.forgetPassFun(email);
+		ExcelReader ER = new ExcelReader();
+		forgetPasswordPage.forgetPassFun(ER.getExcelData(0, 2)[1][1]);		
 		// forgetPasswordPage.sendForgottenEmailBtnFun();
 		Assert.assertTrue(confirmPasswordPage.confirmPassMsg.getText()
 				.contains("الرجاء اتباع التعليمات الموضحة في بريدك الالكتروني"));

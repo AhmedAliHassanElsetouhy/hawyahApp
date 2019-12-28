@@ -14,24 +14,25 @@ public class PaymentPage extends PageBase {
 	@FindBy(xpath = "//*[text()='اختر فئة المسابقة']")
 	public WebElement paymentPageHeader;
 
-	// @FindBy(xpath = "//div[@data-id='1']")
-	@FindBy(xpath = "//div[@class='col m4 s12 wow fadeIn']")
-	// @FindBy(xpath = "//div[@class='contest-image-frame package_option']")
+	@FindBy(xpath = "//*[text()='الفئة الفضية']")
 	WebElement silverType;
 
 	@FindBy(xpath = "//img[@class='icon']")
 	WebElement correctIcon;
+	// *[@id="select-options-430a6986-b622-a71a-8a9c-216ae216a375"]/li[1]/span
 
-	@FindBy(xpath = "//*[text()='إختر طريقة الدفع']")
+	 @FindBy(xpath = "//ul[@class='dropdown-content']")
 	// @FindBy(xpath = "//input[@class='select-dropdown']")
 	// @FindBy(xpath = "//input[@value='إختر طريقة الدفع']")
+//	@FindBy(xpath = "//[@class='dropdown-content select-dropdown']")
 	WebElement paymentLst;
 
-	// @FindBy(xpath = "//*[text()='ايداع بنكي']")
+	// @FindBy(xpath = "//option[text()='ايداع بنكي']")
 	@FindBy(xpath = "//option[@value='DEPOSIT']")
-	WebElement bankDeposit;
+	public WebElement bankDeposit;
 
 	@FindBy(id = "contest_payment_type")
+	// @FindBy(xpath = "//*['@class='select-dropdown']")
 	WebElement paymentList;
 
 	public void silverPrize() {
@@ -40,10 +41,11 @@ public class PaymentPage extends PageBase {
 	}
 
 	public void bankDepositFun() {
-		// clickButton(paymentLst);
+		clickButton(paymentLst);
+		// selectItemWithVisible(paymentList, "إختر طريقة الدفع");
 		selectItemWithVisible(paymentList, "إختر طريقة الدفع");
 		// clickButton(paymentLst);
-		selectItemWithVisible(paymentList, "إختر طريقة الدفع");
+		// selectItemWithVisible(paymentList, "إختر طريقة الدفع");
 		selectItemWithVisible(bankDeposit, "ايداع بنكي");
 		// clickButton(bankDeposit);
 	}

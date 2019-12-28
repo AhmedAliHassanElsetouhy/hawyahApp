@@ -1,5 +1,6 @@
 package tests;
 
+import java.awt.AWTException;
 import java.io.IOException;
 
 import org.testng.Assert;
@@ -15,8 +16,6 @@ public class LoginTest extends TestBase {
 	LoginPage loginPage;
 	DefaultPage defaultPage;
 	HomePage homePage;
-	// String email = "ahmed.ali.rooya@gmail.com";
-	// String password = "11111111";
 
 	@Test(priority = 1, alwaysRun = true)
 	public void openHomePageTest() throws IOException {
@@ -49,5 +48,14 @@ public class LoginTest extends TestBase {
 		Assert.assertTrue(homePage.explain.isDisplayed());
 		Assert.assertTrue(homePage.competing.isDisplayed());
 		Assert.assertTrue(homePage.choose.isDisplayed());
+	}
+
+	@Test(priority = 3, dependsOnMethods = { "loginFun" })
+	public void makeLogoutTest() throws AWTException {
+		homePage = new HomePage(driver);
+		defaultPage = new DefaultPage(driver);
+		homePage.openMainMenuFun();
+		homePage.logoutFun();
+		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
 	}
 }
