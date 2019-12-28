@@ -1,0 +1,29 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Regression Suite">
+	<parameter name="browser" value="chrome" />
+	<test name="Regression Test" preserve-order="true">
+		<classes>
+			<class name="tests.LoginTest" />
+			<class name="tests.RegistrationTest" />
+			<class name="tests.RequestDesignAndSearchTest" />
+			<class name="tests.ForgetPasswordTest" />
+			<class name="tests.BasicIdentityTest" />
+			<class name="tests.CompetitionsTest" />
+			<class name="tests.AboutMeTest" />
+			<class name="tests.CompetitionsListTest" />
+			<class name="tests.WhoUsTest" />
+			<class name="tests.ContactUsTest" />
+			<class name="tests.PricesTest" />
+			<class name="tests.JobsTest" />
+			<class name="tests.TermsAndConditionsTest" />
+			<class name="tests.PrivacyTest" />
+			<class name="tests.CommonQuesTest" />
+			<class name="tests.AskDesignTest" />
+			<class name="tests.BeDesignerTest" />
+			<class name="tests.DesignsRequestTest" />
+			<class name="tests.HowItWorkTest" />
+			<class name="tests.MessagesTest" />
+			<class name="tests.MyPageTest" />
+		</classes>
+	</test>
+</suite> 
