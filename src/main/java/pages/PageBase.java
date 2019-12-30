@@ -77,6 +77,11 @@ public class PageBase {
 		select.selectByVisibleText(selectedElement);
 	}
 
+	public void selectItemByValue(WebElement menuItem, String selectedElement) {
+		select = new Select(menuItem);
+		select.selectByValue(selectedElement);
+	}
+
 	public String split(String strMain, String from) {
 		String[] arrSplit = strMain.split(from);
 		return arrSplit[1];

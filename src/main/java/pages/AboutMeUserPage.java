@@ -38,7 +38,7 @@ public class AboutMeUserPage extends PageBase {
 	WebElement cityOptionTextBox;
 
 	@FindBy(xpath = "//input[@value='حفظ']")
-	WebElement saveBtn;
+	public WebElement saveBtn;
 
 	public void personalDesignerDataForm(String fName, String lName, String screenName, String designerBio, String city,
 			String phone, String cityOption) {
@@ -64,6 +64,7 @@ public class AboutMeUserPage extends PageBase {
 
 	public void saveDataFun() {
 		saveBtn.submit();
+
 	}
 
 	@FindBy(partialLinkText = "البيانات الشخصية")
@@ -110,6 +111,9 @@ public class AboutMeUserPage extends PageBase {
 	@FindBy(id = "designer_account_bank_name")
 	WebElement bankAccountTxtBox;
 
+	@FindBy(xpath = "//*[text()='لم يتم تحديث بياناتك']")
+	WebElement bankAccountValidationMsg;
+
 	public void updateBankAccountDataForm(String ibanNumber, String accountOwnerName, String bankAccount) {
 		ibanNumbertxtBox.clear();
 		setTextElementText(ibanNumbertxtBox, ibanNumber);
@@ -117,9 +121,21 @@ public class AboutMeUserPage extends PageBase {
 		setTextElementText(accountOwnerNameTxtBox, accountOwnerName);
 		bankAccountTxtBox.clear();
 		setTextElementText(bankAccountTxtBox, bankAccount);
+		bankAccountTxtBox.sendKeys(Keys.ENTER);
+		// if (!bankAccountValidationMsg.isDisplayed()) {
+		// } else {
+		// openBankAccountFun();
+		// ibanNumbertxtBox.clear();
+		// setTextElementText(ibanNumbertxtBox, ibanNumber);
+		// accountOwnerNameTxtBox.clear();
+		// setTextElementText(accountOwnerNameTxtBox, accountOwnerName);
+		// bankAccountTxtBox.clear();
+		// setTextElementText(bankAccountTxtBox, bankAccount);
+		// bankAccountTxtBox.sendKeys(Keys.ENTER);
+		// }
 	}
-	
-	@FindBy(xpath="//div[@class='green lighten-5']")
+
+	@FindBy(xpath = "//div[@class='green lighten-5']")
 	public WebElement bankAccConfirmMsg;
 
 }

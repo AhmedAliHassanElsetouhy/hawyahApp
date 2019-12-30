@@ -31,40 +31,7 @@ public class HomeUserPage extends PageBase {
 	@FindBy(xpath = "//*[text()='اختر']")
 	public WebElement choose;
 	
-	@FindBy(partialLinkText="عني")
-	public WebElement aboutMeLink;
 	
-	public void openAboutMe() {
-		clickButton(aboutMeLink);
-	}
-	
-	@FindBy(partialLinkText="احصائياتي")
-	public WebElement myStatsLink;
-	
-	public void openMyStats() {
-		clickButton(myStatsLink);
-	}
-	
-	@FindBy(partialLinkText="الحسابات البنكية")
-	public WebElement myBankAccountLink;
-	
-	public void openMyBankAccount() {
-		clickButton(myBankAccountLink);
-	}
-	
-	@FindBy(partialLinkText="طلبات التحويل")
-	public WebElement myTransfersLink;
-	
-	public void openMyTransfers() {
-		clickButton(myTransfersLink);
-	}
-	
-	@FindBy(partialLinkText="أعمالي")
-	public WebElement myWorksLink;
-	
-	public void openMyWorks() {
-		clickButton(myWorksLink);
-	}
 
 	@FindBy(xpath = "//a[@class='dropdown-button grey-text text-darken-1']")
 	WebElement basicMenu;

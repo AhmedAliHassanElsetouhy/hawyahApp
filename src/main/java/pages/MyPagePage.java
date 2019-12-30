@@ -40,12 +40,12 @@ public class MyPagePage extends PageBase {
 	public void openLoginDataFormPage() {
 		clickButton(loginDataPageLink);
 	}
-	
-	public void openMyCompetitions(){
+
+	public void openMyCompetitions() {
 		clickButton(myCompetitionsLink);
 	}
-	
-	public void openMyPayments(){
+
+	public void openMyPayments() {
 		clickButton(paymentsLink);
 	}
 }

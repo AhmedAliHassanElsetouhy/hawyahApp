@@ -38,11 +38,6 @@ public class LoginUserTest extends TestBase {
 		loginPage.loginFun(ER.getExcelData(5, 2)[1][1], ER.getExcelData(5, 2)[2][1]);
 		System.out.println(homePage.loginConfirmMsg.getText());
 		Assert.assertTrue(homePage.loginConfirmMsg.getText().contains("تم تسجيل الدخول بنجاح"));
-		Assert.assertTrue(homeUserPage.aboutMeLink.isDisplayed());
-		Assert.assertTrue(homeUserPage.myStatsLink.isDisplayed());
-		Assert.assertTrue(homeUserPage.myBankAccountLink.isDisplayed());
-		Assert.assertTrue(homeUserPage.myTransfersLink.isDisplayed());
-		Assert.assertTrue(homeUserPage.myWorksLink.isDisplayed());
 	}
 
 	@Test(priority = 3, dependsOnMethods = { "loginFun" })
