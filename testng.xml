@@ -24,10 +24,12 @@
 			<class name="tests.HowItWorkTest" />
 			<class name="tests.MessagesTest" />
 			<class name="tests.MyPageTest" />
-			
-			<class name="tests.LoginUserTest"/>
-			<class name="tests.RegistrationUserTest"/>
-			<class name="tests.AboutMeUserTest"/>
+
+			<class name="tests.LoginUserTest" />
+			<class name="tests.RegistrationUserTest" />
+			<class name="tests.AboutMeUserTest" />
+			<class name="tests.MyStatsUserTest" />
+			<class name="tests.BankAccountsUserTest"/>
 			
 		</classes>
 	</test>
