@@ -28,8 +28,6 @@ public class BasicIdentityTest extends TestBase {
 	String searchText = fakeData.name().firstName();
 	LoginPage loginPage;
 	HomePage homePage;
-	// String email = "ahmed.ali.rooya@gmail.com";
-	// String password = "11111111";
 	DesignsPage designsPage;
 	SelectDesignsPage selectDesignsPage;
 	SelectColorsPage selectColorsPage;
@@ -38,9 +36,7 @@ public class BasicIdentityTest extends TestBase {
 	String activityDesc = fakeData.name().fullName();
 	String contest = fakeData.name().lastName();
 	String additionalInfo = fakeData.name().lastName();
-	// String folderName = "اخطار النقل.png";
 	String title = fakeData.name().nameWithMiddle();
-	// String activityOption = "الزراعة";
 	PaymentPage paymentPage;
 	JavascriptExecutor jse;
 
@@ -132,6 +128,7 @@ public class BasicIdentityTest extends TestBase {
 		// paymentPage.silverPrize();
 		// Thread.sleep(3000);
 		paymentPage.bankDepositFun();
+		
 		// System.out.println(paymentPage.bankDeposit.getText());
 		// selectDesignsPage.nextFun();
 		// Assert.assertTrue(paymentPage.paymentPageHeader.isDisplayed());

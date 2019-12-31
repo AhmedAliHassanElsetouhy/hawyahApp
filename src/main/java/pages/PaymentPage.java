@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class PaymentPage extends PageBase {
 
@@ -22,7 +23,8 @@ public class PaymentPage extends PageBase {
 	WebElement correctIcon;
 
 	// @FindBy(id = "contest_payment_type_chosen")
-	@FindBy(xpath = "//*[text()='إختر طريقة الدفع']")
+	// @FindBy(xpath = "//*[text()='إختر طريقة الدفع']")
+	@FindBy(xpath = "//*[@class='chosen-single']")
 	public WebElement paymentLst;
 
 	@FindBy(xpath = "//*[@class='contest-image-frame package_option']")
@@ -31,13 +33,18 @@ public class PaymentPage extends PageBase {
 	@FindBy(id = "contest_payment_type")
 	WebElement paymentOption;
 
+	@FindBy(xpath = "//*[@class='chosen-drop']//*[@class='chosen-results']")
+	public WebElement ul;
+
 	public void silverPrize() {
 		clickButton(silverType);
 		// clickButton(correctIcon);
 	}
 
 	public void bankDepositFun() {
-		clickButton(paymentLst);
+		// clickButton(paymentLst);
+		// Assert.assertTrue(paymentLst.isDisplayed());
+		Assert.assertTrue(ul.isDisplayed());
 		// selectItemByValue(paymentOption, "DEPOSIT");
 	}
 }

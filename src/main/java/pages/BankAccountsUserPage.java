@@ -1,6 +1,7 @@
 package pages;
 
-import org.openqa.selenium.By;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,11 +32,12 @@ public class BankAccountsUserPage extends PageBase {
 	}
 
 	@FindBy(xpath = "(//a[@title='حذف الحساب'])")
-	WebElement deleteIcon;
+	public List<WebElement> deleteIcons;
 
-	public void deleteIcon() {
-//		((WebDriver) driver.findElement(By.tagName("a"))).get;
-		clickButton(deleteIcon);
+	public void deleteIcon(int index) {
+		// List<WebElement> allLinks = deleteIcons;
+		// allLinks.get(index).click();
+		selectSpecificIcon(deleteIcons, index);
 	}
 
 }

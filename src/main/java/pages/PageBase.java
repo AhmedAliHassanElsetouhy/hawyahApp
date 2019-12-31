@@ -82,6 +82,11 @@ public class PageBase {
 		select.selectByValue(selectedElement);
 	}
 
+	 public void selectSpecificIcon(List <WebElement> deleteIcons ,int index) {
+	 List<WebElement> allLinks = deleteIcons;
+	 allLinks.get(index).click();
+	 }
+
 	public String split(String strMain, String from) {
 		String[] arrSplit = strMain.split(from);
 		return arrSplit[1];

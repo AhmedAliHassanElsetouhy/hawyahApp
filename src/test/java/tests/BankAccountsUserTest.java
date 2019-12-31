@@ -83,7 +83,7 @@ public class BankAccountsUserTest extends TestBase {
 		myPageUserPage = new MyPageUserPage(driver);
 		bankAccountsUserPage = new BankAccountsUserPage(driver);
 		// myPageUserPage.openMyBankAccount();
-		bankAccountsUserPage.deleteIcon();
+		bankAccountsUserPage.deleteIcon(0);
 		driver.switchTo().alert().accept();
 		myPageUserPage.openMyBankAccount();
 		Assert.assertTrue(bankAccountsUserPage.bankAccNotesHeader.isDisplayed());
@@ -109,12 +109,6 @@ public class BankAccountsUserTest extends TestBase {
 		homePage = new HomePage(driver);
 		myPagePage = new MyPagePage(driver);
 		aboutMeUserPage = new AboutMeUserPage(driver);
-		// ExcelReader ER = new ExcelReader();
-		// myPagePage.openUpdateMyAccountPageFun();
-		// aboutMeUserPage.openBankAccountFun();
-		// aboutMeUserPage.updateBankAccountDataForm(ER.getExcelData(6, 2)[4][1],
-		// ER.getExcelData(6, 2)[5][1],
-		// ER.getExcelData(6, 2)[6][1]);
 		aboutMeUserPage.updateBankAccountDataForm(iban, accOwner, bankName);
 		Assert.assertTrue(aboutMeUserPage.bankAccConfirmMsg.isDisplayed());
 	}
@@ -126,11 +120,35 @@ public class BankAccountsUserTest extends TestBase {
 		myPageUserPage.openMyBankAccount();
 		bankAccountsUserPage.activateAccountFun();
 		driver.switchTo().alert().accept();
-		 myPageUserPage.openMyBankAccount();
+		myPageUserPage.openMyBankAccount();
 		Assert.assertTrue(bankAccountsUserPage.bankAccNotesHeader.isDisplayed());
 	}
 
 	@Test(priority = 9, dependsOnMethods = { "ActivateTest" })
+	public void DeActivateTest1() {
+		myPageUserPage = new MyPageUserPage(driver);
+		bankAccountsUserPage = new BankAccountsUserPage(driver);
+		// myPageUserPage.openMyBankAccount();
+		bankAccountsUserPage.deactivateAccountFun();
+		driver.switchTo().alert().accept();
+		myPageUserPage.openMyBankAccount();
+		Assert.assertTrue(bankAccountsUserPage.bankAccNotesHeader.isDisplayed());
+	}
+
+	int index = 1;
+
+	@Test(priority = 10, dependsOnMethods = { "DeActivateTest1" })
+	public void DeleteTest1() {
+		myPageUserPage = new MyPageUserPage(driver);
+		bankAccountsUserPage = new BankAccountsUserPage(driver);
+		// myPageUserPage.openMyBankAccount();
+		bankAccountsUserPage.deleteIcon(index);
+		driver.switchTo().alert().accept();
+		myPageUserPage.openMyBankAccount();
+		Assert.assertTrue(bankAccountsUserPage.bankAccNotesHeader.isDisplayed());
+	}
+
+	@Test(priority = 11, dependsOnMethods = { "DeleteTest1" })
 	public void makeLogoutTest() throws AWTException {
 		homePage = new HomePage(driver);
 		defaultPage = new DefaultPage(driver);

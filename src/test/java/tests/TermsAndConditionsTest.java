@@ -17,7 +17,7 @@ public class TermsAndConditionsTest extends TestBase {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
 		defaultPage = new DefaultPage(driver);
-		defaultPage.openRegisterFormFun();
+		defaultPage.openTermsAndConditionsPage();
 		Assert.assertTrue(defaultPage.termsAndConditionsLink.isDisplayed());
 	}
 }

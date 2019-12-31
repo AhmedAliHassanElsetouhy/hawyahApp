@@ -10,6 +10,7 @@ import com.github.javafaker.Faker;
 
 import data.ExcelReader;
 import pages.AboutMeUserPage;
+import pages.BankAccountsUserPage;
 import pages.DefaultPage;
 import pages.DesignsPage;
 import pages.HomePage;
@@ -28,6 +29,7 @@ public class AboutMeUserTest extends TestBase {
 	AboutMeUserPage aboutMeUserPage;
 	HomeUserPage homeUserPage;
 	MyPageUserPage myPageUserPage;
+	BankAccountsUserPage bankAccountsUserPage;
 
 	Faker fakeData = new Faker();
 	String fName = fakeData.name().firstName();
@@ -116,18 +118,22 @@ public class AboutMeUserTest extends TestBase {
 		Assert.assertTrue(myPageUserPage.myWorksLink.isDisplayed());
 	}
 
+	String iban = fakeData.number().digits(16);
+	String accOwner = fakeData.funnyName().name();
+	String bankName = fakeData.name().name();
+
 	@Test(priority = 7, dependsOnMethods = { "updateLoginDataTest" })
 	public void updateBankAccountDataTest() throws IOException {
 		homePage = new HomePage(driver);
 		myPagePage = new MyPagePage(driver);
 		aboutMeUserPage = new AboutMeUserPage(driver);
-		ExcelReader ER = new ExcelReader();
+		bankAccountsUserPage = new BankAccountsUserPage(driver);
 		myPagePage.openUpdateMyAccountPageFun();
 		aboutMeUserPage.openBankAccountFun();
-		aboutMeUserPage.updateBankAccountDataForm(ER.getExcelData(6, 2)[4][1], ER.getExcelData(6, 2)[5][1],
-				ER.getExcelData(6, 2)[6][1]);
-		// aboutMeUserPage.saveDataFun();
-		// aboutMeUserPage.saveBtn.sendKeys(Keys.ENTER);
+		aboutMeUserPage.updateBankAccountDataForm(iban, accOwner, bankName);
+		aboutMeUserPage.openBankAccountFun();
+		bankAccountsUserPage.deleteIcon(1);
+		driver.switchTo().alert().accept();
 		Assert.assertTrue(aboutMeUserPage.bankAccConfirmMsg.isDisplayed());
 		Assert.assertTrue(myPageUserPage.aboutMeLink.isDisplayed());
 		Assert.assertTrue(myPageUserPage.myStatsLink.isDisplayed());

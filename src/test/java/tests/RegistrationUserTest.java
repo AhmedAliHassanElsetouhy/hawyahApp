@@ -26,6 +26,9 @@ public class RegistrationUserTest extends TestBase {
 	String email = fake.internet().emailAddress();
 	String password = fake.number().digits(8);
 
+	// String email = "ahmedalihassanelsetouhy@gmail.com";
+	// String password = "11111111";
+
 	@Test(priority = 1)
 	public void openRegisterFormPageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();

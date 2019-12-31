@@ -7,7 +7,8 @@
 			<class name="tests.RegistrationTest" />
 			<class name="tests.RequestDesignAndSearchTest" />
 			<class name="tests.ForgetPasswordTest" />
-			<class name="tests.BasicIdentityTest" />
+			<!-- <class name="tests.BasicIdentityTest" /> Not finished because of 
+				payment list not open -->
 			<class name="tests.CompetitionsTest" />
 			<class name="tests.AboutMeTest" />
 			<class name="tests.CompetitionsListTest" />
@@ -29,8 +30,11 @@
 			<class name="tests.RegistrationUserTest" />
 			<class name="tests.AboutMeUserTest" />
 			<class name="tests.MyStatsUserTest" />
-			<class name="tests.BankAccountsUserTest"/>
-			
+			<class name="tests.BankAccountsUserTest" />
+			<!--<class name="tests.TransfersRequestsTest" /> Not finished because 
+				of popup -->
+			<!--<class name="tests.MyWorkUserTest"/> Not completed because of menu 
+				of design type open twice -->
 		</classes>
 	</test>
 </suite> 
