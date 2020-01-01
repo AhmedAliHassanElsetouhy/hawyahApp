@@ -3,38 +3,41 @@
 	<parameter name="browser" value="chrome" />
 	<test name="Regression Test" preserve-order="true">
 		<classes>
-			<class name="tests.LoginTest" />
-			<class name="tests.RegistrationTest" />
-			<class name="tests.RequestDesignAndSearchTest" />
-			<class name="tests.ForgetPasswordTest" />
-			<!-- <class name="tests.BasicIdentityTest" /> Not finished because of 
-				payment list not open -->
-			<class name="tests.CompetitionsTest" />
-			<class name="tests.AboutMeTest" />
-			<class name="tests.CompetitionsListTest" />
-			<class name="tests.WhoUsTest" />
-			<class name="tests.ContactUsTest" />
-			<class name="tests.PricesTest" />
-			<class name="tests.JobsTest" />
-			<class name="tests.TermsAndConditionsTest" />
-			<class name="tests.PrivacyTest" />
-			<class name="tests.CommonQuesTest" />
-			<class name="tests.AskDesignTest" />
-			<class name="tests.BeDesignerTest" />
-			<class name="tests.DesignsRequestTest" />
-			<class name="tests.HowItWorkTest" />
-			<class name="tests.MessagesTest" />
-			<class name="tests.MyPageTest" />
+			<class name="clientTests.LoginTest" />
+			<class name="clientTests.RegistrationTest" />
+			<class name="clientTests.RequestDesignAndSearchTest" />
+			<class name="clientTests.ForgetPasswordTest" />
+			<!-- <class name="clientTests.BasicIdentityTest" /> Not finished because 
+				of payment list not open -->
+			<class name="clientTests.CompetitionsTest" />
+			<class name="clientTests.AboutMeTest" />
+			<class name="clientTests.CompetitionsListTest" />
+			<class name="clientTests.WhoUsTest" />
+			<class name="clientTests.ContactUsTest" />
+			<class name="clientTests.PricesTest" />
+			<class name="clientTests.JobsTest" />
+			<class name="clientTests.TermsAndConditionsTest" />
+			<class name="clientTests.PrivacyTest" />
+			<class name="clientTests.CommonQuesTest" />
+			<class name="clientTests.AskDesignTest" />
+			<class name="clientTests.BeDesignerTest" />
+			<class name="clientTests.DesignsRequestTest" />
+			<class name="clientTests.HowItWorkTest" />
+			<class name="clientTests.MessagesTest" />
+			<class name="clientTests.MyPageTest" />
 
-			<class name="tests.LoginUserTest" />
-			<class name="tests.RegistrationUserTest" />
-			<class name="tests.AboutMeUserTest" />
-			<class name="tests.MyStatsUserTest" />
-			<class name="tests.BankAccountsUserTest" />
-			<!--<class name="tests.TransfersRequestsTest" /> Not finished because 
-				of popup -->
-			<!--<class name="tests.MyWorkUserTest"/> Not completed because of menu 
-				of design type open twice -->
+			<class name="designerTests.LoginUserTest" />
+			<class name="designerTests.RegistrationUserTest" />
+			<class name="designerTests.AboutMeUserTest" />
+			<class name="designerTests.MyStatsUserTest" />
+			<class name="designerTests.BankAccountsUserTest" />
+			<!--<class name="designerTests.TransfersRequestsTest" /> Not finished 
+				because of popup -->
+			<!--<class name="designerTests.MyWorkUserTest"/> Not completed because 
+				of menu of design type open twice -->
+			<!-- <class name="designerTests.RequestDesignAndSearchDesignerTest"/> 
+				Not completed waiting because of list not selected -->
+			<class name="designerTests.MessagesUserTest" />
 		</classes>
 	</test>
 </suite> 
