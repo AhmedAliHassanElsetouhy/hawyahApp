@@ -4,7 +4,6 @@
 	<test name="Regression Test" preserve-order="true">
 		<classes>
 			<class name="clientTests.LoginTest" />
-			<class name="clientTests.RegistrationTest" />
 			<class name="clientTests.RequestDesignAndSearchTest" />
 			<class name="clientTests.ForgetPasswordTest" />
 			<!-- <class name="clientTests.BasicIdentityTest" /> Not finished because 
@@ -27,7 +26,7 @@
 			<class name="clientTests.MyPageTest" />
 
 			<class name="designerTests.LoginUserTest" />
-			<class name="designerTests.RegistrationUserTest" />
+			
 			<class name="designerTests.AboutMeUserTest" />
 			<class name="designerTests.MyStatsUserTest" />
 			<class name="designerTests.BankAccountsUserTest" />
@@ -38,6 +37,9 @@
 			<!-- <class name="designerTests.RequestDesignAndSearchDesignerTest"/> 
 				Not completed waiting because of list not selected -->
 			<class name="designerTests.MessagesUserTest" />
+			
+			<class name="clientTests.RegistrationTest" />
+			<class name="designerTests.RegistrationUserTest" />
 		</classes>
 	</test>
 </suite> 
