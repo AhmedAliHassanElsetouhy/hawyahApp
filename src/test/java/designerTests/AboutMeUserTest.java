@@ -33,12 +33,13 @@ public class AboutMeUserTest extends TestBase {
 	BankAccountsUserPage bankAccountsUserPage;
 
 	Faker fakeData = new Faker();
-	String fName = fakeData.name().firstName();
+	public String fName = fakeData.name().firstName();
 	String lName = fakeData.name().lastName();
 	String city = fakeData.nation().capitalCity();
 	String phone = fakeData.phoneNumber().cellPhone();
 	String screenName = fakeData.name().firstName() + fakeData.number().numberBetween(1, 99);
 	String designerBio = fakeData.name().title();
+	public String address = fakeData.address().fullAddress();
 
 	@Test(priority = 1)
 	public void openHomePageTest() throws IOException {
@@ -89,7 +90,7 @@ public class AboutMeUserTest extends TestBase {
 		myPageUserPage = new MyPageUserPage(driver);
 		ExcelReader ER = new ExcelReader();
 		aboutMeUserPage.personalDesignerDataForm(fName, lName, screenName, designerBio, city, phone,
-				ER.getExcelData(6, 4)[0][1]);
+				ER.getExcelData(6, 4)[0][1], address);
 		aboutMeUserPage.saveDataFun();
 		Assert.assertTrue(myPageUserPage.aboutMeLink.isDisplayed());
 		Assert.assertTrue(myPageUserPage.myStatsLink.isDisplayed());

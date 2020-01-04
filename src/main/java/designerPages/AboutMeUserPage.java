@@ -42,8 +42,11 @@ public class AboutMeUserPage extends PageBase {
 	@FindBy(xpath = "//input[@value='حفظ']")
 	public WebElement saveBtn;
 
+	@FindBy(id = "designer_address")
+	WebElement addressTxtBox;
+
 	public void personalDesignerDataForm(String fName, String lName, String screenName, String designerBio, String city,
-			String phone, String cityOption) {
+			String phone, String cityOption, String address) {
 		fNameTxtField.clear();
 		setTextElementText(fNameTxtField, fName);
 		lNameTxtField.clear();
@@ -57,6 +60,9 @@ public class AboutMeUserPage extends PageBase {
 		setTextElementText(cityTxtField, city);
 		phoneTxtField.clear();
 		setTextElementText(phoneTxtField, phone);
+
+		addressTxtBox.clear();
+		setTextElementText(addressTxtBox, address);
 
 		clickButton(cityLst);
 		cityOptionTextBox.clear();

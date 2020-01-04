@@ -127,8 +127,14 @@ public class BasicIdentityTest extends TestBase {
 		paymentPage = new PaymentPage(driver);
 		// paymentPage.silverPrize();
 		// Thread.sleep(3000);
+		// Actions action = new Actions(driver);
+		// action.moveToElement(paymentPage.paymentLst, 594,
+		// 1232).click().build().perform();
+
+		// WebDriverWait wait = new WebDriverWait(driver, 30);
+		// wait.until(ExpectedConditions.visibilityOfElementLocated((By)
+		// paymentPage.openPaymentList));
 		paymentPage.bankDepositFun();
-		
 		// System.out.println(paymentPage.bankDeposit.getText());
 		// selectDesignsPage.nextFun();
 		// Assert.assertTrue(paymentPage.paymentPageHeader.isDisplayed());

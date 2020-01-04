@@ -1,4 +1,4 @@
-package clientTests;
+package footerPagesTests;
 
 import java.io.IOException;
 
@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import clientPages.DefaultPage;
+import clientTests.TestBase;
 import data.ExcelReader;
 
 public class CommonQuesTest extends TestBase {

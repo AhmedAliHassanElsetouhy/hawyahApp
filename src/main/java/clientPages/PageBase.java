@@ -82,8 +82,8 @@ public class PageBase {
 		select.selectByValue(selectedElement);
 	}
 
-	 public void selectSpecificIcon(List <WebElement> deleteIcons ,int index) {
-	 List<WebElement> allLinks = deleteIcons;
+	 public void selectSpecificIcon(List <WebElement> items ,int index) {
+	 List<WebElement> allLinks = items;
 	 allLinks.get(index).click();
 	 }
 
@@ -106,8 +106,9 @@ public class PageBase {
 
 	public void testFileUpload(String folderName, WebElement uploadFileIcon) throws InterruptedException {
 		String imagePath = System.getProperty("user.dir") + "/Uploads/" + folderName;
-		clickButton(uploadFileIcon);
 		uploadFileIcon.sendKeys(imagePath);
+		clickButton(uploadFileIcon);
+		
 		Thread.sleep(3000);
 		// Assert.assertEquals(folderName, uploadedFiles.getText());
 	}

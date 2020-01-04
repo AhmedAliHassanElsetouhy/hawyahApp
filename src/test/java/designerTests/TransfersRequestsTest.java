@@ -1,4 +1,4 @@
-package clientTests;
+package designerTests;
 
 import java.io.IOException;
 
@@ -13,6 +13,7 @@ import clientPages.DesignsPage;
 import clientPages.HomePage;
 import clientPages.LoginPage;
 import clientPages.MyPagePage;
+import clientTests.TestBase;
 import data.ExcelReader;
 import designerPages.AboutMeUserPage;
 import designerPages.BankAccountsUserPage;
