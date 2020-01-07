@@ -1,8 +1,8 @@
 package designerPages;
 
 import java.awt.AWTException;
+import java.util.List;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -48,19 +48,50 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 		Assert.assertTrue(idea.isDisplayed());
 	}
 
-	@FindBy(partialLinkText = "التصاميم")
+	// @FindBy(partialLinkText = "التصاميم")
+	@FindBy(xpath = "//a[@href='#designs']")
 	public WebElement designsLink;
 
 	@FindBy(xpath = "//div[@class='card']")
-	public WebElement designCard;
+	public List<WebElement> designCard;
 
 	@FindBy(xpath = "//div[@class='rating m-t-10']")
 	public WebElement rate;
 
 	public void openDesignsFun() {
 		clickButton(designsLink);
-		Assert.assertTrue(designCard.isDisplayed());
 		Assert.assertTrue(rate.isDisplayed());
+	}
+
+	public void openCardFun(int index) {
+		selectSpecificIcon(designCard, index);
+	}
+
+	@FindBy(xpath = "//*[text()='أضف تعليق']")
+	public WebElement addCommentHeader;
+
+	@FindBy(id = "contest_design_comment_message")
+	WebElement msgTextarea;
+
+	@FindBy(id = "submitComment;")
+	WebElement submitCommentBtn;
+
+	@FindBy(xpath = "//div[@class='comment-item']")
+	public List<WebElement> comments;
+
+	public void addCommentFun(String comment) {
+		setTextElementText(msgTextarea, comment);
+		clickButton(submitCommentBtn);
+	}
+	
+	@FindBy(xpath="//div[@class='comment-list']")
+	public WebElement commentList;
+
+	@FindBy(xpath = "//span[@class='close']")
+	public WebElement closeCommentView;
+
+	public void closeCommentViewFun() {
+		clickButton(closeCommentView);
 	}
 
 	@FindBy(partialLinkText = "الملفات")
@@ -79,17 +110,34 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 	@FindBy(xpath = "//*[text()='إغلاق']")
 	WebElement closeBtn;
 
-	// @FindBy(id = "upload_design_input_for_signoff")
-	@FindBy(xpath = "//*[@id=\"upload_design_input_for_signoff\"]")
-	// @FindBy(xpath = "//input[@id='upload_design_input_for_signoff']")
-	WebElement chooseFileBtn;
+	// @FindBy(xpath = "//*[@id=\"upload_design_input_for_signoff\"]")
+	@FindBy(xpath = "//input[@type='file']")
+	public WebElement chooseFileBtn;
 
-	public void openFilesAndOpenAgreementFun() {
+	@FindBy(xpath = "//legend[@class='purple-text']")
+	WebElement designerSig;
+
+	@FindBy(xpath = "//legend[@class='blue-text']")
+	WebElement cliendSig;
+
+	public void openFilesAndOpenAgreementDesignerFun() {
 		clickButton(filesLink);
 		Assert.assertTrue(filesHeader.isDisplayed());
 		Assert.assertTrue(showAgreementLink.isDisplayed());
 		clickButton(showAgreementLink);
 		Assert.assertTrue(agreementPopup.isDisplayed());
+		Assert.assertTrue(designerSig.isDisplayed());
+		Assert.assertTrue(cliendSig.isDisplayed());
+		clickButton(closeBtn);
+	}
+
+	public void openFilesAndOpenAgreementDesignerOnlyFun() {
+		clickButton(filesLink);
+		Assert.assertTrue(filesHeader.isDisplayed());
+		Assert.assertTrue(showAgreementLink.isDisplayed());
+		clickButton(showAgreementLink);
+		Assert.assertTrue(agreementPopup.isDisplayed());
+		Assert.assertTrue(designerSig.isDisplayed());
 		clickButton(closeBtn);
 	}
 
@@ -102,18 +150,27 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 	WebElement saveBtn;
 
 	public void uploadContract(String folderName) throws InterruptedException, AWTException {
-		// saveBtn.submit();
+		chooseFileBtn.sendKeys(System.getProperty("user.dir") + "\\Uploads\\" + folderName);
 		clickButton(saveBtn);
-		// clickButton(chooseFileBtn);
-		chooseFileBtn.submit();
-		chooseFileBtn.sendKeys(Keys.ENTER);
-//		 FileUploadWithRobot(folderName);
-		testFileUpload(folderName, chooseFileBtn);
-		// saveBtn.submit();
 	}
 
-	@FindBy(partialLinkText = "تواصل معنا")
+	// @FindBy(partialLinkText = "تواصل معنا")
+	@FindBy(xpath = "//a[text()='تواصل معنا']")
 	public WebElement contactUsLink;
+
+	@FindBy(xpath = "//a[text()='تحميل تصميم']")
+	public WebElement uploadDesignLink;
+
+	public void openUploadDesignFun() {
+		clickButton(uploadDesignLink);
+	}
+
+	@FindBy(xpath = "//input[@type='file']")
+	public WebElement selectFileBtn;
+
+	public void uploadDesignFileFun(String folderName) throws InterruptedException, AWTException {
+		selectFileBtn.sendKeys(System.getProperty("user.dir") + "\\Uploads\\" + folderName);
+	}
 
 	@FindBy(id = "message[body]")
 	WebElement messageTxtBox;
@@ -125,7 +182,7 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 	WebElement confirmAlertMsg;
 
 	public void contactUsFun(String message) {
-		clickButton(contactUsLink);
+		// clickButton(contactUsLink);
 		setTextElementText(messageTxtBox, message);
 		clickButton(sendBtn);
 		Assert.assertTrue(confirmAlertMsg.isDisplayed());

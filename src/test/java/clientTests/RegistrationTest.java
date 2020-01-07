@@ -2,6 +2,7 @@ package clientTests;
 
 import java.awt.AWTException;
 import java.io.IOException;
+import java.util.Locale;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -21,6 +22,8 @@ public class RegistrationTest extends TestBase {
 	HomePage homePage;
 	RegistrationConfirmationPage registerConfirmPage;
 
+	Faker fakeData = new Faker(new Locale("ar"));
+	
 	Faker fake = new Faker();
 	String userName = fake.name().firstName() + fake.number().numberBetween(1, 99);
 	String email = fake.internet().emailAddress();

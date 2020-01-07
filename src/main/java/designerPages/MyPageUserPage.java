@@ -28,7 +28,7 @@ public class MyPageUserPage extends PageBase {
 	}
 
 	@FindBy(partialLinkText = "الحسابات البنكية")
-//	@FindBy(xpath = "//*[text()='الحسابات البنكية']")
+	// @FindBy(xpath = "//*[text()='الحسابات البنكية']")
 	public WebElement myBankAccountLink;
 
 	public void openMyBankAccount() {

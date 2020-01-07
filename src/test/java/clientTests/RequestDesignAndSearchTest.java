@@ -56,9 +56,9 @@ public class RequestDesignAndSearchTest extends TestBase {
 	// }
 
 	@Test(priority = 4, dependsOnMethods = { "textSearchTest" })
-	public void prizeOptionSearchTest() {
-		defaultPage = new DefaultPage(driver);
+	public void prizeOptionSearchTest() throws InterruptedException {
 		requestDesignPage = new RequestDesignAndSearchPage(driver);
+		Thread.sleep(2000);
 		requestDesignPage.advancedSearchFun();
 		requestDesignPage.searchTxtBox.clear();
 		requestDesignPage.goldenOption();

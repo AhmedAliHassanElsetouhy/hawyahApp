@@ -72,7 +72,6 @@ public class AboutMeUserPage extends PageBase {
 
 	public void saveDataFun() {
 		saveBtn.submit();
-
 	}
 
 	@FindBy(partialLinkText = "البيانات الشخصية")

@@ -20,17 +20,19 @@ public class BankAccountsUserPage extends PageBase {
 	public WebElement bankAccNotesHeader;
 
 	@FindBy(xpath = "//*[@title='إلغاء تفعيل الحساب']")
-	WebElement deactivateIcon;
+	List<WebElement> deactivateIcon;
 
-	public void deactivateAccountFun() {
-		clickButton(deactivateIcon);
+	public void deactivateAccountFun(int index) {
+		// clickButton(deactivateIcon);
+		selectSpecificIcon(deactivateIcon, index);
 	}
 
-	@FindBy(xpath = "//*[@title='تفعيل الحساب']")
-	WebElement activateIcon;
+	@FindBy(xpath = "//a[@title='تفعيل الحساب']")
+	public List<WebElement> activateIcon;
 
-	public void activateAccountFun() {
-		clickButton(activateIcon);
+	public void activateAccountFun(int index) {
+		// clickButton(activateIcon);
+		selectSpecificIcon(activateIcon, index);
 	}
 
 	@FindBy(xpath = "(//a[@title='حذف الحساب'])")

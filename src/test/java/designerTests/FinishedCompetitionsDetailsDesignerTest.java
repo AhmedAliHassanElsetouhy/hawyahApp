@@ -3,6 +3,7 @@ package designerTests;
 import java.awt.AWTException;
 import java.io.IOException;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -26,6 +27,7 @@ public class FinishedCompetitionsDetailsDesignerTest extends TestBase {
 	CompetitionDetailsDesignerPage competitionDetailsDesignerPage;
 	Faker fakeData = new Faker();
 	String message = fakeData.name().title();
+	JavascriptExecutor jse;
 
 	@Test(priority = 1)
 	public void openHomePageTest() throws IOException {
@@ -69,31 +71,33 @@ public class FinishedCompetitionsDetailsDesignerTest extends TestBase {
 		Assert.assertTrue(competitionDetailsDesignerPage.contactUsLink.isDisplayed());
 	}
 
-	@Test(priority = 5, dependsOnMethods = { "openCompetitionsTest" })
+	@Test(priority = 5, dependsOnMethods = { "finishedCompetitionsDetailsTest" })
 	public void detailsTest() {
 		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
 		competitionDetailsDesignerPage.openDetailsFun();
 	}
 
-	@Test(priority = 6, dependsOnMethods = { "openCompetitionsTest" })
+	@Test(priority = 6, dependsOnMethods = { "detailsTest" })
 	public void designsTest() {
 		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
 		competitionDetailsDesignerPage.openDesignsFun();
 	}
 
-	@Test(priority = 7, dependsOnMethods = { "openCompetitionsTest" })
+	@Test(priority = 7, dependsOnMethods = { "designsTest" })
 	public void filesTest() {
 		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
-		competitionDetailsDesignerPage.openFilesAndOpenAgreementFun();
+		competitionDetailsDesignerPage.openFilesAndOpenAgreementDesignerFun();
 	}
 
-	@Test(priority = 8, dependsOnMethods = { "openCompetitionsTest" })
+	@Test(priority = 8, dependsOnMethods = { "filesTest" })
 	public void contactUsTest() {
 		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
+		jse = (JavascriptExecutor) driver;
+		jse.executeScript("arguments[0].click();", competitionDetailsDesignerPage.contactUsLink);
 		competitionDetailsDesignerPage.contactUsFun(message);
 	}
 
-	@Test(priority = 9, dependsOnMethods = { "openCompetitionsTest" })
+	@Test(priority = 9, dependsOnMethods = { "contactUsTest" })
 	public void makeLogoutTest() throws AWTException {
 		homePage = new HomePage(driver);
 		defaultPage = new DefaultPage(driver);

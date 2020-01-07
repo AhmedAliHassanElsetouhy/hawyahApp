@@ -86,18 +86,22 @@ public class MessagesUserTest extends TestBase {
 	@Test(priority = 6, dependsOnMethods = { "deleteMsgTest" })
 	public void openDeletedMsgsTest() {
 		messageFormPage = new MessageFormPage(driver);
-		driver.navigate().to("https://hawyah-dev.herokuapp.com/conversations?box=sent&locale=ar");
+		messageFormPage.sentMsgs();
 		messageFormPage.deleteMsgFun(index);
 		driver.switchTo().alert().accept();
-		driver.navigate().to("https://hawyah-dev.herokuapp.com/conversations?box=trash&locale=ar");
+		messageFormPage.deletedMsgs();
 		messageFormPage.restoreDeleteMsgFun(index);
 		Assert.assertTrue(messageFormPage.confirmRestoreMsg.isDisplayed());
+		messageFormPage.sentMsgs();
+		messageFormPage.deleteMsgFun(index);
+		driver.switchTo().alert().accept();
+		Assert.assertTrue(messageFormPage.confirmDeleteMsg.isDisplayed());
 	}
 
 	@Test(priority = 7, dependsOnMethods = { "openDeletedMsgsTest" })
 	public void deletedAllMsgsTest() {
 		messageFormPage = new MessageFormPage(driver);
-		driver.navigate().to("https://hawyah-dev.herokuapp.com/conversations?box=trash&locale=ar");
+		messageFormPage.deletedMsgs();
 		messageFormPage.deleteAllMsgsFun();
 		driver.switchTo().alert().accept();
 		Assert.assertTrue(messageFormPage.confirmRestoreMsg.isDisplayed());

@@ -15,6 +15,7 @@ import clientPages.LoginPage;
 import clientTests.TestBase;
 import data.ExcelReader;
 import designerPages.CompetitionDetailsDesignerPage;
+import org.openqa.selenium.JavascriptExecutor;
 
 public class DeliverFInalWorkCompetitionsDetailsDesignerTest extends TestBase {
 
@@ -29,6 +30,7 @@ public class DeliverFInalWorkCompetitionsDetailsDesignerTest extends TestBase {
 	String name = fakeData.name().fullName();
 	String title = fakeData.name().title();
 	String phone1 = fakeData.phoneNumber().cellPhone();
+	JavascriptExecutor jse;
 
 	@Test(priority = 1)
 	public void openHomePageTest() throws IOException {
@@ -58,7 +60,7 @@ public class DeliverFInalWorkCompetitionsDetailsDesignerTest extends TestBase {
 	}
 
 	@Test(priority = 4, dependsOnMethods = { "openCompetitionsTest" })
-	public void finishedCompetitionsDetailsTest() {
+	public void deliverFinalWorkCompetitionTest() {
 		competitionsPage = new CompetitionsPage(driver);
 		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
 		competitionsPage.openDeliverFinalWorkCompetitionFun(compititionItem);
@@ -68,59 +70,36 @@ public class DeliverFInalWorkCompetitionsDetailsDesignerTest extends TestBase {
 		Assert.assertTrue(competitionDetailsDesignerPage.contactUsLink.isDisplayed());
 	}
 
-	// @Test(priority = 3, dependsOnMethods = { "loginFun" })
-	// public void deliverFinalWorkCompetitionTest() {
-	// competitionsPage = new CompetitionsPage(driver);
-	// competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
-	// homePage = new HomePage(driver);
-	// homePage.openCompetitionFun();
-	// competitionsPage.openDeliverFinalWorkCompetitionFun(compititionItem);
-	// Assert.assertTrue(competitionDetailsDesignerPage.detailsLink.isDisplayed());
-	// Assert.assertTrue(competitionDetailsDesignerPage.designsLink.isDisplayed());
-	// Assert.assertTrue(competitionDetailsDesignerPage.filesLink.isDisplayed());
-	// Assert.assertTrue(competitionDetailsDesignerPage.contactUsLink.isDisplayed());
-	// }
-
-	@Test(priority = 5, dependsOnMethods = { "openCompetitionsTest" })
-	public void detailsTest() {
+	@Test(priority = 5, dependsOnMethods = { "deliverFinalWorkCompetitionTest" })
+	public void details_Designs_Test() throws InterruptedException, AWTException, IOException {
 		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
 		competitionDetailsDesignerPage.openDetailsFun();
-	}
-
-	@Test(priority = 6, dependsOnMethods = { "openCompetitionsTest" })
-	public void designsTest() {
-		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
 		competitionDetailsDesignerPage.openDesignsFun();
 	}
 
-	// @Test(priority = 4, dependsOnMethods = { "deliverFinalWorkCompetitionTest" })
-	// public void detailsTest() throws InterruptedException, AWTException,
-	// IOException {
-	// competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
-	// competitionDetailsDesignerPage.openDetailsFun();
-	// competitionDetailsDesignerPage.openDesignsFun();
-	// }
-
-	@Test(priority = 7, dependsOnMethods = { "detailsTest" })
-	public void detailsTest1() throws InterruptedException, AWTException, IOException {
+	@Test(priority = 6, dependsOnMethods = { "details_Designs_Test" })
+	public void uploadFinalDesign() throws InterruptedException, AWTException, IOException {
 		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
 		ExcelReader ER = new ExcelReader();
 		competitionDetailsDesignerPage.openFiles();
 		competitionDetailsDesignerPage.uploadContract(ER.getExcelData(9, 2)[0][1]);
+		competitionDetailsDesignerPage.openFilesAndOpenAgreementDesignerOnlyFun();
 	}
 
-	// @Test(priority = 8, dependsOnMethods = { "openCompetitionsTest" })
-	// public void contactUsTest() {
-	// competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
-	// competitionDetailsDesignerPage.contactUsFun(message);
-	// }
+	@Test(priority = 7, dependsOnMethods = { "uploadFinalDesign" })
+	public void contactUsTest() {
+		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
+		jse = (JavascriptExecutor) driver;
+		jse.executeScript("arguments[0].click();", competitionDetailsDesignerPage.contactUsLink);
+		competitionDetailsDesignerPage.contactUsFun(message);
+	}
 
-	// @Test(priority = 9, dependsOnMethods = { "openCompetitionsTest" })
-	// public void makeLogoutTest() throws AWTException {
-	// homePage = new HomePage(driver);
-	// defaultPage = new DefaultPage(driver);
-	// homePage.openMainMenuFun();
-	// homePage.logoutFun();
-	// Assert.assertTrue(defaultPage.loginLink.isDisplayed());
-	// }
+	@Test(priority = 8, dependsOnMethods = { "contactUsTest" })
+	public void makeLogoutTest() throws AWTException {
+		homePage = new HomePage(driver);
+		defaultPage = new DefaultPage(driver);
+		homePage.openMainMenuFun();
+		homePage.logoutFun();
+		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
+	}
 }

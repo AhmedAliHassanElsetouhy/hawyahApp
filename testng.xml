@@ -1,7 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- <suite name="Regression Suite" verbose="2" thread-count="2" parallel="tests"> -->
 <suite name="Regression Suite">
-	<parameter name="browser" value="chrome" />
 	<test name="Regression Test" preserve-order="true">
+		<parameter name="browser" value="firefox" />
 		<classes>
 			<!-- Client tests -->
 			<class name="clientTests.LoginTest" />
@@ -13,9 +14,8 @@
 			<class name="clientTests.CompetitionsTest" />
 			<class name="clientTests.AboutMeTest" />
 			<class name="clientTests.CompetitionsListTest" />
-			<class name="clientTests.MessagesTest" />
 			<class name="clientTests.MyPageTest" />
-
+			<class name="clientTests.MessagesTest" />
 
 			<!-- Designer tests -->
 			<class name="designerTests.LoginUserTest" />
@@ -29,13 +29,16 @@
 				of menu of design type open twice -->
 			<!-- <class name="designerTests.RequestDesignAndSearchDesignerTest"/> 
 				Not completed waiting because of list not selected -->
-			<class name="designerTests.MessagesUserTest" />
 			<class name="designerTests.CompetitionsTest" />
 			<class name="designerTests.ForgetPasswordTest" />
 			<class
 				name="designerTests.FinishedCompetitionsDetailsDesignerTest" />
 			<class
-				name="designerTests.DeliverFInalWorkCompetitionsDetailsDesignerTest2" />
+				name="designerTests.DeliverFInalWorkCompetitionsDetailsDesignerTest" />
+			<class
+				name="designerTests.RecieveDesignsCompetitionsDetailsDesignerTest" />
+
+			<class name="designerTests.MessagesUserTest" />
 
 			<!-- Footer pages tests -->
 			<class name="footerPagesTests.AskDesignTest" />
@@ -48,7 +51,14 @@
 			<class name="footerPagesTests.PricesTest" />
 			<class name="footerPagesTests.TermsAndConditionsTest" />
 			<class name="footerPagesTests.WhoUsTest" />
-
 		</classes>
 	</test>
+
+	<!-- <test name=" TestOnChrome "> <parameter name="browser" value="chrome" 
+		/> <classes> <class name="clientTests.LoginTest" /> </classes> </test> <test 
+		name="TestOnIE"> <parameter name="browser" value="ie" /> <classes> <class 
+		name="clientTests.LoginTest" /> </classes> </test> <test name="TestOnFirefox"> 
+		<parameter name="browser" value="firefox" /> <classes> <class name="clientTests.LoginTest" 
+		/> </classes> </test> -->
+
 </suite> 

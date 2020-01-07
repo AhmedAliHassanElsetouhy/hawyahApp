@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class CompetitionsPage extends PageBase {
 
@@ -39,5 +40,48 @@ public class CompetitionsPage extends PageBase {
 	public void openDeliverFinalWorkCompetitionFun(int index) {
 		selectSpecificIcon(deliverFinalWorkCompetition, index);
 	}
+	
+	@FindBy(xpath = "//*[text()='مرحلة إستقبال التصاميم']")
+	List<WebElement> recievedDesignsCompetition;
 
+	public void openRecievedDesignsCompetitionsFun(int index) {
+		selectSpecificIcon(recievedDesignsCompetition, index);
+	}
+	
+	@FindBy(partialLinkText = "الملفات")
+	public WebElement filesLink;
+
+	@FindBy(xpath = "//legend[@class='blue-text']")
+	public WebElement filesHeader;
+
+	@FindBy(partialLinkText = "عرض الاتفاقية")
+	WebElement showAgreementLink;
+
+	// @FindBy(id = "handoverAgreementViewModal")
+	@FindBy(xpath = "//div[@class='modal open']")
+	public WebElement agreementPopup;
+
+	@FindBy(xpath = "//*[text()='إغلاق']")
+	WebElement closeBtn;
+
+	@FindBy(xpath = "//legend[@class='purple-text']")
+	WebElement designerSig;
+
+	@FindBy(xpath = "//legend[@class='blue-text']")
+	WebElement cliendSig;
+	
+	public void openFilesAndOpenAgreementDesignerOnlyFun() {
+		clickButton(filesLink);
+		Assert.assertTrue(filesHeader.isDisplayed());
+		Assert.assertTrue(showAgreementLink.isDisplayed());
+		clickButton(showAgreementLink);
+		Assert.assertTrue(agreementPopup.isDisplayed());
+		Assert.assertTrue(designerSig.isDisplayed());
+		clickButton(closeBtn);
+	}
+	
+	public void openFiles() {
+		clickButton(filesLink);
+	}
+	
 }

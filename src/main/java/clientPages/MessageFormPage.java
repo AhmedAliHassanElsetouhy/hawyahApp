@@ -55,6 +55,20 @@ public class MessageFormPage extends PageBase {
 		clickButton(messagesIcon);
 	}
 
+	@FindBy(xpath = "//a[@href='/conversations?box=sent&locale=ar']")
+	WebElement sentMsgs;
+
+	public void sentMsgs() {
+		clickButton(sentMsgs);
+	}
+
+	@FindBy(xpath = "//a[@href='/conversations?box=trash&locale=ar']")
+	WebElement deletedMsgs;
+
+	public void deletedMsgs() {
+		clickButton(deletedMsgs);
+	}
+	
 	@FindBy(xpath = "//a[@title='حذف المحادثة']")
 	List<WebElement> deleteIcons;
 
