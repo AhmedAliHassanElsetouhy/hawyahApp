@@ -22,12 +22,23 @@ public class MyWorkUserPage extends PageBase {
 	// @FindBy(name = "designer_previous_work[design_title]")
 	WebElement designTitleTxtBox;
 
-	@FindBy(id = "upload_design_input")
-	WebElement uploadIcon;
+	// @FindBy(id = "upload_design_input")
+	@FindBy(xpath = "//input[@type='file']")
+	public WebElement uploadIcon;
 
-	public void addDesignFun(String title, String folderName) throws InterruptedException, AWTException {
+	@FindBy(xpath = "//*[text()='اختر نوع التصميم']")
+	WebElement selectDesignTypeList;
+
+	@FindBy(xpath = "تصميم هوية أساسية")
+	WebElement designBasicIdentity;
+
+	public void addDesignFun(String title) throws InterruptedException, AWTException {
 		setTextElementText(designTitleTxtBox, title);
-		clickButton(uploadIcon);
-		FileUploadWithRobot(folderName);
+		clickButton(selectDesignTypeList);
+		clickButton(designBasicIdentity);
+		clickButton(saveBtn);
 	}
+
+	@FindBy(xpath = "//*[text()='حفظ']")
+	WebElement saveBtn;
 }

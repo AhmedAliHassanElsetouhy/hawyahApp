@@ -19,7 +19,7 @@ public class MyPagePage extends PageBase {
 	}
 
 	@FindBy(partialLinkText = "تعديل")
-	WebElement updateBtn;
+	public WebElement updateBtn;
 
 	public void openUpdateMyAccountPageFun() {
 		clickButton(updateBtn);

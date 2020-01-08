@@ -48,4 +48,7 @@ public class MyPageUserPage extends PageBase {
 	public void openMyWorks() {
 		clickButton(myWorksLink);
 	}
+	
+	@FindBy(xpath="//div[@class='green lighten-5']")
+	public WebElement confirmSaveDesignMsg;
 }

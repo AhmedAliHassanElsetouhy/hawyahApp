@@ -3,8 +3,11 @@ package designerTests;
 import java.awt.AWTException;
 import java.io.IOException;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.github.javafaker.Faker;
 
 import clientPages.CompetitionsPage;
 import clientPages.DefaultPage;
@@ -14,7 +17,7 @@ import clientTests.TestBase;
 import data.ExcelReader;
 import designerPages.CompetitionDetailsDesignerPage;
 
-public class DeliverFInalWorkCompetitionsDetailsDesignerTest extends TestBase {
+public class ContactUsTest extends TestBase {
 
 	DefaultPage defaultPage;
 	LoginPage loginPage;
@@ -22,6 +25,9 @@ public class DeliverFInalWorkCompetitionsDetailsDesignerTest extends TestBase {
 	CompetitionsPage competitionsPage;
 	int compititionItem = 1;
 	CompetitionDetailsDesignerPage competitionDetailsDesignerPage;
+	Faker fakeData = new Faker();
+	String message = fakeData.name().title();
+	JavascriptExecutor jse;
 
 	@Test(priority = 1)
 	public void openHomePageTest() throws IOException {
@@ -62,20 +68,19 @@ public class DeliverFInalWorkCompetitionsDetailsDesignerTest extends TestBase {
 	}
 
 	@Test(priority = 5, dependsOnMethods = { "deliverFinalWorkCompetitionTest" })
-	public void uploadFinalDesign() throws InterruptedException, AWTException, IOException {
+	public void contactUsTest() {
 		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
-		ExcelReader ER = new ExcelReader();
-		competitionDetailsDesignerPage.openFiles();
-		competitionDetailsDesignerPage.uploadFinalDesign(ER.getExcelData(9, 2)[0][1]);
-		Assert.assertTrue(competitionDetailsDesignerPage.detailsLink.isDisplayed());
+		jse = (JavascriptExecutor) driver;
+		jse.executeScript("arguments[0].click();", competitionDetailsDesignerPage.contactUsLink);
+		competitionDetailsDesignerPage.contactUsFun(message);
 	}
 
-	 @Test(priority = 6, dependsOnMethods = { "uploadFinalDesign" })
-	 public void makeLogoutTest() throws AWTException {
-	 homePage = new HomePage(driver);
-	 defaultPage = new DefaultPage(driver);
-	 homePage.openMainMenuFun();
-	 homePage.logoutFun();
-	 Assert.assertTrue(defaultPage.loginLink.isDisplayed());
-	 }
+	@Test(priority = 6, dependsOnMethods = { "contactUsTest" })
+	public void makeLogoutTest() throws AWTException {
+		homePage = new HomePage(driver);
+		defaultPage = new DefaultPage(driver);
+		homePage.openMainMenuFun();
+		homePage.logoutFun();
+		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
+	}
 }

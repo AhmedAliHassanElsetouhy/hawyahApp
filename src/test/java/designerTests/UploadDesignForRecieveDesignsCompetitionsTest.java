@@ -3,8 +3,11 @@ package designerTests;
 import java.awt.AWTException;
 import java.io.IOException;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.github.javafaker.Faker;
 
 import clientPages.CompetitionsPage;
 import clientPages.DefaultPage;
@@ -14,7 +17,7 @@ import clientTests.TestBase;
 import data.ExcelReader;
 import designerPages.CompetitionDetailsDesignerPage;
 
-public class DeliverFInalWorkCompetitionsDetailsDesignerTest extends TestBase {
+public class UploadDesignForRecieveDesignsCompetitionsTest extends TestBase {
 
 	DefaultPage defaultPage;
 	LoginPage loginPage;
@@ -22,6 +25,9 @@ public class DeliverFInalWorkCompetitionsDetailsDesignerTest extends TestBase {
 	CompetitionsPage competitionsPage;
 	int compititionItem = 1;
 	CompetitionDetailsDesignerPage competitionDetailsDesignerPage;
+	Faker fakeData = new Faker();
+	String message = fakeData.name().title();
+	JavascriptExecutor jse;
 
 	@Test(priority = 1)
 	public void openHomePageTest() throws IOException {
@@ -40,6 +46,7 @@ public class DeliverFInalWorkCompetitionsDetailsDesignerTest extends TestBase {
 		homePage = new HomePage(driver);
 		ExcelReader ER = new ExcelReader();
 		loginPage.loginFun(ER.getExcelData(5, 2)[1][1], ER.getExcelData(5, 2)[2][1]);
+		System.out.println(homePage.loginConfirmMsg.getText());
 		Assert.assertTrue(homePage.loginConfirmMsg.getText().contains("تم تسجيل الدخول بنجاح"));
 	}
 
@@ -51,31 +58,34 @@ public class DeliverFInalWorkCompetitionsDetailsDesignerTest extends TestBase {
 	}
 
 	@Test(priority = 4, dependsOnMethods = { "openCompetitionsTest" })
-	public void deliverFinalWorkCompetitionTest() {
+	public void recieveDesignsCompetitionsDetailsTest() {
 		competitionsPage = new CompetitionsPage(driver);
 		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
-		competitionsPage.openDeliverFinalWorkCompetitionFun(compititionItem);
+		competitionsPage.openRecievedDesignsCompetitionsFun(compititionItem);
 		Assert.assertTrue(competitionDetailsDesignerPage.detailsLink.isDisplayed());
 		Assert.assertTrue(competitionDetailsDesignerPage.designsLink.isDisplayed());
-		Assert.assertTrue(competitionDetailsDesignerPage.filesLink.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerPage.uploadDesignLink.isDisplayed());
 		Assert.assertTrue(competitionDetailsDesignerPage.contactUsLink.isDisplayed());
 	}
 
-	@Test(priority = 5, dependsOnMethods = { "deliverFinalWorkCompetitionTest" })
-	public void uploadFinalDesign() throws InterruptedException, AWTException, IOException {
+	@Test(priority = 5, dependsOnMethods = { "recieveDesignsCompetitionsDetailsTest" })
+	public void uploadDesignTest() throws InterruptedException, AWTException, IOException {
 		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
 		ExcelReader ER = new ExcelReader();
-		competitionDetailsDesignerPage.openFiles();
-		competitionDetailsDesignerPage.uploadFinalDesign(ER.getExcelData(9, 2)[0][1]);
-		Assert.assertTrue(competitionDetailsDesignerPage.detailsLink.isDisplayed());
+		competitionDetailsDesignerPage.openUploadDesignFun();
+		// competitionDetailsDesignerPage.uploadDesignFileFun(ER.getExcelData(9,
+		// 2)[0][1]);
+		competitionDetailsDesignerPage.selectFileBtn
+				.sendKeys(System.getProperty("user.dir") + "\\Uploads\\" + ER.getExcelData(9, 2)[0][1]);
+		Assert.assertTrue(competitionDetailsDesignerPage.fileSize.getText().contains("KB"));
 	}
 
-	 @Test(priority = 6, dependsOnMethods = { "uploadFinalDesign" })
-	 public void makeLogoutTest() throws AWTException {
-	 homePage = new HomePage(driver);
-	 defaultPage = new DefaultPage(driver);
-	 homePage.openMainMenuFun();
-	 homePage.logoutFun();
-	 Assert.assertTrue(defaultPage.loginLink.isDisplayed());
-	 }
+	@Test(priority = 6, dependsOnMethods = { "uploadDesignTest" })
+	public void makeLogoutTest() throws AWTException {
+		homePage = new HomePage(driver);
+		defaultPage = new DefaultPage(driver);
+		homePage.openMainMenuFun();
+		homePage.logoutFun();
+		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
+	}
 }

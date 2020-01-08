@@ -87,9 +87,22 @@ public class MyWorkUserTest extends TestBase {
 	@Test(priority = 5, dependsOnMethods = { "openMyWorkTest" })
 	public void addDesignTest() throws InterruptedException, AWTException, IOException {
 		myWorkUserPage = new MyWorkUserPage(driver);
+		myPageUserPage = new MyPageUserPage(driver);
 		ExcelReader ER = new ExcelReader();
-		myWorkUserPage.addDesignFun(title, ER.getExcelData(0, 7)[0][1]);
 
+		myWorkUserPage.uploadIcon
+				.sendKeys(System.getProperty("user.dir") + "\\Uploads\\" + ER.getExcelData(9, 2)[0][1]);
+		myWorkUserPage.addDesignFun(title);
 		// Assert.assertTrue(transferRequestsUserPage.transferModel.isDisplayed());
+		Assert.assertTrue(myPageUserPage.confirmSaveDesignMsg.isDisplayed());
 	}
+
+	// @Test(priority = 6, dependsOnMethods = { "addDesignTest" })
+	// public void makeLogoutTest() throws AWTException {
+	// homePage = new HomePage(driver);
+	// defaultPage = new DefaultPage(driver);
+	// homePage.openMainMenuFun();
+	// homePage.logoutFun();
+	// Assert.assertTrue(defaultPage.loginLink.isDisplayed());
+	// }
 }

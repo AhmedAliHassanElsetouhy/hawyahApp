@@ -51,11 +51,9 @@ public class ForgetPasswordTest extends TestBase {
 	public void invalidDataForgetPasswordFormTest() throws AWTException {
 		forgetPasswordPage = new ForgetPasswordPage(driver);
 		forgetPasswordPage.forgetPassFun(invalidEmail);
-		// forgetPasswordPage.sendForgottenEmailBtnFun();
 		System.out.println(forgetPasswordPage.invalidForgetPassEmailMsg.getText());
 		Assert.assertTrue(forgetPasswordPage.invalidForgetPassEmailMsg.getText()
 				.contains("البريد الإلكتروني المدخل غير صحيح. الرجاء إعادة المحاولة"));
-		// forgetPasswordPage.refreshPage();
 		forgetPasswordPage.emailTxtBox.clear();
 	}
 
@@ -65,7 +63,6 @@ public class ForgetPasswordTest extends TestBase {
 		confirmPasswordPage = new ConfirmPasswordPage(driver);
 		ExcelReader ER = new ExcelReader();
 		forgetPasswordPage.forgetPassFun(ER.getExcelData(5, 2)[1][1]);
-		// forgetPasswordPage.sendForgottenEmailBtnFun();
 		Assert.assertTrue(confirmPasswordPage.confirmPassMsg.getText()
 				.contains("الرجاء اتباع التعليمات الموضحة في بريدك الالكتروني"));
 	}
@@ -75,7 +72,6 @@ public class ForgetPasswordTest extends TestBase {
 		loginPage = new LoginPage(driver);
 		confirmPasswordPage = new ConfirmPasswordPage(driver);
 		confirmPasswordPage.openLoginFormFun();
-		// forgetPasswordPage.sendForgottenEmailBtnFun();
 		Assert.assertTrue(loginPage.forgetPassLink.isDisplayed());
 	}
 
@@ -84,8 +80,6 @@ public class ForgetPasswordTest extends TestBase {
 		loginPage = new LoginPage(driver);
 		registrationPage = new ClientRegistrationPage(driver);
 		loginPage.openRegisterFormFun();
-		// forgetPasswordPage.sendForgottenEmailBtnFun();
 		Assert.assertTrue(registrationPage.registerFormHeaderTxt.isDisplayed());
 	}
-
 }

@@ -12,13 +12,15 @@ import clientPages.HomePage;
 import clientPages.LoginPage;
 import clientTests.TestBase;
 import data.ExcelReader;
+import designerPages.CompetitionDetailsDesignerPage;
 
-public class CompetitionsTest extends TestBase {
-
+public class ContractTest extends TestBase{
 	DefaultPage defaultPage;
 	LoginPage loginPage;
 	HomePage homePage;
 	CompetitionsPage competitionsPage;
+	int compititionItem = 1;
+	CompetitionDetailsDesignerPage competitionDetailsDesignerPage;
 
 	@Test(priority = 1)
 	public void openHomePageTest() throws IOException {
@@ -37,8 +39,6 @@ public class CompetitionsTest extends TestBase {
 		homePage = new HomePage(driver);
 		ExcelReader ER = new ExcelReader();
 		loginPage.loginFun(ER.getExcelData(5, 2)[1][1], ER.getExcelData(5, 2)[2][1]);
-		// loginPage.submitLoginFun();
-		System.out.println(homePage.loginConfirmMsg.getText());
 		Assert.assertTrue(homePage.loginConfirmMsg.getText().contains("تم تسجيل الدخول بنجاح"));
 	}
 
@@ -47,10 +47,33 @@ public class CompetitionsTest extends TestBase {
 		homePage = new HomePage(driver);
 		competitionsPage = new CompetitionsPage(driver);
 		homePage.openCompetitionFun();
-		System.out.println(competitionsPage.competitions.getText());
 	}
 
 	@Test(priority = 4, dependsOnMethods = { "openCompetitionsTest" })
+	public void deliverFinalWorkCompetitionTest() {
+		competitionsPage = new CompetitionsPage(driver);
+		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
+		competitionsPage.openDeliverFinalWorkCompetitionFun(compititionItem);
+		Assert.assertTrue(competitionDetailsDesignerPage.detailsLink.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerPage.designsLink.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerPage.filesLink.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerPage.contactUsLink.isDisplayed());
+	}
+
+	@Test(priority = 5, dependsOnMethods = { "deliverFinalWorkCompetitionTest" })
+	public void uploadFinalDesignFun() throws InterruptedException, AWTException, IOException {
+		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
+		competitionDetailsDesignerPage.openFiles();
+		Assert.assertTrue(competitionDetailsDesignerPage.filesHeader.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerPage.showAgreementLink.isDisplayed());
+		competitionDetailsDesignerPage.showAgreementFun();
+		Assert.assertTrue(competitionDetailsDesignerPage.agreementPopup.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerPage.designerSig.isDisplayed());
+		competitionDetailsDesignerPage.closeFun();
+		
+	}
+
+	@Test(priority = 6, dependsOnMethods = { "uploadFinalDesignFun" })
 	public void makeLogoutTest() throws AWTException {
 		homePage = new HomePage(driver);
 		defaultPage = new DefaultPage(driver);

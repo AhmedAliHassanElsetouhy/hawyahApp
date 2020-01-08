@@ -22,8 +22,6 @@ public class CompetitionsListTest extends TestBase {
 	LoginPage loginPage;
 	HomePage homePage;
 	DesignsPage designsPage;
-	// String email = "ahmed.ali.rooya@gmail.com";
-	// String password = "11111111";
 	MyPagePage myPagePage;
 	AboutMePage aboutMePage;
 	CompetitionsListPage competitionsListPage;
@@ -99,4 +97,34 @@ public class CompetitionsListTest extends TestBase {
 		homePage.logoutFun();
 		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
 	}
+	
+	//This take more time
+	// @Test(priority = 1)
+	// public void openHomePageTest() throws IOException {
+	// ExcelReader ER = new ExcelReader();
+	// driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
+	// defaultPage = new DefaultPage(driver);
+	// loginPage = new LoginPage(driver);
+	// homePage = new HomePage(driver);
+	// myPagePage = new MyPagePage(driver);
+	// competitionsListPage = new CompetitionsListPage(driver);
+	// paymentsListPage = new PaymentsListPage(driver);
+	// defaultPage.openLoginForm();
+	// Assert.assertTrue(loginPage.forgetPassLink.isDisplayed());
+	// loginPage.loginFun(ER.getExcelData(0, 2)[1][1], ER.getExcelData(0, 2)[2][1]);
+	// System.out.println(homePage.loginConfirmMsg.getText());
+	// Assert.assertTrue(homePage.loginConfirmMsg.getText().contains("تم تسجيل
+	// الدخول بنجاح"));
+	// homePage.openMainMenuFun();
+	// myPagePage.openMyPageFun();
+	// Assert.assertTrue(myPagePage.aboutMeLink.isDisplayed());
+	// Assert.assertTrue(myPagePage.myCompetitionsLink.isDisplayed());
+	// Assert.assertTrue(myPagePage.paymentsLink.isDisplayed());
+	// myPagePage.openMyCompetitions();
+	// myPagePage.openMyPayments();
+	// homePage.openMainMenuFun();
+	// homePage.logoutFun();
+	// Assert.assertTrue(defaultPage.loginLink.isDisplayed());
+	//
+	// }
 }

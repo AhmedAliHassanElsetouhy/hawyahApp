@@ -18,20 +18,20 @@ import clientTests.TestBase;
 import data.ExcelReader;
 import designerPages.AboutMeUserPage;
 import designerPages.BankAccountsUserPage;
+import designerPages.HomeUserPage;
 import designerPages.MyPageUserPage;
-import designerPages.TransferRequestsUserPage;
 
-public class TransfersRequestsTest extends TestBase {
+public class UpdateLoginDataTest extends TestBase {
+
 	DefaultPage defaultPage;
 	LoginPage loginPage;
 	HomePage homePage;
 	DesignsPage designsPage;
 	MyPagePage myPagePage;
+	AboutMeUserPage aboutMeUserPage;
+	HomeUserPage homeUserPage;
 	MyPageUserPage myPageUserPage;
 	BankAccountsUserPage bankAccountsUserPage;
-	AboutMeUserPage aboutMeUserPage;
-	TransferRequestsUserPage transferRequestsUserPage;
-	JavascriptExecutor jse;
 
 	Faker fakeData = new Faker();
 	String fName = fakeData.name().firstName();
@@ -40,6 +40,7 @@ public class TransfersRequestsTest extends TestBase {
 	String phone = fakeData.phoneNumber().cellPhone();
 	String screenName = fakeData.name().firstName() + fakeData.number().numberBetween(1, 99);
 	String designerBio = fakeData.name().title();
+	public String address = fakeData.address().fullAddress();
 
 	@Test(priority = 1)
 	public void openHomePageTest() throws IOException {
@@ -68,38 +69,46 @@ public class TransfersRequestsTest extends TestBase {
 	public void openMyPageTest() {
 		homePage = new HomePage(driver);
 		myPagePage = new MyPagePage(driver);
-		myPageUserPage = new MyPageUserPage(driver);
 		homePage.openMainMenuFun();
 		myPagePage.openMyPageFun();
-		Assert.assertTrue(myPageUserPage.myStatsLink.isDisplayed());
+		Assert.assertTrue(myPagePage.aboutMeLink.isDisplayed());
 	}
+
+	JavascriptExecutor jse;
 
 	@Test(priority = 4, dependsOnMethods = { "openMyPageTest" })
-	public void openTransfersRequestsTest() {
-		myPageUserPage = new MyPageUserPage(driver);
-		bankAccountsUserPage = new BankAccountsUserPage(driver);
-		transferRequestsUserPage = new TransferRequestsUserPage(driver);
-		driver.navigate().to("https://hawyah-dev.herokuapp.com/designer_profile/financial_transfers?locale=ar");
-		Assert.assertTrue(transferRequestsUserPage.balance.isDisplayed());
-		// Assert.assertTrue(transferRequestsUserPage.sendTransferBtn.isDisplayed());
+	public void openEditMyAccountDataTest() {
+		myPagePage = new MyPagePage(driver);
+		aboutMeUserPage = new AboutMeUserPage(driver);
+		myPagePage.openUpdateMyAccountPageFun();
+		// jse = (JavascriptExecutor) driver;
+		// jse.executeScript("arguments[0].click();", myPagePage.updateBtn);
+		Assert.assertTrue(aboutMeUserPage.personalDataLink.isDisplayed());
 	}
 
-	@Test(priority = 5, dependsOnMethods = { "openTransfersRequestsTest" })
-	public void sendTransfersTest() {
+	@Test(priority = 5, dependsOnMethods = { "openEditMyAccountDataTest" })
+	public void updateLoginDataTest() throws IOException {
+		homePage = new HomePage(driver);
+		myPagePage = new MyPagePage(driver);
+		aboutMeUserPage = new AboutMeUserPage(driver);
 		myPageUserPage = new MyPageUserPage(driver);
-		bankAccountsUserPage = new BankAccountsUserPage(driver);
-		transferRequestsUserPage = new TransferRequestsUserPage(driver);
-		if (!transferRequestsUserPage.totalTransferred.getText().contains("0")) {
-			jse = (JavascriptExecutor) driver;
-			jse.executeScript("arguments[0].click();", transferRequestsUserPage.sendTransferBtn);
-			System.out.println(transferRequestsUserPage.modelView.getText());
-			transferRequestsUserPage.cancelFun();
-		} else {
-			Assert.assertTrue(transferRequestsUserPage.transferDate.isDisplayed());
-		}
+		ExcelReader ER = new ExcelReader();
+		// myPagePage.openUpdateMyAccountPageFun();
+		myPagePage.openLoginDataFormPage();
+		aboutMeUserPage.updateLoginDataForm(ER.getExcelData(6, 2)[1][1], ER.getExcelData(6, 2)[2][1],
+				ER.getExcelData(6, 2)[3][1]);
+		System.out.println(ER.getExcelData(1, 2)[1][1]);
+		System.out.println(ER.getExcelData(1, 2)[2][1]);
+		System.out.println(ER.getExcelData(1, 2)[3][1]);
+		aboutMeUserPage.saveDataFun();
+		Assert.assertTrue(myPageUserPage.aboutMeLink.isDisplayed());
+		Assert.assertTrue(myPageUserPage.myStatsLink.isDisplayed());
+		Assert.assertTrue(myPageUserPage.myBankAccountLink.isDisplayed());
+		Assert.assertTrue(myPageUserPage.myTransfersLink.isDisplayed());
+		Assert.assertTrue(myPageUserPage.myWorksLink.isDisplayed());
 	}
 
-	@Test(priority = 6, dependsOnMethods = { "sendTransfersTest" })
+	@Test(priority = 6, dependsOnMethods = { "updateLoginDataTest" })
 	public void makeLogoutTest() throws AWTException {
 		homePage = new HomePage(driver);
 		defaultPage = new DefaultPage(driver);

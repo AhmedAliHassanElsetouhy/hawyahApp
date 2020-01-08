@@ -58,14 +58,14 @@ public class MessageFormPage extends PageBase {
 	@FindBy(xpath = "//a[@href='/conversations?box=sent&locale=ar']")
 	WebElement sentMsgs;
 
-	public void sentMsgs() {
+	public void openSentMsgs() {
 		clickButton(sentMsgs);
 	}
 
 	@FindBy(xpath = "//a[@href='/conversations?box=trash&locale=ar']")
 	WebElement deletedMsgs;
 
-	public void deletedMsgs() {
+	public void openDeletedMsgs() {
 		clickButton(deletedMsgs);
 	}
 	

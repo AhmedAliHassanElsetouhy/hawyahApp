@@ -20,7 +20,7 @@ import designerPages.BankAccountsUserPage;
 import designerPages.HomeUserPage;
 import designerPages.MyPageUserPage;
 
-public class AboutMeUserTest extends TestBase {
+public class UpdatePersonalDataTest extends TestBase {
 
 	DefaultPage defaultPage;
 	LoginPage loginPage;
@@ -33,7 +33,7 @@ public class AboutMeUserTest extends TestBase {
 	BankAccountsUserPage bankAccountsUserPage;
 
 	Faker fakeData = new Faker();
-	public String fName = fakeData.name().firstName();
+	String fName = fakeData.name().firstName();
 	String lName = fakeData.name().lastName();
 	String city = fakeData.nation().capitalCity();
 	String phone = fakeData.phoneNumber().cellPhone();
@@ -100,51 +100,6 @@ public class AboutMeUserTest extends TestBase {
 	}
 
 	@Test(priority = 6, dependsOnMethods = { "updatePersonalDataTest" })
-	public void updateLoginDataTest() throws IOException {
-		homePage = new HomePage(driver);
-		myPagePage = new MyPagePage(driver);
-		aboutMeUserPage = new AboutMeUserPage(driver);
-		ExcelReader ER = new ExcelReader();
-		myPagePage.openUpdateMyAccountPageFun();
-		myPagePage.openLoginDataFormPage();
-		aboutMeUserPage.updateLoginDataForm(ER.getExcelData(6, 2)[1][1], ER.getExcelData(6, 2)[2][1],
-				ER.getExcelData(6, 2)[3][1]);
-		System.out.println(ER.getExcelData(1, 2)[1][1]);
-		System.out.println(ER.getExcelData(1, 2)[2][1]);
-		System.out.println(ER.getExcelData(1, 2)[3][1]);
-		aboutMeUserPage.saveDataFun();
-		Assert.assertTrue(myPageUserPage.aboutMeLink.isDisplayed());
-		Assert.assertTrue(myPageUserPage.myStatsLink.isDisplayed());
-		Assert.assertTrue(myPageUserPage.myBankAccountLink.isDisplayed());
-		Assert.assertTrue(myPageUserPage.myTransfersLink.isDisplayed());
-		Assert.assertTrue(myPageUserPage.myWorksLink.isDisplayed());
-	}
-
-	String iban = fakeData.number().digits(16);
-	String accOwner = fakeData.funnyName().name();
-	String bankName = fakeData.name().name();
-
-	@Test(priority = 7, dependsOnMethods = { "updateLoginDataTest" })
-	public void updateBankAccountDataTest() throws IOException {
-		homePage = new HomePage(driver);
-		myPagePage = new MyPagePage(driver);
-		aboutMeUserPage = new AboutMeUserPage(driver);
-		bankAccountsUserPage = new BankAccountsUserPage(driver);
-		myPagePage.openUpdateMyAccountPageFun();
-		aboutMeUserPage.openBankAccountFun();
-		aboutMeUserPage.updateBankAccountDataForm(iban, accOwner, bankName);
-		aboutMeUserPage.openBankAccountFun();
-		bankAccountsUserPage.deleteIcon(1);
-		driver.switchTo().alert().accept();
-		Assert.assertTrue(aboutMeUserPage.bankAccConfirmMsg.isDisplayed());
-		Assert.assertTrue(myPageUserPage.aboutMeLink.isDisplayed());
-		Assert.assertTrue(myPageUserPage.myStatsLink.isDisplayed());
-		Assert.assertTrue(myPageUserPage.myBankAccountLink.isDisplayed());
-		Assert.assertTrue(myPageUserPage.myTransfersLink.isDisplayed());
-		Assert.assertTrue(myPageUserPage.myWorksLink.isDisplayed());
-	}
-
-	@Test(priority = 8, dependsOnMethods = { "updateBankAccountDataTest" })
 	public void makeLogoutTest() throws AWTException {
 		homePage = new HomePage(driver);
 		defaultPage = new DefaultPage(driver);
@@ -152,5 +107,4 @@ public class AboutMeUserTest extends TestBase {
 		homePage.logoutFun();
 		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
 	}
-
 }

@@ -24,16 +24,16 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 	WebElement name;
 
 	@FindBy(xpath = "//*[text()='ما هو تصنيف نشاطك؟']")
-	WebElement cat;
+	public WebElement cat;
 
 	@FindBy(xpath = "//*[text()='اشرح نشاط أو صفات منتجك الذي تريد']")
-	WebElement desc;
+	public WebElement desc;
 
 	@FindBy(xpath = "//*[text()='هل لديك عبارة ترغب بإضافتها؟']")
 	WebElement details;
 
 	@FindBy(xpath = "//*[text()='هل لديك فكرة أو إضافات معينة ترغب بإخبار المصمم عنها؟']")
-	WebElement idea;
+	public WebElement idea;
 
 	@FindBy(xpath = "//*[text()='الفئة الفضية']")
 	WebElement prize;
@@ -43,9 +43,6 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 
 	public void openDetailsFun() {
 		clickButton(detailsLink);
-		Assert.assertTrue(cat.isDisplayed());
-		Assert.assertTrue(desc.isDisplayed());
-		Assert.assertTrue(idea.isDisplayed());
 	}
 
 	// @FindBy(partialLinkText = "التصاميم")
@@ -60,7 +57,6 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 
 	public void openDesignsFun() {
 		clickButton(designsLink);
-		Assert.assertTrue(rate.isDisplayed());
 	}
 
 	public void openCardFun(int index) {
@@ -79,9 +75,10 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 	@FindBy(xpath = "//div[@class='comment-item']")
 	public List<WebElement> comments;
 
-	public void addCommentFun(String comment) {
+	public void addCommentFun(String comment) throws AWTException {
 		setTextElementText(msgTextarea, comment);
 		clickButton(submitCommentBtn);
+		refreshPage();
 	}
 	
 	@FindBy(xpath="//div[@class='comment-list']")
@@ -101,7 +98,7 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 	public WebElement filesHeader;
 
 	@FindBy(partialLinkText = "عرض الاتفاقية")
-	WebElement showAgreementLink;
+	public WebElement showAgreementLink;
 
 	// @FindBy(id = "handoverAgreementViewModal")
 	@FindBy(xpath = "//div[@class='modal open']")
@@ -115,10 +112,10 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 	public WebElement chooseFileBtn;
 
 	@FindBy(xpath = "//legend[@class='purple-text']")
-	WebElement designerSig;
+	public WebElement designerSig;
 
 	@FindBy(xpath = "//legend[@class='blue-text']")
-	WebElement cliendSig;
+	public WebElement cliendSig;
 
 	public void openFilesAndOpenAgreementDesignerFun() {
 		clickButton(filesLink);
@@ -128,16 +125,22 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 		Assert.assertTrue(agreementPopup.isDisplayed());
 		Assert.assertTrue(designerSig.isDisplayed());
 		Assert.assertTrue(cliendSig.isDisplayed());
-		clickButton(closeBtn);
+		closeFun();
 	}
 
-	public void openFilesAndOpenAgreementDesignerOnlyFun() {
-		clickButton(filesLink);
-		Assert.assertTrue(filesHeader.isDisplayed());
-		Assert.assertTrue(showAgreementLink.isDisplayed());
+	public void showAgreementFun() {
 		clickButton(showAgreementLink);
-		Assert.assertTrue(agreementPopup.isDisplayed());
-		Assert.assertTrue(designerSig.isDisplayed());
+	}
+	
+//	public void openFilesAndOpenAgreementDesignerOnlyFun() {
+////		clickButton(filesLink);
+//		
+////		clickButton(showAgreementLink);
+//		
+//		closeFun();
+//	}
+	
+	public void closeFun() {
 		clickButton(closeBtn);
 	}
 
@@ -149,7 +152,7 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 	// @FindBy(xpath = "//*[text()='حفظ']")
 	WebElement saveBtn;
 
-	public void uploadContract(String folderName) throws InterruptedException, AWTException {
+	public void uploadFinalDesign(String folderName) throws InterruptedException, AWTException {
 		chooseFileBtn.sendKeys(System.getProperty("user.dir") + "\\Uploads\\" + folderName);
 		clickButton(saveBtn);
 	}
@@ -165,6 +168,9 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 		clickButton(uploadDesignLink);
 	}
 
+	@FindBy(xpath="//span[@class='size']")
+	public WebElement fileSize;
+	
 	@FindBy(xpath = "//input[@type='file']")
 	public WebElement selectFileBtn;
 

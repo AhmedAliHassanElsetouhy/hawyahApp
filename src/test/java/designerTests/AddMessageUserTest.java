@@ -17,7 +17,7 @@ import clientPages.MyPagePage;
 import clientTests.TestBase;
 import data.ExcelReader;
 
-public class MessagesUserTest extends TestBase {
+public class AddMessageUserTest extends TestBase {
 
 	DefaultPage defaultPage;
 	LoginPage loginPage;
@@ -74,40 +74,6 @@ public class MessagesUserTest extends TestBase {
 	}
 
 	@Test(priority = 5, dependsOnMethods = { "addMessageTest" })
-	public void deleteMsgTest() {
-		messageFormPage = new MessageFormPage(driver);
-		messageFormPage.openMessages();
-		messageFormPage.openSentMessages();
-		messageFormPage.deleteMsgFun(index);
-		driver.switchTo().alert().accept();
-		Assert.assertTrue(messageFormPage.confirmDeleteMsg.isDisplayed());
-	}
-
-	@Test(priority = 6, dependsOnMethods = { "deleteMsgTest" })
-	public void openDeletedMsgsTest() {
-		messageFormPage = new MessageFormPage(driver);
-		messageFormPage.sentMsgs();
-		messageFormPage.deleteMsgFun(index);
-		driver.switchTo().alert().accept();
-		messageFormPage.deletedMsgs();
-		messageFormPage.restoreDeleteMsgFun(index);
-		Assert.assertTrue(messageFormPage.confirmRestoreMsg.isDisplayed());
-		messageFormPage.sentMsgs();
-		messageFormPage.deleteMsgFun(index);
-		driver.switchTo().alert().accept();
-		Assert.assertTrue(messageFormPage.confirmDeleteMsg.isDisplayed());
-	}
-
-	@Test(priority = 7, dependsOnMethods = { "openDeletedMsgsTest" })
-	public void deletedAllMsgsTest() {
-		messageFormPage = new MessageFormPage(driver);
-		messageFormPage.deletedMsgs();
-		messageFormPage.deleteAllMsgsFun();
-		driver.switchTo().alert().accept();
-		Assert.assertTrue(messageFormPage.confirmRestoreMsg.isDisplayed());
-	}
-
-	@Test(priority = 8, dependsOnMethods = { "deletedAllMsgsTest" })
 	public void makeLogoutTest() throws AWTException {
 		homePage = new HomePage(driver);
 		defaultPage = new DefaultPage(driver);

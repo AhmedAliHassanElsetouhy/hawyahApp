@@ -20,8 +20,9 @@ public class TransferRequestsUserPage extends PageBase {
 	@FindBy(xpath = "//*[text()='نموذج طلب تحويل الرصيد الحالي']")
 	public WebElement transferModel;
 
-	@FindBy(partialLinkText = "إضغط لإرسال طلب تحويل للرصيد الحالي")
-	WebElement sendTransferBtn;
+	// @FindBy(partialLinkText = "إضغط لإرسال طلب تحويل للرصيد الحالي")
+	@FindBy(xpath = "//a[@href='#SendNewTransferRequest']")
+	public WebElement sendTransferBtn;
 
 	// @FindBy(xpath = "//div[@class='modal-content']")
 	@FindBy(id = "SendNewTransferRequest")
@@ -37,4 +38,17 @@ public class TransferRequestsUserPage extends PageBase {
 	public void close() {
 		clickButton(closeIcon);
 	}
+	
+	@FindBy(xpath="//*[text()='إلغاء']")
+	WebElement cancel;
+	
+	public void cancelFun() {
+		clickButton(cancel);
+	}
+	
+	@FindBy(xpath="//div[@class='total_transferred']")
+	public WebElement totalTransferred;
+	
+	@FindBy(xpath="//*[text()='تاريخ طلب التحويل']")
+	public WebElement transferDate;
 }

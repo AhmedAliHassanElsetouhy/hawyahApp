@@ -1,4 +1,4 @@
-package clientTests;
+package designerTests;
 
 import java.awt.AWTException;
 import java.io.IOException;
@@ -14,9 +14,11 @@ import clientPages.LoginPage;
 import clientPages.MessageFormPage;
 import clientPages.MessagesPage;
 import clientPages.MyPagePage;
+import clientTests.TestBase;
 import data.ExcelReader;
 
-public class MessagesTest extends TestBase {
+public class DeleteAllMsgsListTest extends TestBase {
+
 	DefaultPage defaultPage;
 	LoginPage loginPage;
 	HomePage homePage;
@@ -43,7 +45,7 @@ public class MessagesTest extends TestBase {
 		defaultPage = new DefaultPage(driver);
 		homePage = new HomePage(driver);
 		ExcelReader ER = new ExcelReader();
-		loginPage.loginFun(ER.getExcelData(0, 2)[1][1], ER.getExcelData(0, 2)[2][1]);
+		loginPage.loginFun(ER.getExcelData(5, 2)[1][1], ER.getExcelData(5, 2)[2][1]);
 		System.out.println(homePage.loginConfirmMsg.getText());
 		Assert.assertTrue(homePage.loginConfirmMsg.getText().contains("تم تسجيل الدخول بنجاح"));
 	}
@@ -80,23 +82,8 @@ public class MessagesTest extends TestBase {
 		driver.switchTo().alert().accept();
 		Assert.assertTrue(messageFormPage.confirmDeleteMsg.isDisplayed());
 	}
-
-	@Test(priority = 6, dependsOnMethods = { "deleteMsgTest" })
-	public void openDeletedMsgsTest() {
-		messageFormPage = new MessageFormPage(driver);
-		messageFormPage.openSentMsgs();
-		messageFormPage.deleteMsgFun(index);
-		driver.switchTo().alert().accept();
-		messageFormPage.openDeletedMsgs();
-		messageFormPage.restoreDeleteMsgFun(index);
-		Assert.assertTrue(messageFormPage.confirmRestoreMsg.isDisplayed());
-		messageFormPage.openSentMsgs();
-		messageFormPage.deleteMsgFun(index);
-		driver.switchTo().alert().accept();
-		Assert.assertTrue(messageFormPage.confirmDeleteMsg.isDisplayed());
-	}
-
-	@Test(priority = 7, dependsOnMethods = { "openDeletedMsgsTest" })
+	
+	@Test(priority = 7, dependsOnMethods = { "deleteMsgTest" })
 	public void deletedAllMsgsTest() {
 		messageFormPage = new MessageFormPage(driver);
 		messageFormPage.openDeletedMsgs();

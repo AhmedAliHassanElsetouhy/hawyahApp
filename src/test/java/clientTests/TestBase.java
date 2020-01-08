@@ -60,7 +60,7 @@ public class TestBase {
 
 	@BeforeSuite
 	@Parameters({ "browser" })
-	public void startDriver(@Optional("firefox") String browser) {
+	public void startDriver(@Optional("chrome") String browser) {
 		if (browser.equalsIgnoreCase("chrome")) {
 			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver.exe");
 			driver = new ChromeDriver(chromeOption());

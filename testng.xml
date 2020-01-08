@@ -21,24 +21,35 @@
 			<class name="designerTests.LoginUserTest" />
 			<class name="designerTests.RegistrationUserTest" />
 			<class name="designerTests.AboutMeUserTest" />
+			<class name="designerTests.UpdateLoginDataTest" />
+			<class name="designerTests.UpdatePersonalDataTest" />
+			<class name="designerTests.UpdateBankAccountDataTest" />
+
 			<class name="designerTests.MyStatsUserTest" />
 			<class name="designerTests.BankAccountsUserTest" />
-			<!--<class name="designerTests.TransfersRequestsTest" /> Not finished 
-				because of popup -->
+			<class name="designerTests.TransfersRequestsTest" /> 
 			<!--<class name="designerTests.MyWorkUserTest"/> Not completed because 
 				of menu of design type open twice -->
 			<!-- <class name="designerTests.RequestDesignAndSearchDesignerTest"/> 
 				Not completed waiting because of list not selected -->
-			<class name="designerTests.CompetitionsTest" />
 			<class name="designerTests.ForgetPasswordTest" />
+			<class name="designerTests.CompetitionDesignsTest" />
+			<class name="designerTests.CompetitionDetailsTest" />
+			<class name="designerTests.ContactUsTest" />
+			<class name="designerTests.ContractTest" />
+
 			<class
 				name="designerTests.FinishedCompetitionsDetailsDesignerTest" />
 			<class
 				name="designerTests.DeliverFInalWorkCompetitionsDetailsDesignerTest" />
 			<class
-				name="designerTests.RecieveDesignsCompetitionsDetailsDesignerTest" />
+				name="designerTests.UploadDesignForRecieveDesignsCompetitionsTest" />
+			<class name="designerTests.CommentsTest" />
 
-			<class name="designerTests.MessagesUserTest" />
+			<class name="designerTests.AddMessageUserTest" />
+			<class name="designerTests.DeleteMsgTest" />
+			<class name="designerTests.DeleteAllMsgsListTest" />
+			<class name="designerTests.RestoreMsgsTest" />
 
 			<!-- Footer pages tests -->
 			<class name="footerPagesTests.AskDesignTest" />

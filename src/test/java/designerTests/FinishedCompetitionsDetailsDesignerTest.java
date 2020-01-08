@@ -3,11 +3,8 @@ package designerTests;
 import java.awt.AWTException;
 import java.io.IOException;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import com.github.javafaker.Faker;
 
 import clientPages.CompetitionsPage;
 import clientPages.DefaultPage;
@@ -25,9 +22,6 @@ public class FinishedCompetitionsDetailsDesignerTest extends TestBase {
 	CompetitionsPage competitionsPage;
 	int compititionItem = 1;
 	CompetitionDetailsDesignerPage competitionDetailsDesignerPage;
-	Faker fakeData = new Faker();
-	String message = fakeData.name().title();
-	JavascriptExecutor jse;
 
 	@Test(priority = 1)
 	public void openHomePageTest() throws IOException {
@@ -46,7 +40,6 @@ public class FinishedCompetitionsDetailsDesignerTest extends TestBase {
 		homePage = new HomePage(driver);
 		ExcelReader ER = new ExcelReader();
 		loginPage.loginFun(ER.getExcelData(5, 2)[1][1], ER.getExcelData(5, 2)[2][1]);
-		// loginPage.submitLoginFun();
 		System.out.println(homePage.loginConfirmMsg.getText());
 		Assert.assertTrue(homePage.loginConfirmMsg.getText().contains("تم تسجيل الدخول بنجاح"));
 	}
@@ -63,7 +56,6 @@ public class FinishedCompetitionsDetailsDesignerTest extends TestBase {
 	public void finishedCompetitionsDetailsTest() {
 		competitionsPage = new CompetitionsPage(driver);
 		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
-		// competitionsPage.openCompetitionFun(compititionItem);
 		competitionsPage.openFinishedFun(compititionItem);
 		Assert.assertTrue(competitionDetailsDesignerPage.detailsLink.isDisplayed());
 		Assert.assertTrue(competitionDetailsDesignerPage.designsLink.isDisplayed());
@@ -72,32 +64,20 @@ public class FinishedCompetitionsDetailsDesignerTest extends TestBase {
 	}
 
 	@Test(priority = 5, dependsOnMethods = { "finishedCompetitionsDetailsTest" })
-	public void detailsTest() {
-		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
-		competitionDetailsDesignerPage.openDetailsFun();
-	}
-
-	@Test(priority = 6, dependsOnMethods = { "detailsTest" })
-	public void designsTest() {
-		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
-		competitionDetailsDesignerPage.openDesignsFun();
-	}
-
-	@Test(priority = 7, dependsOnMethods = { "designsTest" })
 	public void filesTest() {
 		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
-		competitionDetailsDesignerPage.openFilesAndOpenAgreementDesignerFun();
+		competitionDetailsDesignerPage.openFiles();
+		Assert.assertTrue(competitionDetailsDesignerPage.filesHeader.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerPage.showAgreementLink.isDisplayed());
+		competitionDetailsDesignerPage.showAgreementFun();
+		Assert.assertTrue(competitionDetailsDesignerPage.agreementPopup.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerPage.designerSig.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerPage.cliendSig.isDisplayed());
+		competitionDetailsDesignerPage.closeFun();
+		Assert.assertTrue(competitionDetailsDesignerPage.detailsLink.isDisplayed());
 	}
 
-	@Test(priority = 8, dependsOnMethods = { "filesTest" })
-	public void contactUsTest() {
-		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
-		jse = (JavascriptExecutor) driver;
-		jse.executeScript("arguments[0].click();", competitionDetailsDesignerPage.contactUsLink);
-		competitionDetailsDesignerPage.contactUsFun(message);
-	}
-
-	@Test(priority = 9, dependsOnMethods = { "contactUsTest" })
+	@Test(priority = 6, dependsOnMethods = { "filesTest" })
 	public void makeLogoutTest() throws AWTException {
 		homePage = new HomePage(driver);
 		defaultPage = new DefaultPage(driver);
