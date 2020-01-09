@@ -7,9 +7,9 @@ import org.testng.annotations.Test;
 
 import com.github.javafaker.Faker;
 
-import clientPages.DefaultClientPage;
+import clientPages.DefaultPage;
 import clientPages.HomeClientPage;
-import clientPages.LoginClientPage;
+import clientPages.LoginPage;
 import clientPages.RequestDesignAndSearchClientPage;
 import clientTests.TestBase;
 import data.ExcelReader;
@@ -18,7 +18,7 @@ import designerPages.HomeDesignerPage;
 public class RequestDesignAndSearchDesignerTest extends TestBase {
 
 	Faker fakeData = new Faker();
-	DefaultClientPage defaultPage;
+	DefaultPage defaultPage;
 	HomeClientPage homePage;
 	RequestDesignAndSearchClientPage requestDesignPage;
 	String searchText = fakeData.name().firstName();
@@ -27,7 +27,7 @@ public class RequestDesignAndSearchDesignerTest extends TestBase {
 	// String orderOption = "الأحدث";
 	String status = "منتهية";
 
-	LoginClientPage loginPage;
+	LoginPage loginPage;
 	HomeDesignerPage homeUserPage;
 	int designIndex = 2;
 	int activityIndex = 2;
@@ -37,16 +37,16 @@ public class RequestDesignAndSearchDesignerTest extends TestBase {
 	public void openHomePageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultPage = new DefaultClientPage(driver);
-		loginPage = new LoginClientPage(driver);
+		defaultPage = new DefaultPage(driver);
+		loginPage = new LoginPage(driver);
 		defaultPage.openLoginForm();
-		Assert.assertTrue(loginPage.forgetPassLinkCli.isDisplayed());
+		Assert.assertTrue(loginPage.forgetPassLink.isDisplayed());
 	}
 
 	@Test(priority = 2, dependsOnMethods = { "openHomePageTest" })
 	public void loginFun() throws IOException {
-		loginPage = new LoginClientPage(driver);
-		defaultPage = new DefaultClientPage(driver);
+		loginPage = new LoginPage(driver);
+		defaultPage = new DefaultPage(driver);
 		homePage = new HomeClientPage(driver);
 		homeUserPage = new HomeDesignerPage(driver);
 		ExcelReader ER = new ExcelReader();
@@ -59,7 +59,7 @@ public class RequestDesignAndSearchDesignerTest extends TestBase {
 	public void openRequestDesignTest() throws IOException {
 		// ExcelReader ER = new ExcelReader();
 		// driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultPage = new DefaultClientPage(driver);
+		defaultPage = new DefaultPage(driver);
 		requestDesignPage = new RequestDesignAndSearchClientPage(driver);
 		defaultPage.openRequestDesingFun();
 		Assert.assertTrue(requestDesignPage.advancedSearchLinkCli.isDisplayed());
@@ -67,7 +67,7 @@ public class RequestDesignAndSearchDesignerTest extends TestBase {
 
 	@Test(priority = 4, dependsOnMethods = { "openRequestDesignTest" })
 	public void textSearchTest() {
-		defaultPage = new DefaultClientPage(driver);
+		defaultPage = new DefaultPage(driver);
 		requestDesignPage = new RequestDesignAndSearchClientPage(driver);
 		requestDesignPage.advancedSearchFun();
 		requestDesignPage.sendSearchTxt(searchText);
@@ -76,7 +76,7 @@ public class RequestDesignAndSearchDesignerTest extends TestBase {
 
 	@Test(priority = 5, dependsOnMethods = { "textSearchTest" })
 	public void searchListTest() throws IOException {
-		defaultPage = new DefaultClientPage(driver);
+		defaultPage = new DefaultPage(driver);
 		requestDesignPage = new RequestDesignAndSearchClientPage(driver);
 		ExcelReader ER = new ExcelReader(); 
 		requestDesignPage.searchList(ER.getExcelData(8, 2)[0][1], activityIndex, orderIndex);

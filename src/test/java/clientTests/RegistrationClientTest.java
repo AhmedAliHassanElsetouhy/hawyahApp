@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import com.github.javafaker.Faker;
 
 import clientPages.RegistrationClientPage;
-import clientPages.DefaultClientPage;
+import clientPages.DefaultPage;
 import clientPages.HomeClientPage;
 import clientPages.RegistrationConfirmationClientPage;
 import data.ExcelReader;
@@ -18,7 +18,7 @@ import data.ExcelReader;
 public class RegistrationClientTest extends TestBase {
 
 	RegistrationClientPage registrationClientPage;
-	DefaultClientPage defaultClientPage;
+	DefaultPage defaultClientPage;
 	HomeClientPage homeClientPage;
 	RegistrationConfirmationClientPage registerConfirmClientPage;
 
@@ -32,7 +32,7 @@ public class RegistrationClientTest extends TestBase {
 	public void openRegisterFormPageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultClientPage = new DefaultClientPage(driver);
+		defaultClientPage = new DefaultPage(driver);
 		registrationClientPage = new RegistrationClientPage(driver);
 		defaultClientPage.openRegisterFormFun();
 		Assert.assertTrue(registrationClientPage.registerFormHeaderTxtCli.getText().contains("إنشاء حساب في هوية"));
@@ -40,7 +40,7 @@ public class RegistrationClientTest extends TestBase {
 
 	@Test(priority = 2, dependsOnMethods = { "openRegisterFormPageTest" })
 	public void emptyRegisterFormPageTest() {
-		defaultClientPage = new DefaultClientPage(driver);
+		defaultClientPage = new DefaultPage(driver);
 		registrationClientPage = new RegistrationClientPage(driver);
 		registrationClientPage.submitRegisterfun();
 		Assert.assertTrue(registrationClientPage.registerFormHeaderTxtCli.getText().contains("إنشاء حساب في هوية"));
@@ -48,7 +48,7 @@ public class RegistrationClientTest extends TestBase {
 
 	@Test(priority = 3, dependsOnMethods = { "emptyRegisterFormPageTest" })
 	public void invalidRegisterFormPageTest() throws AWTException {
-		defaultClientPage = new DefaultClientPage(driver);
+		defaultClientPage = new DefaultPage(driver);
 		registrationClientPage = new RegistrationClientPage(driver);
 		registrationClientPage.registerFun(emailCli, passwordCli, userNameCli);
 		registrationClientPage.checkTermsAndCondition();
@@ -60,7 +60,7 @@ public class RegistrationClientTest extends TestBase {
 
 	@Test(priority = 4, dependsOnMethods = { "invalidRegisterFormPageTest" })
 	public void clientRegisterFormPageTest() {
-		defaultClientPage = new DefaultClientPage(driver);
+		defaultClientPage = new DefaultPage(driver);
 		registrationClientPage = new RegistrationClientPage(driver);
 		registerConfirmClientPage = new RegistrationConfirmationClientPage(driver);
 		System.out.println(emailCli);

@@ -14,41 +14,41 @@ public class MyPageDesignerPage extends PageBase {
 	}
 
 	@FindBy(partialLinkText = "عني")
-	public WebElement aboutMeLink;
+	public WebElement aboutMeLinkDes;
 
 	public void openAboutMe() {
-		clickButton(aboutMeLink);
+		clickButton(aboutMeLinkDes);
 	}
 
 	@FindBy(partialLinkText = "احصائياتي")
-	public WebElement myStatsLink;
+	public WebElement myStatsLinkDes;
 
 	public void openMyStats() {
-		clickButton(myStatsLink);
+		clickButton(myStatsLinkDes);
 	}
 
 	@FindBy(partialLinkText = "الحسابات البنكية")
 	// @FindBy(xpath = "//*[text()='الحسابات البنكية']")
-	public WebElement myBankAccountLink;
+	public WebElement myBankAccountLinkDes;
 
 	public void openMyBankAccount() {
-		clickButton(myBankAccountLink);
+		clickButton(myBankAccountLinkDes);
 	}
 
 	@FindBy(partialLinkText = "طلبات التحويل")
-	public WebElement myTransfersLink;
+	public WebElement myTransfersLinkDes;
 
 	public void openMyTransfers() {
-		clickButton(myTransfersLink);
+		clickButton(myTransfersLinkDes);
 	}
 
 	@FindBy(partialLinkText = "أعمالي")
-	public WebElement myWorksLink;
+	public WebElement myWorksLinkDes;
 
 	public void openMyWorks() {
-		clickButton(myWorksLink);
+		clickButton(myWorksLinkDes);
 	}
-	
-	@FindBy(xpath="//div[@class='green lighten-5']")
-	public WebElement confirmSaveDesignMsg;
+
+	@FindBy(xpath = "//div[@class='green lighten-5']")
+	public WebElement confirmSaveDesignMsgDes;
 }

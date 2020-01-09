@@ -4,32 +4,32 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class DefaultClientPage extends PageBase {
+public class DefaultPage extends PageBase {
 
-	public DefaultClientPage(WebDriver driver) {
+	public DefaultPage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
 
 	@FindBy(linkText = "تسجيل الدخول")
-	public WebElement loginLinkCli;
+	public WebElement loginLink;
 
 	@FindBy(linkText = "إنضم إلينا")
-	WebElement joinUsBtnCli;
+	WebElement joinUsBtn;
 
 	@FindBy(linkText = "طلبات التصميم")
-	WebElement requestDesignCli;
+	WebElement requestDesign;
 
 	public void openLoginForm() {
-		clickButton(loginLinkCli);
+		clickButton(loginLink);
 	}
 
 	public void openRegisterFormFun() {
-		clickButton(joinUsBtnCli);
+		clickButton(joinUsBtn);
 	}
 
 	public void openRequestDesingFun() {
-		clickButton(requestDesignCli);
+		clickButton(requestDesign);
 	}
 
 	@FindBy(xpath = "//*[text()='من نحن']")
@@ -40,72 +40,72 @@ public class DefaultClientPage extends PageBase {
 	}
 
 	@FindBy(xpath = "//*[text()='تواصل معنا']")
-	public WebElement contactUsLinkCli;
+	public WebElement contactUsLink;
 
 	public void openContactUsPage() {
-		clickButton(contactUsLinkCli);
+		clickButton(contactUsLink);
 	}
 
 	@FindBy(xpath = "//*[text()='الأسعار']")
-	public WebElement pricesLinkCli;
+	public WebElement pricesLink;
 
 	public void openPricesPage() {
-		clickButton(pricesLinkCli);
+		clickButton(pricesLink);
 	}
 
 	@FindBy(xpath = "//*[text()='وظائف']")
-	public WebElement jobsLinkCli;
+	public WebElement jobsLink;
 
 	public void openJobsPage() {
-		clickButton(jobsLinkCli);
+		clickButton(jobsLink);
 	}
 
 	@FindBy(xpath = "//*[text()='الشروط والأحكام']")
-	public WebElement termsAndConditionsLinkCli;
+	public WebElement termsAndConditionsLink;
 
 	public void openTermsAndConditionsPage() {
-		clickButton(termsAndConditionsLinkCli);
+		clickButton(termsAndConditionsLink);
 	}
 
 	@FindBy(xpath = "//*[text()='سياسة الخصوصية']")
-	public WebElement privacyLinkCli;
+	public WebElement privacyLink;
 
 	public void openPrivacyPage() {
-		clickButton(pricesLinkCli);
+		clickButton(pricesLink);
 	}
 
 	@FindBy(xpath = "//*[text()='الاسئلة الشائعة']")
-	public WebElement commonQuesLinkCli;
+	public WebElement commonQuesLink;
 
 	public void openCommonQuesPage() {
-		clickButton(commonQuesLinkCli);
+		clickButton(commonQuesLink);
 	}
 
 	@FindBy(xpath = "//*[text()='اطلب تصميم']")
-	public WebElement askDesignLinkCli;
+	public WebElement askDesignLink;
 
 	public void openAskDesignPage() {
-		clickButton(askDesignLinkCli);
+		clickButton(askDesignLink);
 	}
 
 	@FindBy(xpath = "//*[text()='إنضم الى قائمة مصممينا']")
-	public WebElement beDesignerLinkCli;
+	public WebElement beDesignerLink;
 
 	public void openBeDesignerPage() {
-		clickButton(beDesignerLinkCli);
+		clickButton(beDesignerLink);
 	}
 
 	@FindBy(xpath = "//*[text()='طلبات التصميم']")
-	public WebElement designsReqLinkCli;
+	public WebElement designsReqLink;
 
 	public void openDesignRequestsPage() {
-		clickButton(designsReqLinkCli);
+		clickButton(designsReqLink);
 	}
 
 	@FindBy(xpath = "//*[text()='كيف نعمل']")
-	public WebElement howItWorkLinkCli;
+	public WebElement howItWorkLink;
 
 	public void openHowItWorkPage() {
-		clickButton(howItWorkLinkCli);
+		clickButton(howItWorkLink);
 	}
 }

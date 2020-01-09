@@ -10,10 +10,10 @@ import com.github.javafaker.Faker;
 
 import clientPages.RegistrationClientPage;
 import clientPages.ConfirmPasswordClientPage;
-import clientPages.DefaultClientPage;
+import clientPages.DefaultPage;
 import clientPages.ForgetPasswordClientPage;
 import clientPages.HomeClientPage;
-import clientPages.LoginClientPage;
+import clientPages.LoginPage;
 import data.ExcelReader;
 
 public class ForgetPasswordClientTest extends TestBase {
@@ -21,8 +21,8 @@ public class ForgetPasswordClientTest extends TestBase {
 	Faker fakeData = new Faker();
 	HomeClientPage homeClientPage;
 	ForgetPasswordClientPage forgetPasswordClientPage;
-	DefaultClientPage defaultClientPage;
-	LoginClientPage loginClientPage;
+	DefaultPage defaultClientPage;
+	LoginPage loginClientPage;
 	ConfirmPasswordClientPage confirmPasswordClientPage;
 	RegistrationClientPage registrationClientPage;
 	String invalidEmailCli = fakeData.internet().emailAddress();
@@ -31,16 +31,16 @@ public class ForgetPasswordClientTest extends TestBase {
 	public void openHomePageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultClientPage = new DefaultClientPage(driver);
-		loginClientPage = new LoginClientPage(driver);
+		defaultClientPage = new DefaultPage(driver);
+		loginClientPage = new LoginPage(driver);
 		defaultClientPage.openLoginForm();
-		Assert.assertTrue(loginClientPage.forgetPassLinkCli.isDisplayed());
+		Assert.assertTrue(loginClientPage.forgetPassLink.isDisplayed());
 	}
 
 	@Test(priority = 2, dependsOnMethods = { "openHomePageTest" })
 	public void openForgetPassPageTest() {
-		defaultClientPage = new DefaultClientPage(driver);
-		loginClientPage = new LoginClientPage(driver);
+		defaultClientPage = new DefaultPage(driver);
+		loginClientPage = new LoginPage(driver);
 		forgetPasswordClientPage = new ForgetPasswordClientPage(driver);
 		loginClientPage.openForgetPassPageFun();
 		Assert.assertTrue(forgetPasswordClientPage.resetPassBtnCli.isDisplayed());
@@ -68,15 +68,15 @@ public class ForgetPasswordClientTest extends TestBase {
 
 	@Test(priority = 5, dependsOnMethods = { "forgetPasswordFormTest" })
 	public void openLoginFormTest() {
-		loginClientPage = new LoginClientPage(driver);
+		loginClientPage = new LoginPage(driver);
 		confirmPasswordClientPage = new ConfirmPasswordClientPage(driver);
 		confirmPasswordClientPage.openLoginFormFun();
-		Assert.assertTrue(loginClientPage.forgetPassLinkCli.isDisplayed());
+		Assert.assertTrue(loginClientPage.forgetPassLink.isDisplayed());
 	}
 
 	@Test(priority = 6, dependsOnMethods = { "openLoginFormTest" })
 	public void openRegisterFormTest() {
-		loginClientPage = new LoginClientPage(driver);
+		loginClientPage = new LoginPage(driver);
 		registrationClientPage = new RegistrationClientPage(driver);
 		loginClientPage.openRegisterFormFun();
 		Assert.assertTrue(registrationClientPage.registerFormHeaderTxtCli.isDisplayed());

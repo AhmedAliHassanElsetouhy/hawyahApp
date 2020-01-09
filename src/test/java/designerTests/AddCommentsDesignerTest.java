@@ -13,39 +13,39 @@ import org.testng.annotations.Test;
 import com.github.javafaker.Faker;
 
 import clientPages.CompetitionsClientPage;
-import clientPages.DefaultClientPage;
+import clientPages.DefaultPage;
 import clientPages.HomeClientPage;
-import clientPages.LoginClientPage;
+import clientPages.LoginPage;
 import clientTests.TestBase;
 import data.ExcelReader;
 import designerPages.CompetitionDetailsDesignerPage;
 
 public class AddCommentsDesignerTest extends TestBase {
 
-	DefaultClientPage defaultPage;
-	LoginClientPage loginPage;
+	DefaultPage defaultPage;
+	LoginPage loginPage;
 	HomeClientPage homePage;
 	CompetitionsClientPage competitionsPage;
 	int compititionItem = 1;
 	CompetitionDetailsDesignerPage competitionDetailsDesignerPage;
 	Faker fakeData = new Faker();
-	String message = fakeData.name().title();
+	String messageDes = fakeData.name().title();
 	JavascriptExecutor jse;
 
 	@Test(priority = 1)
 	public void openHomePageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultPage = new DefaultClientPage(driver);
-		loginPage = new LoginClientPage(driver);
+		defaultPage = new DefaultPage(driver);
+		loginPage = new LoginPage(driver);
 		defaultPage.openLoginForm();
-		Assert.assertTrue(loginPage.forgetPassLinkCli.isDisplayed());
+		Assert.assertTrue(loginPage.forgetPassLink.isDisplayed());
 	}
 
 	@Test(priority = 2, dependsOnMethods = { "openHomePageTest" })
 	public void loginFun() throws IOException {
-		loginPage = new LoginClientPage(driver);
-		defaultPage = new DefaultClientPage(driver);
+		loginPage = new LoginPage(driver);
+		defaultPage = new DefaultPage(driver);
 		homePage = new HomeClientPage(driver);
 		ExcelReader ER = new ExcelReader();
 		loginPage.loginFun(ER.getExcelData(5, 2)[1][1], ER.getExcelData(5, 2)[2][1]);
@@ -65,22 +65,22 @@ public class AddCommentsDesignerTest extends TestBase {
 		competitionsPage = new CompetitionsClientPage(driver);
 		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
 		competitionsPage.openRecievedDesignsCompetitionsFun(compititionItem);
-		Assert.assertTrue(competitionDetailsDesignerPage.detailsLink.isDisplayed());
-		Assert.assertTrue(competitionDetailsDesignerPage.designsLink.isDisplayed());
-		Assert.assertTrue(competitionDetailsDesignerPage.uploadDesignLink.isDisplayed());
-		Assert.assertTrue(competitionDetailsDesignerPage.contactUsLink.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerPage.detailsLinkDes.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerPage.designsLinkDes.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerPage.uploadDesignLinkDes.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerPage.contactUsLinkDes.isDisplayed());
 	}
 
 	int index = 0;
-	String comment = fakeData.name().title();
+	String commentDes = fakeData.name().title();
 
 	@Test(priority = 5, dependsOnMethods = { "recieveDesignsCompetitionsDetailsTest" })
 	public void commentsTest() throws AWTException {
 		competitionDetailsDesignerPage = new CompetitionDetailsDesignerPage(driver);
 		competitionDetailsDesignerPage.openDesignsFun();
 		competitionDetailsDesignerPage.openCardFun(index);
-		Assert.assertTrue(competitionDetailsDesignerPage.addCommentHeader.isDisplayed());
-		competitionDetailsDesignerPage.addCommentFun(comment);
+		Assert.assertTrue(competitionDetailsDesignerPage.addCommentHeaderDes.isDisplayed());
+		competitionDetailsDesignerPage.addCommentFun(commentDes);
 		// WebElement x =
 		// competitionDetailsDesignerPage.comments.get(competitionDetailsDesignerPage.comments.size());
 		// System.out.println(x);
@@ -89,10 +89,11 @@ public class AddCommentsDesignerTest extends TestBase {
 		// get current date time with Date()
 		Date date = new Date();
 		// Now format the date
-		String date1 = dateFormat.format(date);
-		System.out.println(date1);
-		System.out.println(competitionDetailsDesignerPage.commentList.getText());
-		Assert.assertTrue(competitionDetailsDesignerPage.commentList.getText().contains(date1));
+		String date1Des = dateFormat.format(date);
+		System.out.println(date1Des);
+		System.out.println(competitionDetailsDesignerPage.commentListDes.getText()
+				+ "Waiting untill updating the issue of time region");
+		Assert.assertTrue(competitionDetailsDesignerPage.commentListDes.getText().contains(date1Des));
 
 		// Assert.assertTrue(x.getText().contains(date1));
 		// if (commentsNum1 > commentsNum) {
@@ -109,9 +110,9 @@ public class AddCommentsDesignerTest extends TestBase {
 	@Test(priority = 6, dependsOnMethods = { "commentsTest" })
 	public void makeLogoutTest() throws AWTException {
 		homePage = new HomeClientPage(driver);
-		defaultPage = new DefaultClientPage(driver);
+		defaultPage = new DefaultPage(driver);
 		homePage.openMainMenuFun();
 		homePage.logoutFun();
-		Assert.assertTrue(defaultPage.loginLinkCli.isDisplayed());
+		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
 	}
 }

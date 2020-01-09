@@ -6,31 +6,31 @@ import java.io.IOException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import clientPages.DefaultClientPage;
+import clientPages.DefaultPage;
 import clientPages.HomeClientPage;
-import clientPages.LoginClientPage;
+import clientPages.LoginPage;
 import data.ExcelReader;
 
 public class LoginClientTest extends TestBase {
 
-	LoginClientPage loginClientPage;
-	DefaultClientPage defaultClientPage;
+	LoginPage loginClientPage;
+	DefaultPage defaultClientPage;
 	HomeClientPage homeClientPage;
 
 	@Test(priority = 1, alwaysRun = true)
 	public void openHomePageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultClientPage = new DefaultClientPage(driver);
-		loginClientPage = new LoginClientPage(driver);
+		defaultClientPage = new DefaultPage(driver);
+		loginClientPage = new LoginPage(driver);
 		defaultClientPage.openLoginForm();
-		Assert.assertTrue(loginClientPage.forgetPassLinkCli.isDisplayed());
+		Assert.assertTrue(loginClientPage.forgetPassLink.isDisplayed());
 	}
 
 	@Test(priority = 2, dependsOnMethods = { "openHomePageTest" })
 	public void loginFun() throws IOException {
-		loginClientPage = new LoginClientPage(driver);
-		defaultClientPage = new DefaultClientPage(driver);
+		loginClientPage = new LoginPage(driver);
+		defaultClientPage = new DefaultPage(driver);
 		homeClientPage = new HomeClientPage(driver);
 		ExcelReader ER = new ExcelReader();
 		loginClientPage.loginFun(ER.getExcelData(0, 2)[1][1], ER.getExcelData(0, 2)[2][1]);
@@ -53,9 +53,9 @@ public class LoginClientTest extends TestBase {
 	@Test(priority = 3, dependsOnMethods = { "loginFun" })
 	public void makeLogoutTest() throws AWTException {
 		homeClientPage = new HomeClientPage(driver);
-		defaultClientPage = new DefaultClientPage(driver);
+		defaultClientPage = new DefaultPage(driver);
 		homeClientPage.openMainMenuFun();
 		homeClientPage.logoutFun();
-		Assert.assertTrue(defaultClientPage.loginLinkCli.isDisplayed());
+		Assert.assertTrue(defaultClientPage.loginLink.isDisplayed());
 	}
 }

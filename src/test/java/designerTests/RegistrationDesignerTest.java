@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import com.github.javafaker.Faker;
 
 import clientPages.RegistrationClientPage;
-import clientPages.DefaultClientPage;
+import clientPages.DefaultPage;
 import clientPages.HomeClientPage;
 import clientPages.RegistrationConfirmationClientPage;
 import clientTests.TestBase;
@@ -18,7 +18,7 @@ import data.ExcelReader;
 public class RegistrationDesignerTest extends TestBase {
 
 	RegistrationClientPage registrationPage;
-	DefaultClientPage defaultPage;
+	DefaultPage defaultPage;
 	HomeClientPage homePage;
 	RegistrationConfirmationClientPage registerConfirmPage;
 
@@ -31,7 +31,7 @@ public class RegistrationDesignerTest extends TestBase {
 	public void openRegisterFormPageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultPage = new DefaultClientPage(driver);
+		defaultPage = new DefaultPage(driver);
 		registrationPage = new RegistrationClientPage(driver);
 		defaultPage.openRegisterFormFun();
 		Assert.assertTrue(registrationPage.registerFormHeaderTxtCli.getText().contains("إنشاء حساب في هوية"));
@@ -39,7 +39,7 @@ public class RegistrationDesignerTest extends TestBase {
 
 	@Test(priority = 2, dependsOnMethods = { "openRegisterFormPageTest" })
 	public void emptyRegisterFormPageTest() {
-		defaultPage = new DefaultClientPage(driver);
+		defaultPage = new DefaultPage(driver);
 		registrationPage = new RegistrationClientPage(driver);
 		registrationPage.submitRegisterfun();
 		Assert.assertTrue(registrationPage.registerFormHeaderTxtCli.getText().contains("إنشاء حساب في هوية"));
@@ -47,7 +47,7 @@ public class RegistrationDesignerTest extends TestBase {
 
 	@Test(priority = 3, dependsOnMethods = { "emptyRegisterFormPageTest" })
 	public void invalidRegisterFormPageTest() throws AWTException {
-		defaultPage = new DefaultClientPage(driver);
+		defaultPage = new DefaultPage(driver);
 		registrationPage = new RegistrationClientPage(driver);
 		registrationPage.registerFun(email, password, userName);
 		registrationPage.checkTermsAndCondition();
@@ -59,7 +59,7 @@ public class RegistrationDesignerTest extends TestBase {
 
 	@Test(priority = 4, dependsOnMethods = { "invalidRegisterFormPageTest" })
 	public void designerRegisterFormPageTest() {
-		defaultPage = new DefaultClientPage(driver);
+		defaultPage = new DefaultPage(driver);
 		registrationPage = new RegistrationClientPage(driver);
 		registerConfirmPage = new RegistrationConfirmationClientPage(driver);
 		System.out.println(email);

@@ -16,29 +16,29 @@ public class MyWorkDesignerPage extends PageBase {
 	}
 
 	@FindBy(xpath = "//*[text()='اضف تصميم جديد']")
-	public WebElement myWorkHeaderMsg;
+	public WebElement myWorkHeaderMsgDes;
 
 	@FindBy(id = "designer_previous_work_design_title")
 	// @FindBy(name = "designer_previous_work[design_title]")
-	WebElement designTitleTxtBox;
+	WebElement designTitleTxtBoxDes;
 
 	// @FindBy(id = "upload_design_input")
 	@FindBy(xpath = "//input[@type='file']")
-	public WebElement uploadIcon;
+	public WebElement uploadIconDes;
 
 	@FindBy(xpath = "//*[text()='اختر نوع التصميم']")
-	WebElement selectDesignTypeList;
+	WebElement selectDesignTypeListDes;
 
 	@FindBy(xpath = "تصميم هوية أساسية")
-	WebElement designBasicIdentity;
+	WebElement designBasicIdentityDes;
 
-	public void addDesignFun(String title) throws InterruptedException, AWTException {
-		setTextElementText(designTitleTxtBox, title);
-		clickButton(selectDesignTypeList);
-		clickButton(designBasicIdentity);
-		clickButton(saveBtn);
+	public void addDesignFun(String titleDes) throws InterruptedException, AWTException {
+		setTextElementText(designTitleTxtBoxDes, titleDes);
+		clickButton(selectDesignTypeListDes);
+		clickButton(designBasicIdentityDes);
+		clickButton(saveBtnDes);
 	}
 
 	@FindBy(xpath = "//*[text()='حفظ']")
-	WebElement saveBtn;
+	WebElement saveBtnDes;
 }

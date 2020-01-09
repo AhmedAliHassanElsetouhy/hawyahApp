@@ -18,98 +18,98 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 	}
 
 	@FindBy(partialLinkText = "التفاصيل")
-	public WebElement detailsLink;
+	public WebElement detailsLinkDes;
 
 	@FindBy(xpath = "//*[text()='ما هو الاسم الذي تريده في طلبك']")
-	WebElement name;
+	WebElement nameDes;
 
 	@FindBy(xpath = "//*[text()='ما هو تصنيف نشاطك؟']")
-	public WebElement cat;
+	public WebElement catDes;
 
 	@FindBy(xpath = "//*[text()='اشرح نشاط أو صفات منتجك الذي تريد']")
-	public WebElement desc;
+	public WebElement descDes;
 
 	@FindBy(xpath = "//*[text()='هل لديك عبارة ترغب بإضافتها؟']")
-	WebElement details;
+	WebElement detailsDes;
 
 	@FindBy(xpath = "//*[text()='هل لديك فكرة أو إضافات معينة ترغب بإخبار المصمم عنها؟']")
-	public WebElement idea;
+	public WebElement ideaDes;
 
 	@FindBy(xpath = "//*[text()='الفئة الفضية']")
-	WebElement prize;
+	WebElement prizeDes;
 
 	@FindBy(xpath = "//*[text()='متطلبات تسليم العمل في مرحلة التسليم']")
-	WebElement requirement;
+	WebElement requirementDes;
 
 	public void openDetailsFun() {
-		clickButton(detailsLink);
+		clickButton(detailsLinkDes);
 	}
 
 	// @FindBy(partialLinkText = "التصاميم")
 	@FindBy(xpath = "//a[@href='#designs']")
-	public WebElement designsLink;
+	public WebElement designsLinkDes;
 
 	@FindBy(xpath = "//div[@class='card']")
-	public List<WebElement> designCard;
+	public List<WebElement> designCardDes;
 
 	@FindBy(xpath = "//div[@class='rating m-t-10']")
-	public WebElement rate;
+	public WebElement rateDes;
 
 	public void openDesignsFun() {
-		clickButton(designsLink);
+		clickButton(designsLinkDes);
 	}
 
 	public void openCardFun(int index) {
-		selectSpecificIcon(designCard, index);
+		selectSpecificIcon(designCardDes, index);
 	}
 
 	@FindBy(xpath = "//*[text()='أضف تعليق']")
-	public WebElement addCommentHeader;
+	public WebElement addCommentHeaderDes;
 
 	@FindBy(id = "contest_design_comment_message")
-	WebElement msgTextarea;
+	WebElement msgTextareaDes;
 
 	@FindBy(id = "submitComment;")
-	WebElement submitCommentBtn;
+	WebElement submitCommentBtnDes;
 
 	@FindBy(xpath = "//div[@class='comment-item']")
-	public List<WebElement> comments;
+	public List<WebElement> commentsDes;
 
 	public void addCommentFun(String comment) throws AWTException {
-		setTextElementText(msgTextarea, comment);
-		clickButton(submitCommentBtn);
+		setTextElementText(msgTextareaDes, comment);
+		clickButton(submitCommentBtnDes);
 		refreshPage();
 	}
 
 	@FindBy(xpath = "//div[@class='comment-list']")
-	public WebElement commentList;
+	public WebElement commentListDes;
 
 	@FindBy(xpath = "//span[@class='close']")
-	public WebElement closeCommentView;
+	public WebElement closeCommentViewDes;
 
 	public void closeCommentViewFun() {
-		clickButton(closeCommentView);
+		clickButton(closeCommentViewDes);
 	}
 
 	@FindBy(partialLinkText = "الملفات")
-	public WebElement filesLink;
+	public WebElement filesLinkDes;
 
 	@FindBy(xpath = "//legend[@class='blue-text']")
-	public WebElement filesHeader;
+	public WebElement filesHeaderDes;
 
 	@FindBy(partialLinkText = "عرض الاتفاقية")
-	public WebElement showAgreementLink;
+	public WebElement showAgreementLinkDes;
 
 	// @FindBy(id = "handoverAgreementViewModal")
 	@FindBy(xpath = "//div[@class='modal open']")
-	public WebElement agreementPopup;
+	public WebElement agreementPopupDes;
 
 	@FindBy(xpath = "//*[text()='إغلاق']")
-	WebElement closeBtn;
+	public WebElement closeBtnDes;
 
 	// @FindBy(xpath = "//*[@id=\"upload_design_input_for_signoff\"]")
 	@FindBy(xpath = "//input[@type='file']")
-	public WebElement chooseFileBtn;
+	public WebElement chooseFileBtnDes;
 
 	@FindBy(xpath = "//legend[@class='purple-text']")
 	public WebElement designerSig;
@@ -118,91 +118,91 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 	public WebElement cliendSig;
 
 	public void showAgreementFun() {
-		clickButton(showAgreementLink);
+		clickButton(showAgreementLinkDes);
 	}
 
 	public void closeFun() {
-		clickButton(closeBtn);
+		clickButton(closeBtnDes);
 	}
 
 	public void openFiles() {
-		clickButton(filesLink);
+		clickButton(filesLinkDes);
 	}
 
 	@FindBy(xpath = "//input[@value='حفظ']")
 	// @FindBy(xpath = "//*[text()='حفظ']")
-	WebElement saveBtn;
+	WebElement saveBtnDes;
 
 	public void uploadFinalDesign(String folderName) throws InterruptedException, AWTException {
-		chooseFileBtn.sendKeys(System.getProperty("user.dir") + "\\Uploads\\" + folderName);
-		clickButton(saveBtn);
+		chooseFileBtnDes.sendKeys(System.getProperty("user.dir") + "\\Uploads\\" + folderName);
+		clickButton(saveBtnDes);
 	}
 
 	// @FindBy(partialLinkText = "تواصل معنا")
 	@FindBy(xpath = "//a[text()='تواصل معنا']")
-	public WebElement contactUsLink;
+	public WebElement contactUsLinkDes;
 
 	@FindBy(xpath = "//a[text()='تحميل تصميم']")
-	public WebElement uploadDesignLink;
+	public WebElement uploadDesignLinkDes;
 
 	public void openUploadDesignFun() {
-		clickButton(uploadDesignLink);
+		clickButton(uploadDesignLinkDes);
 	}
 
 	@FindBy(xpath = "//span[@class='size']")
-	public WebElement fileSize;
+	public WebElement fileSizeDes;
 
 	@FindBy(xpath = "//input[@type='file']")
-	public WebElement selectFileBtn;
+	public WebElement selectFileBtnDes;
 
 	public void uploadDesignFileFun(String folderName) throws InterruptedException, AWTException {
-		selectFileBtn.sendKeys(System.getProperty("user.dir") + "\\Uploads\\" + folderName);
+		selectFileBtnDes.sendKeys(System.getProperty("user.dir") + "\\Uploads\\" + folderName);
 	}
 
 	@FindBy(id = "message[body]")
-	WebElement messageTxtBox;
+	WebElement messageTxtBoxDes;
 
 	@FindBy(xpath = "//input[@value='ارسال']")
-	WebElement sendBtn;
+	WebElement sendBtnDes;
 
 	@FindBy(xpath = "//div[@class='green lighten-5']")
-	WebElement confirmAlertMsg;
+	WebElement confirmAlertMsgDes;
 
-	public void contactUsFun(String message) {
+	public void contactUsFun(String messageDes) {
 		// clickButton(contactUsLink);
-		setTextElementText(messageTxtBox, message);
-		clickButton(sendBtn);
-		Assert.assertTrue(confirmAlertMsg.isDisplayed());
+		setTextElementText(messageTxtBoxDes, messageDes);
+		clickButton(sendBtnDes);
+		Assert.assertTrue(confirmAlertMsgDes.isDisplayed());
 	}
 
 	@FindBy(xpath = "//span[@class='lever']")
-	WebElement signAgreementIcon;
+	WebElement signAgreementIconDes;
 
 	public void openDesignerAgreementFormFun() {
-		clickButton(filesLink);
-		clickButton(signAgreementIcon);
+		clickButton(filesLinkDes);
+		clickButton(signAgreementIconDes);
 	}
 
 	@FindBy(id = "name")
-	WebElement designerName;
+	WebElement designerNameDes;
 
 	@FindBy(id = "address")
-	WebElement designerTitle;
+	WebElement designerTitleDes;
 
 	@FindBy(id = "mobile_no")
-	WebElement designerPhone;
+	WebElement designerPhoneDes;
 
 	@FindBy(xpath = "//label[@for='terms_and_conditions']")
-	WebElement conditionCheckBox;
+	WebElement conditionCheckBoxDes;
 
 	@FindBy(xpath = "//*[text()='توقيع الإتفاقية']")
-	WebElement agreementBtn;
+	WebElement agreementBtnDes;
 
-	public void designerAgreementFormData(String name, String title, String phone) {
-		setTextElementText(designerName, name);
-		setTextElementText(designerTitle, title);
-		setTextElementText(designerPhone, phone);
-		clickButton(conditionCheckBox);
-		agreementBtn.submit();
+	public void designerAgreementFormData(String nameDes, String titleDes, String phoneDes) {
+		setTextElementText(designerNameDes, nameDes);
+		setTextElementText(designerTitleDes, titleDes);
+		setTextElementText(designerPhoneDes, phoneDes);
+		clickButton(conditionCheckBoxDes);
+		agreementBtnDes.submit();
 	}
 }

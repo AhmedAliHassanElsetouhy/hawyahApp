@@ -17,31 +17,30 @@ public class BankAccountsDesignerPage extends PageBase {
 
 	// @FindBy(xpath = "//*[@class='blue-text']")
 	@FindBy(xpath = "//*[text()='ملاحظات بخصوص الحسابات البنكية']")
-	public WebElement bankAccNotesHeader;
+	public WebElement bankAccNotesHeaderDes;
 
 	@FindBy(xpath = "//*[@title='إلغاء تفعيل الحساب']")
-	List<WebElement> deactivateIcon;
+	List<WebElement> deactivateIconDes;
 
 	public void deactivateAccountFun(int index) {
 		// clickButton(deactivateIcon);
-		selectSpecificIcon(deactivateIcon, index);
+		selectSpecificIcon(deactivateIconDes, index);
 	}
 
 	@FindBy(xpath = "//a[@title='تفعيل الحساب']")
-	public List<WebElement> activateIcon;
+	public List<WebElement> activateIconDes;
 
 	public void activateAccountFun(int index) {
 		// clickButton(activateIcon);
-		selectSpecificIcon(activateIcon, index);
+		selectSpecificIcon(activateIconDes, index);
 	}
 
 	@FindBy(xpath = "(//a[@title='حذف الحساب'])")
-	public List<WebElement> deleteIcons;
+	public List<WebElement> deleteIconsDes;
 
 	public void deleteIcon(int index) {
 		// List<WebElement> allLinks = deleteIcons;
 		// allLinks.get(index).click();
-		selectSpecificIcon(deleteIcons, index);
+		selectSpecificIcon(deleteIconsDes, index);
 	}
-
 }

@@ -8,10 +8,10 @@ import org.testng.annotations.Test;
 
 import com.github.javafaker.Faker;
 
-import clientPages.DefaultClientPage;
+import clientPages.DefaultPage;
 import clientPages.DesignsClientPage;
 import clientPages.HomeClientPage;
-import clientPages.LoginClientPage;
+import clientPages.LoginPage;
 import clientPages.MyPageClientPage;
 import clientTests.TestBase;
 import data.ExcelReader;
@@ -21,8 +21,8 @@ import designerPages.MyPageDesignerPage;
 
 public class BankAccountsDesignerTest extends TestBase {
 
-	DefaultClientPage defaultPage;
-	LoginClientPage loginPage;
+	DefaultPage defaultPage;
+	LoginPage loginPage;
 	HomeClientPage homePage;
 	DesignsClientPage designsPage;
 	MyPageClientPage myPagePage;
@@ -31,28 +31,28 @@ public class BankAccountsDesignerTest extends TestBase {
 	AboutMeDesignerPage aboutMeUserPage;
 
 	Faker fakeData = new Faker();
-	String fName = fakeData.name().firstName();
-	String lName = fakeData.name().lastName();
-	String city = fakeData.nation().capitalCity();
-	String phone = fakeData.phoneNumber().cellPhone();
-	String screenName = fakeData.name().firstName() + fakeData.number().numberBetween(1, 99);
-	String designerBio = fakeData.name().title();
+	String fNameDes = fakeData.name().firstName();
+	String lNameDes = fakeData.name().lastName();
+	String cityDes = fakeData.nation().capitalCity();
+	String phoneDes = fakeData.phoneNumber().cellPhone();
+	String screenNameDes = fakeData.name().firstName() + fakeData.number().numberBetween(1, 99);
+	String designerBioDes = fakeData.name().title();
 	int index = 1;
 
 	@Test(priority = 1)
 	public void openHomePageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultPage = new DefaultClientPage(driver);
-		loginPage = new LoginClientPage(driver);
+		defaultPage = new DefaultPage(driver);
+		loginPage = new LoginPage(driver);
 		defaultPage.openLoginForm();
-		Assert.assertTrue(loginPage.forgetPassLinkCli.isDisplayed());
+		Assert.assertTrue(loginPage.forgetPassLink.isDisplayed());
 	}
 
 	@Test(priority = 2, dependsOnMethods = { "openHomePageTest" })
 	public void loginFun() throws IOException {
-		loginPage = new LoginClientPage(driver);
-		defaultPage = new DefaultClientPage(driver);
+		loginPage = new LoginPage(driver);
+		defaultPage = new DefaultPage(driver);
 		homePage = new HomeClientPage(driver);
 		ExcelReader ER = new ExcelReader();
 		loginPage.loginFun(ER.getExcelData(5, 2)[1][1], ER.getExcelData(5, 2)[2][1]);
@@ -69,7 +69,7 @@ public class BankAccountsDesignerTest extends TestBase {
 		myPageUserPage = new MyPageDesignerPage(driver);
 		homePage.openMainMenuFun();
 		myPagePage.openMyPageFun();
-		Assert.assertTrue(myPageUserPage.myStatsLink.isDisplayed());
+		Assert.assertTrue(myPageUserPage.myStatsLinkDes.isDisplayed());
 	}
 
 	String iban = fakeData.number().digits(16);
@@ -85,7 +85,7 @@ public class BankAccountsDesignerTest extends TestBase {
 		myPagePage.openUpdateMyAccountPageFun();
 		myPageUserPage.openMyBankAccount();
 		aboutMeUserPage.updateBankAccountDataForm(iban, accOwner, bankName);
-		Assert.assertTrue(aboutMeUserPage.bankAccConfirmMsg.isDisplayed());
+		Assert.assertTrue(aboutMeUserPage.bankAccConfirmMsgDes.isDisplayed());
 	}
 
 	@Test(priority = 5, dependsOnMethods = { "addBankAccountDataTest" })
@@ -96,7 +96,7 @@ public class BankAccountsDesignerTest extends TestBase {
 		bankAccountsUserPage.activateAccountFun(index);
 		driver.switchTo().alert().accept();
 		myPageUserPage.openMyBankAccount();
-		Assert.assertTrue(bankAccountsUserPage.bankAccNotesHeader.isDisplayed());
+		Assert.assertTrue(bankAccountsUserPage.bankAccNotesHeaderDes.isDisplayed());
 	}
 
 	@Test(priority = 6, dependsOnMethods = { "ActivateTest" })
@@ -107,7 +107,7 @@ public class BankAccountsDesignerTest extends TestBase {
 		bankAccountsUserPage.deactivateAccountFun(1);
 		driver.switchTo().alert().accept();
 		myPageUserPage.openMyBankAccount();
-		Assert.assertTrue(bankAccountsUserPage.bankAccNotesHeader.isDisplayed());
+		Assert.assertTrue(bankAccountsUserPage.bankAccNotesHeaderDes.isDisplayed());
 	}
 
 	@Test(priority = 7, dependsOnMethods = { "DeActivateTest" })
@@ -117,15 +117,15 @@ public class BankAccountsDesignerTest extends TestBase {
 		bankAccountsUserPage.deleteIcon(index);
 		driver.switchTo().alert().accept();
 		myPageUserPage.openMyBankAccount();
-		Assert.assertTrue(bankAccountsUserPage.bankAccNotesHeader.isDisplayed());
+		Assert.assertTrue(bankAccountsUserPage.bankAccNotesHeaderDes.isDisplayed());
 	}
 
 	@Test(priority = 8, dependsOnMethods = { "DeleteTest" })
 	public void makeLogoutTest() throws AWTException {
 		homePage = new HomeClientPage(driver);
-		defaultPage = new DefaultClientPage(driver);
+		defaultPage = new DefaultPage(driver);
 		homePage.openMainMenuFun();
 		homePage.logoutFun();
-		Assert.assertTrue(defaultPage.loginLinkCli.isDisplayed());
+		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
 	}
 }

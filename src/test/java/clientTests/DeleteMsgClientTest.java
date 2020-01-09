@@ -14,9 +14,11 @@ import clientPages.LoginPage;
 import clientPages.MessageFormClientPage;
 import clientPages.MessagesClientPage;
 import clientPages.MyPageClientPage;
+import clientTests.TestBase;
 import data.ExcelReader;
 
-public class MessagesClientTest extends TestBase {
+public class DeleteMsgClientTest extends TestBase {
+
 	DefaultPage defaultClientPage;
 	LoginPage loginClientPage;
 	HomeClientPage homeClientPage;
@@ -43,7 +45,7 @@ public class MessagesClientTest extends TestBase {
 		defaultClientPage = new DefaultPage(driver);
 		homeClientPage = new HomeClientPage(driver);
 		ExcelReader ER = new ExcelReader();
-		loginClientPage.loginFun(ER.getExcelData(0, 2)[1][1], ER.getExcelData(0, 2)[2][1]);
+		loginClientPage.loginFun(ER.getExcelData(5, 2)[1][1], ER.getExcelData(5, 2)[2][1]);
 		System.out.println(homeClientPage.loginConfirmMsgCli.getText());
 		Assert.assertTrue(homeClientPage.loginConfirmMsgCli.getText().contains("تم تسجيل الدخول بنجاح"));
 	}
@@ -82,30 +84,6 @@ public class MessagesClientTest extends TestBase {
 	}
 
 	@Test(priority = 6, dependsOnMethods = { "deleteMsgTest" })
-	public void openDeletedMsgsTest() {
-		messageFormClientPage = new MessageFormClientPage(driver);
-		messageFormClientPage.openSentMsgs();
-		messageFormClientPage.deleteMsgFun(index);
-		driver.switchTo().alert().accept();
-		messageFormClientPage.openDeletedMsgs();
-		messageFormClientPage.restoreDeleteMsgFun(index);
-		Assert.assertTrue(messageFormClientPage.confirmRestoreMsgCli.isDisplayed());
-		messageFormClientPage.openSentMsgs();
-		messageFormClientPage.deleteMsgFun(index);
-		driver.switchTo().alert().accept();
-		Assert.assertTrue(messageFormClientPage.confirmDeleteMsgCli.isDisplayed());
-	}
-
-	@Test(priority = 7, dependsOnMethods = { "openDeletedMsgsTest" })
-	public void deletedAllMsgsTest() {
-		messageFormClientPage = new MessageFormClientPage(driver);
-		messageFormClientPage.openDeletedMsgs();
-		messageFormClientPage.deleteAllMsgsFun();
-		driver.switchTo().alert().accept();
-		Assert.assertTrue(messageFormClientPage.confirmRestoreMsgCli.isDisplayed());
-	}
-
-	@Test(priority = 8, dependsOnMethods = { "deletedAllMsgsTest" })
 	public void makeLogoutTest() throws AWTException {
 		homeClientPage = new HomeClientPage(driver);
 		defaultClientPage = new DefaultPage(driver);

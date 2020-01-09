@@ -13,42 +13,39 @@ public class TransferRequestsDesignerPage extends PageBase {
 		// TODO Auto-generated constructor stub
 	}
 
-	// @FindBy(xpath = "//div[@class='total_transferred']")
 	@FindBy(xpath = "//*[text()='طلبات التحويل']")
-	public WebElement balance;
+	public WebElement balanceDes;
 
 	@FindBy(xpath = "//*[text()='نموذج طلب تحويل الرصيد الحالي']")
-	public WebElement transferModel;
+	public WebElement transferModelDes;
 
-	// @FindBy(partialLinkText = "إضغط لإرسال طلب تحويل للرصيد الحالي")
 	@FindBy(xpath = "//a[@href='#SendNewTransferRequest']")
-	public WebElement sendTransferBtn;
+	public WebElement sendTransferBtnDes;
 
-	// @FindBy(xpath = "//div[@class='modal-content']")
 	@FindBy(id = "SendNewTransferRequest")
-	public WebElement modelView;
+	public WebElement modelViewDes;
 
-	@FindBy(partialLinkText = "X")
-	WebElement closeIcon;
+	@FindBy(xpath = "//div[@class='total_transferred']")
+	public WebElement totalTransferredDes;
+
+	@FindBy(xpath = "//*[text()='تاريخ طلب التحويل']")
+	public WebElement transferDateDes;
+
+	// @FindBy(partialLinkText = "X")
+	// WebElement closeIcon;
 
 	public void sendTransferFun() {
-		clickButton(sendTransferBtn);
+		clickButton(sendTransferBtnDes);
 	}
 
-	public void close() {
-		clickButton(closeIcon);
-	}
-	
-	@FindBy(xpath="//*[text()='إلغاء']")
-	WebElement cancel;
-	
+	// public void close() {
+	// clickButton(closeIcon);
+	// }
+
+	@FindBy(xpath = "//*[text()='إلغاء']")
+	WebElement cancelDes;
+
 	public void cancelFun() {
-		clickButton(cancel);
+		clickButton(cancelDes);
 	}
-	
-	@FindBy(xpath="//div[@class='total_transferred']")
-	public WebElement totalTransferred;
-	
-	@FindBy(xpath="//*[text()='تاريخ طلب التحويل']")
-	public WebElement transferDate;
 }

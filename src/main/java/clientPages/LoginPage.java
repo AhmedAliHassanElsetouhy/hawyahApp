@@ -5,9 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginClientPage extends PageBase {
+public class LoginPage extends PageBase {
 
-	public LoginClientPage(WebDriver driver) {
+	public LoginPage(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
@@ -16,35 +16,35 @@ public class LoginClientPage extends PageBase {
 	// WebElement loginBtn;
 
 	@FindBy(partialLinkText = "تسجيل الدخول")
-	WebElement loginBtnCli;
+	WebElement loginBtn;
 
 	@FindBy(id = "user_email")
-	public WebElement emailTxtBoxCli;
+	public WebElement emailTxtBox;
 
 	@FindBy(id = "user_password")
-	public WebElement passwordTxtBoxCli;
+	public WebElement passwordTxtBox;
 
 	@FindBy(linkText = "هل نسيت كلمة المرور؟")
-	public WebElement forgetPassLinkCli;
+	public WebElement forgetPassLink;
 
 	@FindBy(linkText = "إنضم إلينا")
-	WebElement joinUsLinkCli;
+	WebElement joinUsLink;
 
 	public void submitLoginFun() {
-		clickButton(loginBtnCli);
+		clickButton(loginBtn);
 	}
 
 	public void loginFun(String email, String password) {
-		setTextElementText(emailTxtBoxCli, email);
-		setTextElementText(passwordTxtBoxCli, password);
-		passwordTxtBoxCli.sendKeys(Keys.ENTER);
+		setTextElementText(emailTxtBox, email);
+		setTextElementText(passwordTxtBox, password);
+		passwordTxtBox.sendKeys(Keys.ENTER);
 	}
 
 	public void openForgetPassPageFun() {
-		clickButton(forgetPassLinkCli);
+		clickButton(forgetPassLink);
 	}
 
 	public void openRegisterFormFun() {
-		clickButton(joinUsLinkCli);
+		clickButton(joinUsLink);
 	}
 }

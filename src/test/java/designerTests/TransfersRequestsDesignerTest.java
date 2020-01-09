@@ -9,10 +9,10 @@ import org.testng.annotations.Test;
 
 import com.github.javafaker.Faker;
 
-import clientPages.DefaultClientPage;
+import clientPages.DefaultPage;
 import clientPages.DesignsClientPage;
 import clientPages.HomeClientPage;
-import clientPages.LoginClientPage;
+import clientPages.LoginPage;
 import clientPages.MyPageClientPage;
 import clientTests.TestBase;
 import data.ExcelReader;
@@ -22,8 +22,8 @@ import designerPages.MyPageDesignerPage;
 import designerPages.TransferRequestsDesignerPage;
 
 public class TransfersRequestsDesignerTest extends TestBase {
-	DefaultClientPage defaultPage;
-	LoginClientPage loginPage;
+	DefaultPage defaultPage;
+	LoginPage loginPage;
 	HomeClientPage homePage;
 	DesignsClientPage designsPage;
 	MyPageClientPage myPagePage;
@@ -45,16 +45,16 @@ public class TransfersRequestsDesignerTest extends TestBase {
 	public void openHomePageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultPage = new DefaultClientPage(driver);
-		loginPage = new LoginClientPage(driver);
+		defaultPage = new DefaultPage(driver);
+		loginPage = new LoginPage(driver);
 		defaultPage.openLoginForm();
-		Assert.assertTrue(loginPage.forgetPassLinkCli.isDisplayed());
+		Assert.assertTrue(loginPage.forgetPassLink.isDisplayed());
 	}
 
 	@Test(priority = 2, dependsOnMethods = { "openHomePageTest" })
 	public void loginFun() throws IOException {
-		loginPage = new LoginClientPage(driver);
-		defaultPage = new DefaultClientPage(driver);
+		loginPage = new LoginPage(driver);
+		defaultPage = new DefaultPage(driver);
 		homePage = new HomeClientPage(driver);
 		ExcelReader ER = new ExcelReader();
 		loginPage.loginFun(ER.getExcelData(5, 2)[1][1], ER.getExcelData(5, 2)[2][1]);
@@ -71,7 +71,7 @@ public class TransfersRequestsDesignerTest extends TestBase {
 		myPageUserPage = new MyPageDesignerPage(driver);
 		homePage.openMainMenuFun();
 		myPagePage.openMyPageFun();
-		Assert.assertTrue(myPageUserPage.myStatsLink.isDisplayed());
+		Assert.assertTrue(myPageUserPage.myStatsLinkDes.isDisplayed());
 	}
 
 	@Test(priority = 4, dependsOnMethods = { "openMyPageTest" })
@@ -80,7 +80,7 @@ public class TransfersRequestsDesignerTest extends TestBase {
 		bankAccountsUserPage = new BankAccountsDesignerPage(driver);
 		transferRequestsUserPage = new TransferRequestsDesignerPage(driver);
 		driver.navigate().to("https://hawyah-dev.herokuapp.com/designer_profile/financial_transfers?locale=ar");
-		Assert.assertTrue(transferRequestsUserPage.balance.isDisplayed());
+		Assert.assertTrue(transferRequestsUserPage.balanceDes.isDisplayed());
 		// Assert.assertTrue(transferRequestsUserPage.sendTransferBtn.isDisplayed());
 	}
 
@@ -89,22 +89,22 @@ public class TransfersRequestsDesignerTest extends TestBase {
 		myPageUserPage = new MyPageDesignerPage(driver);
 		bankAccountsUserPage = new BankAccountsDesignerPage(driver);
 		transferRequestsUserPage = new TransferRequestsDesignerPage(driver);
-		if (!transferRequestsUserPage.totalTransferred.getText().contains("0")) {
+		if (!transferRequestsUserPage.totalTransferredDes.getText().contains("0")) {
 			jse = (JavascriptExecutor) driver;
-			jse.executeScript("arguments[0].click();", transferRequestsUserPage.sendTransferBtn);
-			System.out.println(transferRequestsUserPage.modelView.getText());
+			jse.executeScript("arguments[0].click();", transferRequestsUserPage.sendTransferBtnDes);
+			System.out.println(transferRequestsUserPage.modelViewDes.getText());
 			transferRequestsUserPage.cancelFun();
 		} else {
-			Assert.assertTrue(transferRequestsUserPage.transferDate.isDisplayed());
+			Assert.assertTrue(transferRequestsUserPage.transferDateDes.isDisplayed());
 		}
 	}
 
 	@Test(priority = 6, dependsOnMethods = { "sendTransfersTest" })
 	public void makeLogoutTest() throws AWTException {
 		homePage = new HomeClientPage(driver);
-		defaultPage = new DefaultClientPage(driver);
+		defaultPage = new DefaultPage(driver);
 		homePage.openMainMenuFun();
 		homePage.logoutFun();
-		Assert.assertTrue(defaultPage.loginLinkCli.isDisplayed());
+		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
 	}
 }

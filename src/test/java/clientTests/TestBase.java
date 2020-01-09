@@ -14,9 +14,10 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
@@ -58,7 +59,8 @@ public class TestBase {
 		return capabilities;
 	}
 
-	@BeforeSuite
+	// @BeforeSuite
+	@BeforeClass
 	@Parameters({ "browser" })
 	public void startDriver(@Optional("chrome") String browser) {
 		if (browser.equalsIgnoreCase("chrome")) {
@@ -100,7 +102,12 @@ public class TestBase {
 
 	@AfterSuite
 	public void stopDriver() {
-//		driver.quit();
+		// driver.quit();
+	}
+
+	@AfterClass
+	public void quitBrowserAfterClass() {
+		driver.quit();
 	}
 
 	// take screenshot when test case fail and add it in the Screenshot folder

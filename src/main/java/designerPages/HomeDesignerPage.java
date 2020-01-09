@@ -15,63 +15,60 @@ public class HomeDesignerPage extends PageBase {
 
 	// @FindBy(xpath = "//*[text()='تم تسجيل الدخول بنجاح']")
 	@FindBy(xpath = "//div[@class='green lighten-5']")
-	public WebElement loginConfirmMsg;
+	public WebElement loginConfirmMsgDes;
 
 	@FindBy(xpath = "//*[text()='إبدأ الآن']")
-	WebElement startNowBtn;
+	WebElement startNowBtnDes;
 
 	public void openServicesFun() {
-		clickButton(startNowBtn);
+		clickButton(startNowBtnDes);
 	}
 
 	@FindBy(xpath = "//*[text()='إشرح']")
-	public WebElement explain;
+	public WebElement explainDes;
 
 	@FindBy(xpath = "//*[text()='يتنافس']")
-	public WebElement competing;
+	public WebElement competingDes;
 
 	@FindBy(xpath = "//*[text()='اختر']")
-	public WebElement choose;
-	
-	
+	public WebElement chooseDes;
 
 	@FindBy(xpath = "//a[@class='dropdown-button grey-text text-darken-1']")
-	WebElement basicMenu;
+	WebElement basicMenuDes;
 
 	@FindBy(linkText = "مسابقاتي")
 	// @FindBy(xpath = "//*[text()='مسابقاتي']")
-	WebElement competitionLink;
+	WebElement competitionLinkDes;
 
 	@FindBy(xpath = "//*[text()='حسابي']")
-	WebElement myAccountLink;
+	WebElement myAccountLinkDes;
 
 	@FindBy(xpath = "//*[text()='الرسائل']")
-	WebElement messagesLink;
+	WebElement messagesLinkDes;
 
 	public void openMyAccount() {
-		clickButton(myAccountLink);
+		clickButton(myAccountLinkDes);
 	}
 
 	public void openMessagesFun() {
-		clickButton(messagesLink);
+		clickButton(messagesLinkDes);
 	}
 
 	public void openMainMenuFun() {
-		clickButton(basicMenu);
+		clickButton(basicMenuDes);
 	}
 
 	public void openCompetitionFun() {
-		clickButton(competitionLink);
+		clickButton(competitionLinkDes);
 	}
 
 	// @FindBy(xpath = "//*[text()='خروج']")
 	// WebElement logoutBtn;
 
 	@FindBy(xpath = "//*[@rel='nofollow']")
-	WebElement logoutBtn;
+	WebElement logoutBtnDes;
 
 	public void logoutFun() {
-		clickButton(logoutBtn);
+		clickButton(logoutBtnDes);
 	}
-
 }

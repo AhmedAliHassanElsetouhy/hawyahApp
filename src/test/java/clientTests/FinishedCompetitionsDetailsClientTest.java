@@ -7,17 +7,17 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import clientPages.CompetitionsClientPage;
-import clientPages.DefaultClientPage;
+import clientPages.DefaultPage;
 import clientPages.HomeClientPage;
-import clientPages.LoginClientPage;
+import clientPages.LoginPage;
 import clientTests.TestBase;
 import data.ExcelReader;
 import designerPages.CompetitionDetailsDesignerPage;
 
 public class FinishedCompetitionsDetailsClientTest extends TestBase {
 
-	DefaultClientPage defaultClientPage;
-	LoginClientPage loginClientPage;
+	DefaultPage defaultClientPage;
+	LoginPage loginClientPage;
 	HomeClientPage homeClientPage;
 	CompetitionsClientPage competitionsClientPage;
 	int compititionItem = 1;
@@ -27,16 +27,16 @@ public class FinishedCompetitionsDetailsClientTest extends TestBase {
 	public void openHomePageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultClientPage = new DefaultClientPage(driver);
-		loginClientPage = new LoginClientPage(driver);
+		defaultClientPage = new DefaultPage(driver);
+		loginClientPage = new LoginPage(driver);
 		defaultClientPage.openLoginForm();
-		Assert.assertTrue(loginClientPage.forgetPassLinkCli.isDisplayed());
+		Assert.assertTrue(loginClientPage.forgetPassLink.isDisplayed());
 	}
 
 	@Test(priority = 2, dependsOnMethods = { "openHomePageTest" })
 	public void loginFun() throws IOException {
-		loginClientPage = new LoginClientPage(driver);
-		defaultClientPage = new DefaultClientPage(driver);
+		loginClientPage = new LoginPage(driver);
+		defaultClientPage = new DefaultPage(driver);
 		homeClientPage = new HomeClientPage(driver);
 		ExcelReader ER = new ExcelReader();
 		loginClientPage.loginFun(ER.getExcelData(0, 2)[1][1], ER.getExcelData(0, 2)[2][1]);
@@ -56,32 +56,32 @@ public class FinishedCompetitionsDetailsClientTest extends TestBase {
 		competitionsClientPage = new CompetitionsClientPage(driver);
 		competitionDetailsDesignerClientPage = new CompetitionDetailsDesignerPage(driver);
 		competitionsClientPage.openFinishedFun(compititionItem);
-		Assert.assertTrue(competitionDetailsDesignerClientPage.detailsLink.isDisplayed());
-		Assert.assertTrue(competitionDetailsDesignerClientPage.designsLink.isDisplayed());
-		Assert.assertTrue(competitionDetailsDesignerClientPage.filesLink.isDisplayed());
-		Assert.assertTrue(competitionDetailsDesignerClientPage.contactUsLink.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerClientPage.detailsLinkDes.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerClientPage.designsLinkDes.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerClientPage.filesLinkDes.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerClientPage.contactUsLinkDes.isDisplayed());
 	}
 
 	@Test(priority = 5, dependsOnMethods = { "finishedCompetitionsDetailsTest" })
 	public void showClientAgreementViewTest() {
 		competitionDetailsDesignerClientPage = new CompetitionDetailsDesignerPage(driver);
 		competitionDetailsDesignerClientPage.openFiles();
-		Assert.assertTrue(competitionDetailsDesignerClientPage.filesHeader.isDisplayed());
-		Assert.assertTrue(competitionDetailsDesignerClientPage.showAgreementLink.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerClientPage.filesHeaderDes.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerClientPage.showAgreementLinkDes.isDisplayed());
 		competitionDetailsDesignerClientPage.showAgreementFun();
-		Assert.assertTrue(competitionDetailsDesignerClientPage.agreementPopup.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerClientPage.agreementPopupDes.isDisplayed());
 		Assert.assertTrue(competitionDetailsDesignerClientPage.designerSig.isDisplayed());
 		Assert.assertTrue(competitionDetailsDesignerClientPage.cliendSig.isDisplayed());
 		competitionDetailsDesignerClientPage.closeFun();
-		Assert.assertTrue(competitionDetailsDesignerClientPage.detailsLink.isDisplayed());
+		Assert.assertTrue(competitionDetailsDesignerClientPage.detailsLinkDes.isDisplayed());
 	}
 
 	@Test(priority = 6, dependsOnMethods = { "showClientAgreementViewTest" })
 	public void makeLogoutTest() throws AWTException {
 		homeClientPage = new HomeClientPage(driver);
-		defaultClientPage = new DefaultClientPage(driver);
+		defaultClientPage = new DefaultPage(driver);
 		homeClientPage.openMainMenuFun();
 		homeClientPage.logoutFun();
-		Assert.assertTrue(defaultClientPage.loginLinkCli.isDisplayed());
+		Assert.assertTrue(defaultClientPage.loginLink.isDisplayed());
 	}
 }

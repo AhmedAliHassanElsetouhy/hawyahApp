@@ -11,7 +11,6 @@
 			<class name="designerTests.UpdateLoginDataDesignerTest" />
 			<class name="designerTests.UpdatePersonalDataDesignerTest" />
 			<class name="designerTests.UpdateBankAccountDataDesignerTest" />
-
 			<class name="designerTests.MyStatsDesignerTest" />
 			<class name="designerTests.BankAccountsDesignerTest" />
 			<class name="designerTests.TransfersRequestsDesignerTest" />
@@ -24,7 +23,6 @@
 			<class name="designerTests.CompetitionDetailsDesignerTest" />
 			<class name="designerTests.ContactUsDesignerTest" />
 			<class name="designerTests.ContractDesignerTest" />
-
 			<class
 				name="designerTests.FinishedCompetitionsDetailsDesignerTest" />
 			<class
@@ -32,7 +30,6 @@
 			<class
 				name="designerTests.UploadDesignForRecieveDesignsCompetitionsDesignerTest" />
 			<class name="designerTests.AddCommentsDesignerTest" />
-
 			<class name="designerTests.AddMessageDesignerTest" />
 			<class name="designerTests.DeleteMsgDesignerTest" />
 			<class name="designerTests.DeleteAllMsgsListDesignerTest" />

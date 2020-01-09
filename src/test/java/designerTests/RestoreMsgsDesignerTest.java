@@ -7,10 +7,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import clientPages.AboutMeClientPage;
-import clientPages.DefaultClientPage;
+import clientPages.DefaultPage;
 import clientPages.DesignsClientPage;
 import clientPages.HomeClientPage;
-import clientPages.LoginClientPage;
+import clientPages.LoginPage;
 import clientPages.MessageFormClientPage;
 import clientPages.MessagesClientPage;
 import clientPages.MyPageClientPage;
@@ -19,8 +19,8 @@ import data.ExcelReader;
 
 public class RestoreMsgsDesignerTest extends TestBase {
 
-	DefaultClientPage defaultPage;
-	LoginClientPage loginPage;
+	DefaultPage defaultPage;
+	LoginPage loginPage;
 	HomeClientPage homePage;
 	DesignsClientPage designsPage;
 	MyPageClientPage myPagePage;
@@ -33,16 +33,16 @@ public class RestoreMsgsDesignerTest extends TestBase {
 	public void openHomePageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultPage = new DefaultClientPage(driver);
-		loginPage = new LoginClientPage(driver);
+		defaultPage = new DefaultPage(driver);
+		loginPage = new LoginPage(driver);
 		defaultPage.openLoginForm();
-		Assert.assertTrue(loginPage.forgetPassLinkCli.isDisplayed());
+		Assert.assertTrue(loginPage.forgetPassLink.isDisplayed());
 	}
 
 	@Test(priority = 2, dependsOnMethods = { "openHomePageTest" })
 	public void loginFun() throws IOException {
-		loginPage = new LoginClientPage(driver);
-		defaultPage = new DefaultClientPage(driver);
+		loginPage = new LoginPage(driver);
+		defaultPage = new DefaultPage(driver);
 		homePage = new HomeClientPage(driver);
 		ExcelReader ER = new ExcelReader();
 		loginPage.loginFun(ER.getExcelData(5, 2)[1][1], ER.getExcelData(5, 2)[2][1]);
@@ -86,9 +86,9 @@ public class RestoreMsgsDesignerTest extends TestBase {
 	@Test(priority = 6, dependsOnMethods = { "deleteMsgTest" })
 	public void openDeletedMsgsTest() {
 		messageFormPage = new MessageFormClientPage(driver);
-		messageFormPage.openSentMsgs();
-		messageFormPage.deleteMsgFun(index);
-		driver.switchTo().alert().accept();
+		// messageFormPage.openSentMsgs();
+		// messageFormPage.deleteMsgFun(index);
+		// driver.switchTo().alert().accept();
 		messageFormPage.openDeletedMsgs();
 		messageFormPage.restoreDeleteMsgFun(index);
 		Assert.assertTrue(messageFormPage.confirmRestoreMsgCli.isDisplayed());
@@ -97,9 +97,9 @@ public class RestoreMsgsDesignerTest extends TestBase {
 	@Test(priority = 7, dependsOnMethods = { "openDeletedMsgsTest" })
 	public void makeLogoutTest() throws AWTException {
 		homePage = new HomeClientPage(driver);
-		defaultPage = new DefaultClientPage(driver);
+		defaultPage = new DefaultPage(driver);
 		homePage.openMainMenuFun();
 		homePage.logoutFun();
-		Assert.assertTrue(defaultPage.loginLinkCli.isDisplayed());
+		Assert.assertTrue(defaultPage.loginLink.isDisplayed());
 	}
 }

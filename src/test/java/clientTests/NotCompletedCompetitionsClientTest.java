@@ -11,10 +11,10 @@ import com.github.javafaker.Faker;
 
 import clientPages.CompetitionsClientPage;
 import clientPages.CompetitionsDetailsClientPage;
-import clientPages.DefaultClientPage;
+import clientPages.DefaultPage;
 import clientPages.DesignsClientPage;
 import clientPages.HomeClientPage;
-import clientPages.LoginClientPage;
+import clientPages.LoginPage;
 import clientPages.MoreDetailsClientPage;
 import clientPages.PaymentClientPage;
 import clientPages.RequestDesignAndSearchClientPage;
@@ -25,10 +25,10 @@ import data.ExcelReader;
 public class NotCompletedCompetitionsClientTest extends TestBase {
 
 	Faker fakeData = new Faker();
-	DefaultClientPage defaultClientPage;
+	DefaultPage defaultClientPage;
 	RequestDesignAndSearchClientPage requestDesignAndSearchClientPage;
 	String searchTextCli = fakeData.name().firstName();
-	LoginClientPage loginClientPage;
+	LoginPage loginClientPage;
 	HomeClientPage homeClientPage;
 	DesignsClientPage designsClientPage;
 	SelectDesignsClientPage selectDesignsClientPage;
@@ -49,16 +49,16 @@ public class NotCompletedCompetitionsClientTest extends TestBase {
 	public void openHomePageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultClientPage = new DefaultClientPage(driver);
-		loginClientPage = new LoginClientPage(driver);
+		defaultClientPage = new DefaultPage(driver);
+		loginClientPage = new LoginPage(driver);
 		defaultClientPage.openLoginForm();
-		Assert.assertTrue(loginClientPage.forgetPassLinkCli.isDisplayed());
+		Assert.assertTrue(loginClientPage.forgetPassLink.isDisplayed());
 	}
 
 	@Test(priority = 2, dependsOnMethods = { "openHomePageTest" })
 	public void loginFun() throws IOException {
-		loginClientPage = new LoginClientPage(driver);
-		defaultClientPage = new DefaultClientPage(driver);
+		loginClientPage = new LoginPage(driver);
+		defaultClientPage = new DefaultPage(driver);
 		homeClientPage = new HomeClientPage(driver);
 		ExcelReader ER = new ExcelReader();
 		loginClientPage.loginFun(ER.getExcelData(0, 2)[1][1], ER.getExcelData(0, 2)[2][1]);
@@ -68,7 +68,7 @@ public class NotCompletedCompetitionsClientTest extends TestBase {
 
 	@Test(priority = 3, dependsOnMethods = { "loginFun" })
 	public void openRequestDesignsTest() {
-		defaultClientPage = new DefaultClientPage(driver);
+		defaultClientPage = new DefaultPage(driver);
 		requestDesignAndSearchClientPage = new RequestDesignAndSearchClientPage(driver);
 		homeClientPage = new HomeClientPage(driver);
 		designsClientPage = new DesignsClientPage(driver);
@@ -145,9 +145,9 @@ public class NotCompletedCompetitionsClientTest extends TestBase {
 	@Test(priority = 11, dependsOnMethods = { "deliverFinalWorkCompetitionTest" })
 	public void makeLogoutTest() throws AWTException {
 		homeClientPage = new HomeClientPage(driver);
-		defaultClientPage = new DefaultClientPage(driver);
+		defaultClientPage = new DefaultPage(driver);
 		homeClientPage.openMainMenuFun();
 		homeClientPage.logoutFun();
-		Assert.assertTrue(defaultClientPage.loginLinkCli.isDisplayed());
+		Assert.assertTrue(defaultClientPage.loginLink.isDisplayed());
 	}
 }

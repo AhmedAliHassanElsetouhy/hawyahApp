@@ -15,13 +15,13 @@ public class MyStatsDesignerPage extends PageBase {
 
 	// @FindBy(xpath = "//*[text()='المشاركات']")
 	@FindBy(xpath = "//div[@class='black-text']")
-	public WebElement shares;
+	public WebElement sharesDes;
 
 	// @FindBy(xpath = "//*[text()='مرات الفوز']")
 	@FindBy(xpath = "//div[@class='green-text']")
-	public WebElement numOfWins;
+	public WebElement numOfWinsDes;
 
 	// @FindBy(xpath = "//*[text()='المبلغ المحصل']")
 	@FindBy(xpath = "//div[@class='blue-text']")
-	public WebElement totalCollectedNum;
+	public WebElement totalCollectedNumDes;
 }
