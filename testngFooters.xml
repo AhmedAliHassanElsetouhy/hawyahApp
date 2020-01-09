@@ -1,0 +1,28 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- <suite name="Regression Suite" verbose="2" thread-count="2" parallel="tests"> -->
+<suite name="Regression Suite">
+	<test name="Regression Test" preserve-order="true">
+		<parameter name="browser" value="firefox" />
+		<classes>
+			<!-- Footer pages tests -->
+			<class name="footerPagesTests.AskDesignTest" />
+			<class name="footerPagesTests.BeDesignerTest" />
+			<class name="footerPagesTests.CommonQuesTest" />
+			<class name="footerPagesTests.ContactUsTest" />
+			<class name="footerPagesTests.DesignsRequestTest" />
+			<class name="footerPagesTests.HowItWorkTest" />
+			<class name="footerPagesTests.JobsTest" />
+			<class name="footerPagesTests.PricesTest" />
+			<class name="footerPagesTests.TermsAndConditionsTest" />
+			<class name="footerPagesTests.WhoUsTest" />
+		</classes>
+	</test>
+
+	<!-- <test name=" TestOnChrome "> <parameter name="browser" value="chrome" 
+		/> <classes> <class name="clientTests.LoginTest" /> </classes> </test> <test 
+		name="TestOnIE"> <parameter name="browser" value="ie" /> <classes> <class 
+		name="clientTests.LoginTest" /> </classes> </test> <test name="TestOnFirefox"> 
+		<parameter name="browser" value="firefox" /> <classes> <class name="clientTests.LoginTest" 
+		/> </classes> </test> -->
+
+</suite> 

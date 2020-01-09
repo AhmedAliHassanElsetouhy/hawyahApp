@@ -12,5 +12,5 @@ public class WhoUsPage extends PageBase{
 	}
 
 	@FindBy(xpath="")
-	WebElement x;
+	WebElement xCli;
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- <suite name="Regression Suite" verbose="2" thread-count="2" parallel="tests"> -->
+<suite name="Regression Suite">
+	<test name="Regression Test" preserve-order="true">
+		<parameter name="browser" value="firefox" />
+		<classes>
+
+			<!-- Designer tests -->
+			<class name="designerTests.LoginDesignerTest" />
+			<class name="designerTests.RegistrationDesignerTest" />
+			<class name="designerTests.UpdateLoginDataDesignerTest" />
+			<class name="designerTests.UpdatePersonalDataDesignerTest" />
+			<class name="designerTests.UpdateBankAccountDataDesignerTest" />
+
+			<class name="designerTests.MyStatsDesignerTest" />
+			<class name="designerTests.BankAccountsDesignerTest" />
+			<class name="designerTests.TransfersRequestsDesignerTest" />
+			<!--<class name="designerTests.MyWorkDesignerTest"/> Not completed because 
+				of menu of design type open twice -->
+			<!-- <class name="designerTests.RequestDesignAndSearchDesignerTest"/> 
+				Not completed waiting because of list not selected -->
+			<class name="designerTests.ForgetPasswordDesignerTest" />
+			<class name="designerTests.CompetitionDesignsDesignerTest" />
+			<class name="designerTests.CompetitionDetailsDesignerTest" />
+			<class name="designerTests.ContactUsDesignerTest" />
+			<class name="designerTests.ContractDesignerTest" />
+
+			<class
+				name="designerTests.FinishedCompetitionsDetailsDesignerTest" />
+			<class
+				name="designerTests.DeliverFinalWorkCompetitionsDetailsDesignerTest" />
+			<class
+				name="designerTests.UploadDesignForRecieveDesignsCompetitionsDesignerTest" />
+			<class name="designerTests.AddCommentsDesignerTest" />
+
+			<class name="designerTests.AddMessageDesignerTest" />
+			<class name="designerTests.DeleteMsgDesignerTest" />
+			<class name="designerTests.DeleteAllMsgsListDesignerTest" />
+			<class name="designerTests.RestoreMsgsDesignerTest" />
+		</classes>
+	</test>
+
+	<!-- <test name=" TestOnChrome "> <parameter name="browser" value="chrome" 
+		/> <classes> <class name="clientTests.LoginTest" /> </classes> </test> <test 
+		name="TestOnIE"> <parameter name="browser" value="ie" /> <classes> <class 
+		name="clientTests.LoginTest" /> </classes> </test> <test name="TestOnFirefox"> 
+		<parameter name="browser" value="firefox" /> <classes> <class name="clientTests.LoginTest" 
+		/> </classes> </test> -->
+
+</suite> 

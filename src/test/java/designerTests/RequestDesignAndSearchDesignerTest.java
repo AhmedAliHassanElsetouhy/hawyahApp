@@ -7,28 +7,28 @@ import org.testng.annotations.Test;
 
 import com.github.javafaker.Faker;
 
-import clientPages.DefaultPage;
-import clientPages.HomePage;
-import clientPages.LoginPage;
-import clientPages.RequestDesignAndSearchPage;
+import clientPages.DefaultClientPage;
+import clientPages.HomeClientPage;
+import clientPages.LoginClientPage;
+import clientPages.RequestDesignAndSearchClientPage;
 import clientTests.TestBase;
 import data.ExcelReader;
-import designerPages.HomeUserPage;
+import designerPages.HomeDesignerPage;
 
 public class RequestDesignAndSearchDesignerTest extends TestBase {
 
 	Faker fakeData = new Faker();
-	DefaultPage defaultPage;
-	HomePage homePage;
-	RequestDesignAndSearchPage requestDesignPage;
+	DefaultClientPage defaultPage;
+	HomeClientPage homePage;
+	RequestDesignAndSearchClientPage requestDesignPage;
 	String searchText = fakeData.name().firstName();
 	// String selectDesignOption = "تصميم شعار";
 	// String selectActivityOption = "الزراعة";
 	// String orderOption = "الأحدث";
 	String status = "منتهية";
 
-	LoginPage loginPage;
-	HomeUserPage homeUserPage;
+	LoginClientPage loginPage;
+	HomeDesignerPage homeUserPage;
 	int designIndex = 2;
 	int activityIndex = 2;
 	int orderIndex = 2;
@@ -37,50 +37,50 @@ public class RequestDesignAndSearchDesignerTest extends TestBase {
 	public void openHomePageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultPage = new DefaultPage(driver);
-		loginPage = new LoginPage(driver);
+		defaultPage = new DefaultClientPage(driver);
+		loginPage = new LoginClientPage(driver);
 		defaultPage.openLoginForm();
-		Assert.assertTrue(loginPage.forgetPassLink.isDisplayed());
+		Assert.assertTrue(loginPage.forgetPassLinkCli.isDisplayed());
 	}
 
 	@Test(priority = 2, dependsOnMethods = { "openHomePageTest" })
 	public void loginFun() throws IOException {
-		loginPage = new LoginPage(driver);
-		defaultPage = new DefaultPage(driver);
-		homePage = new HomePage(driver);
-		homeUserPage = new HomeUserPage(driver);
+		loginPage = new LoginClientPage(driver);
+		defaultPage = new DefaultClientPage(driver);
+		homePage = new HomeClientPage(driver);
+		homeUserPage = new HomeDesignerPage(driver);
 		ExcelReader ER = new ExcelReader();
 		loginPage.loginFun(ER.getExcelData(5, 2)[1][1], ER.getExcelData(5, 2)[2][1]);
-		System.out.println(homePage.loginConfirmMsg.getText());
-		Assert.assertTrue(homePage.loginConfirmMsg.getText().contains("تم تسجيل الدخول بنجاح"));
+		System.out.println(homePage.loginConfirmMsgCli.getText());
+		Assert.assertTrue(homePage.loginConfirmMsgCli.getText().contains("تم تسجيل الدخول بنجاح"));
 	}
 
 	@Test(priority = 3, dependsOnMethods = { "loginFun" })
 	public void openRequestDesignTest() throws IOException {
 		// ExcelReader ER = new ExcelReader();
 		// driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultPage = new DefaultPage(driver);
-		requestDesignPage = new RequestDesignAndSearchPage(driver);
+		defaultPage = new DefaultClientPage(driver);
+		requestDesignPage = new RequestDesignAndSearchClientPage(driver);
 		defaultPage.openRequestDesingFun();
-		Assert.assertTrue(requestDesignPage.advancedSearchLink.isDisplayed());
+		Assert.assertTrue(requestDesignPage.advancedSearchLinkCli.isDisplayed());
 	}
 
 	@Test(priority = 4, dependsOnMethods = { "openRequestDesignTest" })
 	public void textSearchTest() {
-		defaultPage = new DefaultPage(driver);
-		requestDesignPage = new RequestDesignAndSearchPage(driver);
+		defaultPage = new DefaultClientPage(driver);
+		requestDesignPage = new RequestDesignAndSearchClientPage(driver);
 		requestDesignPage.advancedSearchFun();
 		requestDesignPage.sendSearchTxt(searchText);
-		Assert.assertTrue(requestDesignPage.noResultTxtBox.isDisplayed());
+		Assert.assertTrue(requestDesignPage.noResultTxtBoxCli.isDisplayed());
 	}
 
 	@Test(priority = 5, dependsOnMethods = { "textSearchTest" })
 	public void searchListTest() throws IOException {
-		defaultPage = new DefaultPage(driver);
-		requestDesignPage = new RequestDesignAndSearchPage(driver);
+		defaultPage = new DefaultClientPage(driver);
+		requestDesignPage = new RequestDesignAndSearchClientPage(driver);
 		ExcelReader ER = new ExcelReader(); 
 		requestDesignPage.searchList(ER.getExcelData(8, 2)[0][1], activityIndex, orderIndex);
-		Assert.assertTrue(requestDesignPage.noResultTxtBox.isDisplayed());
+		Assert.assertTrue(requestDesignPage.noResultTxtBoxCli.isDisplayed());
 	}
 
 	// @Test(priority = 5, dependsOnMethods = { "textSearchTest" })

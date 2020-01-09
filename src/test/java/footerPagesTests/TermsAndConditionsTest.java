@@ -5,20 +5,20 @@ import java.io.IOException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import clientPages.DefaultPage;
+import clientPages.DefaultClientPage;
 import clientTests.TestBase;
 import data.ExcelReader;
 
 public class TermsAndConditionsTest extends TestBase {
 
-	DefaultPage defaultPage;
+	DefaultClientPage defaultPage;
 
 	@Test(priority = 1)
 	public void termsAndConditionsTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
-		defaultPage = new DefaultPage(driver);
+		defaultPage = new DefaultClientPage(driver);
 		defaultPage.openTermsAndConditionsPage();
-		Assert.assertTrue(defaultPage.termsAndConditionsLink.isDisplayed());
+		Assert.assertTrue(defaultPage.termsAndConditionsLinkCli.isDisplayed());
 	}
 }

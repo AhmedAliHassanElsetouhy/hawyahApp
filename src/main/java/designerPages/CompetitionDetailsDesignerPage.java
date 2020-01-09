@@ -80,8 +80,8 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 		clickButton(submitCommentBtn);
 		refreshPage();
 	}
-	
-	@FindBy(xpath="//div[@class='comment-list']")
+
+	@FindBy(xpath = "//div[@class='comment-list']")
 	public WebElement commentList;
 
 	@FindBy(xpath = "//span[@class='close']")
@@ -117,29 +117,10 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 	@FindBy(xpath = "//legend[@class='blue-text']")
 	public WebElement cliendSig;
 
-	public void openFilesAndOpenAgreementDesignerFun() {
-		clickButton(filesLink);
-		Assert.assertTrue(filesHeader.isDisplayed());
-		Assert.assertTrue(showAgreementLink.isDisplayed());
-		clickButton(showAgreementLink);
-		Assert.assertTrue(agreementPopup.isDisplayed());
-		Assert.assertTrue(designerSig.isDisplayed());
-		Assert.assertTrue(cliendSig.isDisplayed());
-		closeFun();
-	}
-
 	public void showAgreementFun() {
 		clickButton(showAgreementLink);
 	}
-	
-//	public void openFilesAndOpenAgreementDesignerOnlyFun() {
-////		clickButton(filesLink);
-//		
-////		clickButton(showAgreementLink);
-//		
-//		closeFun();
-//	}
-	
+
 	public void closeFun() {
 		clickButton(closeBtn);
 	}
@@ -168,9 +149,9 @@ public class CompetitionDetailsDesignerPage extends PageBase {
 		clickButton(uploadDesignLink);
 	}
 
-	@FindBy(xpath="//span[@class='size']")
+	@FindBy(xpath = "//span[@class='size']")
 	public WebElement fileSize;
-	
+
 	@FindBy(xpath = "//input[@type='file']")
 	public WebElement selectFileBtn;
 
