@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- <suite name="Regression Suite" verbose="2" thread-count="2" parallel="tests"> -->
+<suite name="Regression Suite">
+	<test name="Regression Test" preserve-order="true">
+		<parameter name="browser" value="firefox" />
+		<classes>
+			<!-- Admin tests -->
+			<class name="adminTests.LoginAdminTest" />
+			<class name="adminTests.ContestsAdminTest" />
+		</classes>
+	</test>
+</suite> 

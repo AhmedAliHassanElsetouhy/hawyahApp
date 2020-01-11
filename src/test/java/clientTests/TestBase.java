@@ -107,7 +107,7 @@ public class TestBase {
 
 	@AfterClass
 	public void quitBrowserAfterClass() {
-		driver.quit();
+//		driver.quit();
 	}
 
 	// take screenshot when test case fail and add it in the Screenshot folder
