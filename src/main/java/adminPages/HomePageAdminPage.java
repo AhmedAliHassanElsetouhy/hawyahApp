@@ -1,5 +1,6 @@
 package adminPages;
 
+import java.awt.AWTException;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -16,44 +17,48 @@ public class HomePageAdminPage extends PageBase {
 	}
 
 	// @FindBy(xpath = "//li[@class='nav-item']")
-	@FindBy(xpath = "//a[@class=\"nav-link nav-toggle\"]")
-	public List<WebElement> adminMainListItems;
+	@FindBy(xpath = "//a[@class='nav-link nav-toggle']")
+	public List<WebElement> adminSideMenuListItems;
 
 	// @FindBy(xpath="//h3[@class='page-title']")
 	@FindBy(xpath = "//*[text()='Dashboard']")
 	public WebElement adminHomePageTitle;
-	
-	@FindBy(xpath="//span[@class=\"username username-hide-on-mobile\"]")
+
+	@FindBy(xpath = "//span[@class='username username-hide-on-mobile']")
 	public WebElement userAdminMenu;
-	
-	@FindBy(xpath="//a[@href=\"/web/logout?locale=en\"]")
+
+	@FindBy(xpath = "//a[@href='/web/logout?locale=en']")
 	WebElement logoutbtn;
-	
-	@FindBy(id="graph4")
+
+	@FindBy(id = "graph4")
 	public WebElement packagesGraph;
-	
-	@FindBy(id="graph3")
+
+	@FindBy(id = "graph3")
 	public WebElement designsGraph;
-	
-	@FindBy(id="graph5")
+
+	@FindBy(id = "graph5")
 	public WebElement usersGraph;
-	
-	@FindBy(id="graph")
+
+	@FindBy(id = "graph")
 	public WebElement moneyGraph;
-	
-	@FindBy(id="graph2")
+
+	@FindBy(id = "graph2")
 	public WebElement statusGraph;
-	
-	
-	public void logoutAdminFun() {
+
+	// @FindBy(xpath = "//*[@href='javascript:;']")
+	@FindBy(xpath = "//a[@class='dropdown-toggle']")
+	public List<WebElement> adminMenu;
+
+	public void logoutAdminFun() throws AWTException {
 		clickButton(logoutbtn);
+		refreshPage();
 	}
-	
+
 	public void openUserAdminMenuFun() {
 		clickButton(userAdminMenu);
 	}
 
 	public void openAdminMenuItem(int adminMainMenuOption) {
-		selectSpecificIcon(adminMainListItems, adminMainMenuOption);
+		selectSpecificIcon(adminSideMenuListItems, adminMainMenuOption);
 	}
 }

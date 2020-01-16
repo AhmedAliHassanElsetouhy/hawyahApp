@@ -26,7 +26,8 @@ public class RegistrationClientTest extends TestBase {
 	Faker fake = new Faker();
 	String userNameCli = fake.name().firstName() + fake.number().numberBetween(1, 99);
 	String emailCli = fake.internet().emailAddress();
-	String passwordCli = fake.number().digits(8);
+	// String passwordCli = fake.number().digits(8);
+	String passwordCli = "P@55word";
 
 	@Test(priority = 1)
 	public void openRegisterFormPageTest() throws IOException {
@@ -50,6 +51,7 @@ public class RegistrationClientTest extends TestBase {
 	public void invalidRegisterFormPageTest() throws AWTException {
 		defaultClientPage = new DefaultPage(driver);
 		registrationClientPage = new RegistrationClientPage(driver);
+		System.out.println(emailCli);
 		registrationClientPage.registerFun(emailCli, passwordCli, userNameCli);
 		registrationClientPage.checkTermsAndCondition();
 		registrationClientPage.submitRegisterfun();
@@ -63,9 +65,9 @@ public class RegistrationClientTest extends TestBase {
 		defaultClientPage = new DefaultPage(driver);
 		registrationClientPage = new RegistrationClientPage(driver);
 		registerConfirmClientPage = new RegistrationConfirmationClientPage(driver);
-		System.out.println(emailCli);
 		registrationClientPage.clientRegister();
 		registrationClientPage.submitRegisterfun();
-		Assert.assertTrue(registerConfirmClientPage.registerClientConfirmMsgCli.getText().contains("شكرا لتسجيلك في موقع هوية"));
+		Assert.assertTrue(
+				registerConfirmClientPage.registerClientConfirmMsgCli.getText().contains("شكرا لتسجيلك في موقع هوية"));
 	}
 }

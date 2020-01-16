@@ -63,6 +63,7 @@ public class TestBase {
 	@BeforeClass
 	@Parameters({ "browser" })
 	public void startDriver(@Optional("chrome") String browser) {
+		// public void startDriver(@Optional String browser) {
 		if (browser.equalsIgnoreCase("chrome")) {
 			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver.exe");
 			driver = new ChromeDriver(chromeOption());
@@ -107,7 +108,7 @@ public class TestBase {
 
 	@AfterClass
 	public void quitBrowserAfterClass() {
-//		driver.quit();
+		// driver.quit();
 	}
 
 	// take screenshot when test case fail and add it in the Screenshot folder

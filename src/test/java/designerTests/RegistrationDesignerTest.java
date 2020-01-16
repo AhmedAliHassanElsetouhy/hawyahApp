@@ -25,7 +25,8 @@ public class RegistrationDesignerTest extends TestBase {
 	Faker fake = new Faker();
 	String userName = fake.name().firstName() + fake.number().numberBetween(1, 99);
 	String email = fake.internet().emailAddress();
-	String password = fake.number().digits(8);
+	// String password = fake.number().digits(8);
+	String password = "P@55word";
 
 	@Test(priority = 1)
 	public void openRegisterFormPageTest() throws IOException {

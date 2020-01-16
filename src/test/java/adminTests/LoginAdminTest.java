@@ -1,5 +1,6 @@
 package adminTests;
 
+import java.awt.AWTException;
 import java.io.IOException;
 
 import org.openqa.selenium.interactions.Actions;
@@ -38,22 +39,22 @@ public class LoginAdminTest extends TestBase {
 		homePageAdminPage = new HomePageAdminPage(driver);
 		ExcelReader ER = new ExcelReader();
 		loginAdminPage.loginFun(ER.getExcelData(10, 2)[1][1], password);
-		System.out.println(homePageAdminPage.adminMainListItems.get(0).getText());
-		Assert.assertTrue(homePageAdminPage.adminMainListItems.get(0).isDisplayed());
-		System.out.println(homePageAdminPage.adminMainListItems.get(1).getText());
-		Assert.assertTrue(homePageAdminPage.adminMainListItems.get(1).isDisplayed());
-		System.out.println(homePageAdminPage.adminMainListItems.get(2).getText());
-		Assert.assertTrue(homePageAdminPage.adminMainListItems.get(2).isDisplayed());
-		System.out.println(homePageAdminPage.adminMainListItems.get(3).getText());
-		Assert.assertTrue(homePageAdminPage.adminMainListItems.get(3).isDisplayed());
-		System.out.println(homePageAdminPage.adminMainListItems.get(4).getText());
-		Assert.assertTrue(homePageAdminPage.adminMainListItems.get(4).isDisplayed());
-		System.out.println(homePageAdminPage.adminMainListItems.get(5).getText());
-		Assert.assertTrue(homePageAdminPage.adminMainListItems.get(5).isDisplayed());
-		System.out.println(homePageAdminPage.adminMainListItems.get(6).getText());
-		Assert.assertTrue(homePageAdminPage.adminMainListItems.get(6).isDisplayed());
-		System.out.println(homePageAdminPage.adminMainListItems.get(7).getText());
-		Assert.assertTrue(homePageAdminPage.adminMainListItems.get(7).isDisplayed());
+		System.out.println(homePageAdminPage.adminSideMenuListItems.get(0).getText());
+		Assert.assertTrue(homePageAdminPage.adminSideMenuListItems.get(0).isDisplayed());
+		System.out.println(homePageAdminPage.adminSideMenuListItems.get(1).getText());
+		Assert.assertTrue(homePageAdminPage.adminSideMenuListItems.get(1).isDisplayed());
+		System.out.println(homePageAdminPage.adminSideMenuListItems.get(2).getText());
+		Assert.assertTrue(homePageAdminPage.adminSideMenuListItems.get(2).isDisplayed());
+		System.out.println(homePageAdminPage.adminSideMenuListItems.get(3).getText());
+		Assert.assertTrue(homePageAdminPage.adminSideMenuListItems.get(3).isDisplayed());
+		System.out.println(homePageAdminPage.adminSideMenuListItems.get(4).getText());
+		Assert.assertTrue(homePageAdminPage.adminSideMenuListItems.get(4).isDisplayed());
+		System.out.println(homePageAdminPage.adminSideMenuListItems.get(5).getText());
+		Assert.assertTrue(homePageAdminPage.adminSideMenuListItems.get(5).isDisplayed());
+		System.out.println(homePageAdminPage.adminSideMenuListItems.get(6).getText());
+		Assert.assertTrue(homePageAdminPage.adminSideMenuListItems.get(6).isDisplayed());
+		System.out.println(homePageAdminPage.adminSideMenuListItems.get(7).getText());
+		Assert.assertTrue(homePageAdminPage.adminSideMenuListItems.get(7).isDisplayed());
 
 		System.out.println(homePageAdminPage.packagesGraph.getText());
 		System.out.println(homePageAdminPage.designsGraph.getText());
@@ -63,7 +64,7 @@ public class LoginAdminTest extends TestBase {
 	}
 
 	@Test(priority = 3, dependsOnMethods = { "loginFun" })
-	public void makeLogoutTest() {
+	public void makeLogoutTest() throws AWTException {
 		homePageAdminPage = new HomePageAdminPage(driver);
 		defaultAdminPage = new DefaultPage(driver);
 		hoverAction = new Actions(driver);

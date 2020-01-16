@@ -2,9 +2,12 @@ package adminTests;
 
 import java.io.IOException;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.github.javafaker.Faker;
 
 import adminPages.ContestsAdminPage;
 import adminPages.HomePageAdminPage;
@@ -31,6 +34,12 @@ public class ContestsAdminTest extends TestBase {
 	String endedDate = "2020-01-07";
 	String fromCreatedDate = "2020-01-07";
 	String toCreatedDate = "2020-01-07";
+	Faker fakeData = new Faker();
+	String orgName = fakeData.company().name();
+	String orgDesc = fakeData.company().name();
+	String conDesc = fakeData.name().title();
+	String addInfo = fakeData.name().name();
+	String cancelationReason = fakeData.name().title();
 
 	@Test(priority = 1, alwaysRun = true)
 	public void openHomePageTest() throws IOException {
@@ -42,85 +51,134 @@ public class ContestsAdminTest extends TestBase {
 		defaultAdminPage.openLoginForm();
 		Assert.assertTrue(loginAdminPage.forgetPassLink.isDisplayed());
 		loginAdminPage.loginFun(ER.getExcelData(10, 2)[1][1], password);
-		System.out.println(homePageAdminPage.adminMainListItems.get(0).getText());
-		Assert.assertTrue(homePageAdminPage.adminMainListItems.get(0).isDisplayed());
-		homePageAdminPage.adminMainListItems.get(1).click();
+		System.out.println(homePageAdminPage.adminSideMenuListItems.get(0).getText());
+		Assert.assertTrue(homePageAdminPage.adminSideMenuListItems.get(0).isDisplayed());
+		homePageAdminPage.adminSideMenuListItems.get(1).click();
 	}
 
-	@Test(priority = 2)
-	public void DesignTypeSearchTest() {
+	// @Test(priority = 2)
+	// public void DesignTypeSearchTest() {
+	// contestsAdminPage = new ContestsAdminPage(driver);
+	// contestsAdminPage.designTypeFun(1);
+	// Assert.assertTrue(contestsAdminPage.logoAndBrand.isDisplayed());
+	// contestsAdminPage.clearFun();
+	// }
+	//
+	// @Test(priority = 3)
+	// public void PackageTypeSearchTest() {
+	// contestsAdminPage = new ContestsAdminPage(driver);
+	// contestsAdminPage.packageTypeFun(1);
+	// Assert.assertTrue(contestsAdminPage.packageStatus.isDisplayed());
+	// contestsAdminPage.clearFun();
+	// }
+	//
+	// @Test(priority = 4)
+	// public void StatusTypeSearchTest() {
+	// contestsAdminPage = new ContestsAdminPage(driver);
+	// contestsAdminPage.statusFun(5);
+	// Assert.assertTrue(contestsAdminPage.contestStatus.isDisplayed());
+	// contestsAdminPage.clearFun();
+	// }
+	//
+	// @Test(priority = 5)
+	// public void launchedDateSearchTest() {
+	// contestsAdminPage = new ContestsAdminPage(driver);
+	// contestsAdminPage.launchedDateFun(launchedDate);
+	// Assert.assertTrue(contestsAdminPage.recordsBody.getText().isEmpty());
+	// contestsAdminPage.clearFun();
+	// }
+	//
+	// @Test(priority = 6)
+	// public void endedDateSearchTest() {
+	// contestsAdminPage = new ContestsAdminPage(driver);
+	// contestsAdminPage.endedDateFun(endedDate);
+	// Assert.assertTrue(contestsAdminPage.recordsBody.getText().isEmpty());
+	// contestsAdminPage.clearFun();
+	// }
+	//
+	// @Test(priority = 7)
+	// public void fromCreatedDateSearchTest() {
+	// contestsAdminPage = new ContestsAdminPage(driver);
+	// contestsAdminPage.fromCreatedDateFun(fromCreatedDate);
+	// Assert.assertTrue(contestsAdminPage.recordsBody.getText().isEmpty());
+	// contestsAdminPage.clearFun();
+	// }
+	//
+	// @Test(priority = 8)
+	// public void toCreatedDateSearchTest() {
+	// contestsAdminPage = new ContestsAdminPage(driver);
+	// contestsAdminPage.toCreatedDateFun(toCreatedDate);
+	// Assert.assertTrue(contestsAdminPage.recordsBody.getText().isEmpty());
+	// contestsAdminPage.clearFun();
+	// }
+	//
+	// @Test(priority = 9)
+	// public void SearchTest() {
+	// contestsAdminPage = new ContestsAdminPage(driver);
+	// contestsAdminPage.searchFun(contestTitle, designTypeItem, packageTypeItem,
+	// price, customerItem, statusItem,
+	// launchedDate, endedDate, fromCreatedDate, toCreatedDate);
+	// Assert.assertTrue(contestsAdminPage.recordsBody.getText().isEmpty());
+	// contestsAdminPage.clearFun();
+	// }
+
+//	@Test(priority = 10)
+//	public void Phase1StatusTest() throws InterruptedException {
+//		contestsAdminPage = new ContestsAdminPage(driver);
+//		contestsAdminPage.phase1Status.get(0).click();
+//		System.out.println(contestTitle + " " + orgName + " " + orgDesc + " " + conDesc + " " + addInfo);
+//		contestsAdminPage.contestDetailsFormFun(contestTitle, orgName, orgDesc, conDesc, addInfo);
+//		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.submitBtn);
+//		Assert.assertTrue(contestsAdminPage.openContestFormSuccessMsg.isDisplayed());
+//		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.paymentsTab);
+//		Assert.assertTrue(contestsAdminPage.paymentStatus.isDisplayed());
+//		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.designsTab);
+//		Thread.sleep(2000);
+//		contestsAdminPage.openCancelContestFun();
+//		contestsAdminPage.cancelContestFun(cancelationReason);
+//		contestsAdminPage.cancelFun();
+//	}
+
+	@Test(priority = 11)
+	public void cancelContestTest() {
 		contestsAdminPage = new ContestsAdminPage(driver);
-		contestsAdminPage.designTypeFun(1);
-		Assert.assertTrue(contestsAdminPage.logoAndBrand.isDisplayed());
-		contestsAdminPage.clearFun();
+		contestsAdminPage.CancelledByAdminStatus.get(0).click();
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.paymentsTab);
+		Assert.assertTrue(contestsAdminPage.paymentStatus.isDisplayed());
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.designsTab);
+		contestsAdminPage.cancelFun();
+		Assert.assertTrue(contestsAdminPage.CancelledByAdminStatus.get(0).isDisplayed());
 	}
 
-	@Test(priority = 3)
-	public void PackageTypeSearchTest() {
+	@Test(priority = 12)
+	public void waitingForDepositTest() {
 		contestsAdminPage = new ContestsAdminPage(driver);
-		contestsAdminPage.packageTypeFun(1);
-		Assert.assertTrue(contestsAdminPage.packageStatus.isDisplayed());
-		contestsAdminPage.clearFun();
+		contestsAdminPage.waitingDepositStatus.get(0).click();
+		contestsAdminPage.contestDetailsFormFun(contestTitle, orgName, orgDesc, conDesc, addInfo);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.designsTab);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.paymentsTab);
+		// System.out.println(contestsAdminPage.paymentFormView.get(0).getText());
+		Assert.assertTrue(contestsAdminPage.paymentFormView.get(0).getText().contains("Pending"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.cancelBtn);
 	}
 
-	@Test(priority = 4)
-	public void StatusTypeSearchTest() {
+	@Test(priority = 13)
+	public void deliverFinalWorkTest() {
 		contestsAdminPage = new ContestsAdminPage(driver);
-		contestsAdminPage.statusFun(5);
-		Assert.assertTrue(contestsAdminPage.contestStatus.isDisplayed());
-		contestsAdminPage.clearFun();
+		contestsAdminPage.deliverFinalWorkStatus.get(0).click();
+		Assert.assertTrue(contestsAdminPage.contestStatusList.getText().contains("Signoff"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.cancelBtn);
 	}
 
-	@Test(priority = 5)
-	public void launchedDateSearchTest() {
+	@Test(priority = 14)
+	public void completedStatusTest() {
 		contestsAdminPage = new ContestsAdminPage(driver);
-		contestsAdminPage.launchedDateFun(launchedDate);
-		Assert.assertTrue(contestsAdminPage.recordsBody.getText().isEmpty());
-		contestsAdminPage.clearFun();
+		contestsAdminPage.completedStatus.get(0).click();
+		Assert.assertTrue(contestsAdminPage.contestStatusList.getText().contains("Completed"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.cancelBtn);
 	}
 
-	@Test(priority = 6)
-	public void endedDateSearchTest() {
-		contestsAdminPage = new ContestsAdminPage(driver);
-		contestsAdminPage.endedDateFun(endedDate);
-		Assert.assertTrue(contestsAdminPage.recordsBody.getText().isEmpty());
-		contestsAdminPage.clearFun();
-	}
-
-	@Test(priority = 7)
-	public void fromCreatedDateSearchTest() {
-		contestsAdminPage = new ContestsAdminPage(driver);
-		contestsAdminPage.fromCreatedDateFun(fromCreatedDate);
-		Assert.assertTrue(contestsAdminPage.recordsBody.getText().isEmpty());
-		contestsAdminPage.clearFun();
-	}
-
-	@Test(priority = 8)
-	public void toCreatedDateSearchTest() {
-		contestsAdminPage = new ContestsAdminPage(driver);
-		contestsAdminPage.toCreatedDateFun(toCreatedDate);
-		Assert.assertTrue(contestsAdminPage.recordsBody.getText().isEmpty());
-		contestsAdminPage.clearFun();
-	}
-
-	@Test(priority = 9)
-	public void SearchTest() {
-		contestsAdminPage = new ContestsAdminPage(driver);
-		contestsAdminPage.searchFun(contestTitle, designTypeItem, packageTypeItem, price, customerItem, statusItem,
-				launchedDate, endedDate, fromCreatedDate, toCreatedDate);
-		Assert.assertTrue(contestsAdminPage.recordsBody.getText().isEmpty());
-		contestsAdminPage.clearFun();
-	}
-
-	@Test(priority = 10)
-	public void Phase1StatusTest() {
-		contestsAdminPage = new ContestsAdminPage(driver);
-		contestsAdminPage.phase1Status.get(2).click();
-		// Assert.assertTrue(contestsAdminPage.phase1Status.get(0).getText()
-		// .contains(contestsAdminPage.phase1Status.get(0).getText()));
-	}
-
-	// @Test(priority = 10)
+	// @Test(priority = 15)
 	// public void makeLogoutTest() {
 	// homePageAdminPage = new HomePageAdminPage(driver);
 	// defaultAdminPage = new DefaultPage(driver);

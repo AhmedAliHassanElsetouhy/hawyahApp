@@ -12,6 +12,7 @@ public class DefaultPage extends PageBase {
 	}
 
 	@FindBy(linkText = "تسجيل الدخول")
+	// @FindBy(xpath = "//a[@href='/web/login?locale=ar']")
 	public WebElement loginLink;
 
 	@FindBy(linkText = "إنضم إلينا")

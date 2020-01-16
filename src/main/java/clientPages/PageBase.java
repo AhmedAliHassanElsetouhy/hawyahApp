@@ -27,15 +27,15 @@ public class PageBase {
 		PageFactory.initElements(driver, this);
 	}
 
-	protected static void moveToElement(WebElement elementToMoveTo) {
-		Actions generateReportHoverAction = new Actions(driver);
-		generateReportHoverAction.moveToElement(elementToMoveTo).perform();
-	}
-
-	public void mouseHover(WebElement elementToHoverOn) {
-		Actions hoverAction = new Actions(driver);
-		hoverAction.moveToElement(elementToHoverOn).perform();
-	}
+//	protected static void moveToElement(WebElement elementToMoveTo) {
+//		Actions generateReportHoverAction = new Actions(driver);
+//		generateReportHoverAction.moveToElement(elementToMoveTo).perform();
+//	}
+//
+//	public void mouseHover(WebElement elementToHoverOn) {
+//		Actions hoverAction = new Actions(driver);
+//		hoverAction.moveToElement(elementToHoverOn).perform();
+//	}
 
 	protected static void clickNotClickableElement(WebElement notClickableElement) {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -53,6 +53,11 @@ public class PageBase {
 	protected static void setTextElementText(WebElement textElement, String value) {
 		textElement.sendKeys(value);
 	}
+
+	// protected static void setTextElementDate(WebElement textElement, Object
+	// today) {
+	// textElement.sendKeys((CharSequence[]) today);
+	// }
 
 	protected static void setTextElementText(WebElement textElement, int value) {
 		textElement.sendKeys(Integer.toString(value));
@@ -82,10 +87,10 @@ public class PageBase {
 		select.selectByValue(selectedElement);
 	}
 
-	 public void selectSpecificIcon(List <WebElement> items ,int index) {
-	 List<WebElement> allLinks = items;
-	 allLinks.get(index).click();
-	 }
+	public void selectSpecificIcon(List<WebElement> items, int index) {
+		List<WebElement> allLinks = items;
+		allLinks.get(index).click();
+	}
 
 	public String split(String strMain, String from) {
 		String[] arrSplit = strMain.split(from);
@@ -108,7 +113,7 @@ public class PageBase {
 		String imagePath = System.getProperty("user.dir") + "/Uploads/" + folderName;
 		uploadFileIcon.sendKeys(imagePath);
 		clickButton(uploadFileIcon);
-		
+
 		Thread.sleep(3000);
 		// Assert.assertEquals(folderName, uploadedFiles.getText());
 	}
