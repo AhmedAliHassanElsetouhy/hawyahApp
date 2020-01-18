@@ -106,6 +106,11 @@ public class TestBase {
 		// driver.quit();
 	}
 
+	@AfterMethod
+	public void sleepMinute() throws InterruptedException {
+		Thread.sleep(1000);
+	}
+	
 	@AfterClass
 	public void quitBrowserAfterClass() {
 		// driver.quit();

@@ -37,7 +37,7 @@ public class UsersAdminPage extends PageBase {
 	WebElement createdToDateTxtBox;
 
 	@FindBy(xpath = "//input[@value='search']")
-	WebElement searchBtn;
+	public WebElement searchBtn;
 
 	@FindBy(xpath = "//a[@href='https://hawyah-dev.herokuapp.com/admin/users?locale=en']")
 	WebElement clearBtn;
@@ -45,14 +45,25 @@ public class UsersAdminPage extends PageBase {
 	@FindBy(xpath = "//span[@class='label label-sm label-danger']")
 	public List<WebElement> pendingStatus;
 
+	public void openPendingStatusFun(int index) {
+		selectSpecificIcon(pendingStatus, index);
+	}
+
 	@FindBy(xpath = "//span[@class='label label-sm label-success']")
 	public List<WebElement> activeStatus;
 
+	public void openActiveStatusFun(int index) {
+		selectSpecificIcon(activeStatus, index);
+	}
+
 	@FindBy(xpath = "//a[@class='btn btn-success btn-xs']")
-	public List<WebElement> activatedAccount;
+	public List<WebElement> activateAccountBtn;
+
+	@FindBy(xpath = "//span[text()='disabled']")
+	public List<WebElement> disabledStatus;
 
 	@FindBy(xpath = "//a[@class='btn btn-danger btn-xs']")
-	public List<WebElement> deactivatedAccount;
+	public List<WebElement> deactivatedAccountBtn;
 
 	@FindBy(id = "q_confirmed_true")
 	WebElement confirmFCheckBox;
@@ -62,11 +73,11 @@ public class UsersAdminPage extends PageBase {
 	}
 
 	public void activateAccountFun(int activatedIndex) {
-		selectSpecificIcon(deactivatedAccount, activatedIndex);
+		selectSpecificIcon(activateAccountBtn, activatedIndex);
 	}
 
 	public void deActivateAccountFun(int deactivatedIndex) {
-		selectSpecificIcon(activatedAccount, deactivatedIndex);
+		selectSpecificIcon(deactivatedAccountBtn, deactivatedIndex);
 	}
 
 	public void searchFun() {

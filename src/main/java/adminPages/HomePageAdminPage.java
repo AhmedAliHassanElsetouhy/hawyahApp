@@ -49,6 +49,23 @@ public class HomePageAdminPage extends PageBase {
 	@FindBy(xpath = "//a[@class='dropdown-toggle']")
 	public List<WebElement> adminMenu;
 
+	@FindBy(xpath = "//div[@class='portlet-body']")
+	public WebElement searchResultCntainer;
+
+	@FindBy(xpath = "//span[@class='input-group-btn']")
+	WebElement searchIcon;
+
+	public void searchClick() {
+		clickButton(searchIcon);
+	}
+
+	@FindBy(xpath = "//input[@placeholder='Search...']")
+	public WebElement searchTxtBox;
+
+	public void searchTxtBoxFun(String searchText) {
+		setTextElementText(searchTxtBox, searchText);
+	}
+
 	public void logoutAdminFun() throws AWTException {
 		clickButton(logoutbtn);
 		refreshPage();

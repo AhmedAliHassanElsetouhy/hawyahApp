@@ -15,8 +15,8 @@ import org.testng.annotations.Test;
 import com.github.javafaker.Faker;
 
 import adminPages.ContestsAdminPage;
+import adminPages.DesignersAdminPage;
 import adminPages.HomePageAdminPage;
-import adminPages.UsersAdminPage;
 import clientPages.DefaultPage;
 import clientPages.HomeClientPage;
 import clientPages.LoginPage;
@@ -26,14 +26,14 @@ import clientTests.TestBase;
 import data.ExcelReader;
 import designerPages.HomeDesignerPage;
 
-public class UsersAdminTest extends TestBase {
+public class DesignersAdminTest extends TestBase {
 
 	HomePageAdminPage homePageAdminPage;
 	DefaultPage defaultAdminPage;
 	LoginPage loginAdminPage;
 	String password = "11111111";
 	ContestsAdminPage contestsAdminPage;
-	UsersAdminPage usersAdminPage;
+	DesignersAdminPage designersAdminPage;
 	RegistrationClientPage registrationPage;
 	HomeClientPage homeClientPage;
 	RegistrationConfirmationClientPage registerConfirmPage;
@@ -42,10 +42,9 @@ public class UsersAdminTest extends TestBase {
 	Faker fake = new Faker();
 	String userName = fake.name().firstName() + fake.number().numberBetween(1, 99);
 	String email = fake.internet().emailAddress();
-	// String password = fake.number().digits(8);
 	String usPassword = "P@55word";
 
-	@Test(priority = 0)
+	@Test(priority = 1, alwaysRun = true)
 	public void EnsuringClientRegisterSubmittedtAdminTest() throws IOException, AWTException, InterruptedException {
 		ExcelReader ER = new ExcelReader();
 		Thread.sleep(1000);
@@ -58,37 +57,37 @@ public class UsersAdminTest extends TestBase {
 		Assert.assertTrue(registrationPage.registerFormHeaderTxtCli.getText().contains("إنشاء حساب في هوية"));
 		registrationPage.registerFun(email, usPassword, userName);
 		registrationPage.checkTermsAndCondition();
-		registrationPage.clientRegister();
+		registrationPage.designerRegister();
 		registrationPage.submitRegisterfun();
-		System.out.println(registerConfirmPage.registerClientConfirmMsgCli.getText());
-		Assert.assertTrue(registerConfirmPage.registerClientConfirmMsgCli.getText().contains("شكرا"));
+		System.out.println(registerConfirmPage.registerDesignerConfirmMsgCli.getText());
+		Assert.assertTrue(registerConfirmPage.registerDesignerConfirmMsgCli.getText().contains("كمصمم"));
 
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
 		homePageAdminPage = new HomePageAdminPage(driver);
 		loginAdminPage = new LoginPage(driver);
 		defaultAdminPage = new DefaultPage(driver);
-		usersAdminPage = new UsersAdminPage(driver);
+		designersAdminPage = new DesignersAdminPage(driver);
 		defaultAdminPage.openLoginForm();
 		Assert.assertTrue(loginAdminPage.forgetPassLink.isDisplayed());
 		loginAdminPage.loginFun(ER.getExcelData(10, 2)[1][1], password);
 		System.out.println(homePageAdminPage.adminSideMenuListItems.get(0).getText());
 		Assert.assertTrue(homePageAdminPage.adminSideMenuListItems.get(0).isDisplayed());
 		homePageAdminPage.adminSideMenuListItems.get(2).click();
-		// String todayDate = "20200116";
 		Date date = new Date();
 		SimpleDateFormat today = new SimpleDateFormat("yyyyMMdd");
 		System.out.println(today.format(date));
 		String todayDate = today.format(date);
-		usersAdminPage.fromToDateFun(todayDate);
-		usersAdminPage.swapConfirmCheckBoxFun();
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", usersAdminPage.searchBtn);
-		Assert.assertTrue(usersAdminPage.pendingStatus.size() != 0);
+		designersAdminPage.fromToDateFunDes(todayDate);
+		designersAdminPage.swapConfirmCheckBoxFunDes();
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.searchBtnDes);
+		Assert.assertTrue(designersAdminPage.pendingStatusDes.size() != 0);
 		Actions hoverAction = new Actions(driver);
 		hoverAction.moveToElement(homePageAdminPage.adminMenu.get(1)).perform();
+		Thread.sleep(1000);
 		homePageAdminPage.logoutAdminFun();
 	}
 
-	@Test(priority = 1, alwaysRun = true)
+	@Test(priority = 2)
 	public void openHomePageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		// driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
@@ -100,81 +99,79 @@ public class UsersAdminTest extends TestBase {
 		loginAdminPage.loginFun(ER.getExcelData(10, 2)[1][1], password);
 		System.out.println(homePageAdminPage.adminSideMenuListItems.get(0).getText());
 		Assert.assertTrue(homePageAdminPage.adminSideMenuListItems.get(0).isDisplayed());
-		homePageAdminPage.adminSideMenuListItems.get(2).click();
+		homePageAdminPage.adminSideMenuListItems.get(3).click();
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 3)
 	public void Activate_Deactivate_Test() throws InterruptedException, AWTException {
-		usersAdminPage = new UsersAdminPage(driver);
-		int numOfActiveAcc = usersAdminPage.activateAccountBtn.size();
+		designersAdminPage = new DesignersAdminPage(driver);
+		int numOfActiveAcc = designersAdminPage.activateAccountBtnDes.size();
 		System.out.println(" Number of Activated accounts are: " + numOfActiveAcc);
-		int numOfDeactivatedAcc = usersAdminPage.deactivatedAccountBtn.size();
+		int numOfDeactivatedAcc = designersAdminPage.deactivatedAccountBtnDes.size();
 		System.out.println(" Number of notActivated accounts are: " + numOfDeactivatedAcc);
 		if (numOfActiveAcc > 0) {
-			usersAdminPage.deActivateAccountFun(0);
+			designersAdminPage.activateAccountFunDes(0);
 		} else {
-			usersAdminPage.activateAccountFun(0);
+			designersAdminPage.deActivateAccountFunDes(0);
 		}
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_F5);
 		robot.keyRelease(KeyEvent.VK_F5);
 
-		int numOfDeactiveAcc1 = usersAdminPage.activateAccountBtn.size();
+		int numOfDeactiveAcc1 = designersAdminPage.activateAccountBtnDes.size();
 		System.out.println(" Number of notActivated accounts are: " + numOfDeactiveAcc1);
 		if (numOfDeactiveAcc1 > 0) {
-			usersAdminPage.activateAccountFun(0);
+			designersAdminPage.deActivateAccountFunDes(0);
 		} else {
-			usersAdminPage.deActivateAccountFun(0);
+			designersAdminPage.activateAccountFunDes(0);
 		}
-		int numOfActivatedAcc1 = usersAdminPage.deactivatedAccountBtn.size();
+		int numOfActivatedAcc1 = designersAdminPage.deactivatedAccountBtnDes.size();
 		System.out.println(" Number of notActivated accounts are: " + numOfActivatedAcc1);
-		// Assert.assertEquals(usersAdminPage.pendingStatus.size(),
-		// usersAdminPage.activateAccountBtn.size());
-		Assert.assertEquals(usersAdminPage.activeStatus.size(), usersAdminPage.deactivatedAccountBtn.size());
-	}
-
-	@Test(priority = 3)
-	public void searchTest() throws InterruptedException {
-		usersAdminPage = new UsersAdminPage(driver);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", usersAdminPage.searchBtn);
-		Assert.assertTrue(usersAdminPage.pendingStatus.size() != 0);
+		Assert.assertEquals(designersAdminPage.activeStatusDes.size(),
+				designersAdminPage.deactivatedAccountBtnDes.size());
 	}
 
 	@Test(priority = 4)
-	public void searchActivatedTest() throws InterruptedException {
-		usersAdminPage = new UsersAdminPage(driver);
-		usersAdminPage.accountStatusFun(1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", usersAdminPage.searchBtn);
-		Assert.assertEquals(usersAdminPage.pendingStatus.size(), 0);
-		usersAdminPage.clearFun();
+	public void searchTest() throws InterruptedException {
+		designersAdminPage = new DesignersAdminPage(driver);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.searchBtnDes);
+		Assert.assertTrue(
+				designersAdminPage.pendingStatusDes.size() != 0 || designersAdminPage.activeStatusDes.size() != 0);
 	}
 
 	@Test(priority = 5)
-	public void searchPendingTest() throws InterruptedException {
-		usersAdminPage = new UsersAdminPage(driver);
-		usersAdminPage.accountStatusFun(2);
-		usersAdminPage.swapConfirmCheckBoxFun();
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", usersAdminPage.searchBtn);
-		Assert.assertEquals(usersAdminPage.activeStatus.size(), 0);
-		usersAdminPage.clearFun();
-		Thread.sleep(1000);
+	public void searchActivatedTest() throws InterruptedException {
+		designersAdminPage = new DesignersAdminPage(driver);
+		designersAdminPage.accountStatusFunDes(1);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.searchBtnDes);
+		Assert.assertEquals(designersAdminPage.pendingStatusDes.size(), 0);
+		designersAdminPage.clearFunDes();
 	}
 
 	@Test(priority = 6)
+	public void searchPendingTest() throws InterruptedException {
+		designersAdminPage = new DesignersAdminPage(driver);
+		designersAdminPage.accountStatusFunDes(2);
+		designersAdminPage.swapConfirmCheckBoxFunDes();
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.searchBtnDes);
+		Assert.assertEquals(designersAdminPage.activeStatusDes.size(), 0);
+		designersAdminPage.clearFunDes();
+	}
+
+	@Test(priority = 7)
 	public void searchDatesTest() throws InterruptedException, AWTException {
-		usersAdminPage = new UsersAdminPage(driver);
+		designersAdminPage = new DesignersAdminPage(driver);
 		Date date = new Date();
 		SimpleDateFormat today = new SimpleDateFormat("yyyyMMdd");
 		System.out.println(today.format(date));
 		String todayDate = today.format(date);
-		usersAdminPage.fromToDateFun(todayDate);
-		usersAdminPage.swapConfirmCheckBoxFun();
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", usersAdminPage.searchBtn);
-		Assert.assertTrue(usersAdminPage.pendingStatus.size() != 0);
-		usersAdminPage.clearFun();
+		designersAdminPage.fromToDateFunDes(todayDate);
+		designersAdminPage.swapConfirmCheckBoxFunDes();
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.searchBtnDes);
+		Assert.assertTrue(designersAdminPage.pendingStatusDes.size() != 0);
+		designersAdminPage.clearFunDes();
 		Actions hoverAction = new Actions(driver);
 		hoverAction.moveToElement(homePageAdminPage.adminMenu.get(1)).perform();
 		homePageAdminPage.logoutAdminFun();
 	}
-
 }
