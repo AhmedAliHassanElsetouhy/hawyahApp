@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -27,15 +28,22 @@ public class PageBase {
 		PageFactory.initElements(driver, this);
 	}
 
-//	protected static void moveToElement(WebElement elementToMoveTo) {
-//		Actions generateReportHoverAction = new Actions(driver);
-//		generateReportHoverAction.moveToElement(elementToMoveTo).perform();
-//	}
-//
-//	public void mouseHover(WebElement elementToHoverOn) {
-//		Actions hoverAction = new Actions(driver);
-//		hoverAction.moveToElement(elementToHoverOn).perform();
-//	}
+	// public void todayDate() {
+	// Date date = new Date();
+	// SimpleDateFormat today = new SimpleDateFormat("yyyyMMdd");
+	// System.out.println(today.format(date));
+	// String todayDate = today.format(date);
+	// }
+
+	// protected static void moveToElement(WebElement elementToMoveTo) {
+	// Actions generateReportHoverAction = new Actions(driver);
+	// generateReportHoverAction.moveToElement(elementToMoveTo).perform();
+	// }
+	//
+	// public void mouseHover(WebElement elementToHoverOn) {
+	// Actions hoverAction = new Actions(driver);
+	// hoverAction.moveToElement(elementToHoverOn).perform();
+	// }
 
 	protected static void clickNotClickableElement(WebElement notClickableElement) {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;

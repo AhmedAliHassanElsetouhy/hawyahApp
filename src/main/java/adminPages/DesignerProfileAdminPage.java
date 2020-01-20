@@ -38,10 +38,31 @@ public class DesignerProfileAdminPage extends PageBase {
 	WebElement addTxtBoxDes;
 
 	@FindBy(id = "designer_account_status")
-	WebElement statusListDes;
+	public WebElement statusListDes;
 
 	@FindBy(xpath = "//div[@class='flash_alert']")
 	public WebElement updateAlertSuccessMsgDes;
+
+	@FindBy(xpath = "//*[@href='#account_info']")
+	WebElement accountInfoTab;
+
+	public void openAccountInfoTabFun() {
+		clickButton(accountInfoTab);
+	}
+
+	@FindBy(xpath = "//*[@href='#contests']")
+	WebElement contestsInfoTab;
+
+	public void openContestsInfoTabFun() {
+		clickButton(contestsInfoTab);
+	}
+
+	@FindBy(xpath = "//*[@href='#transfers']")
+	WebElement transfersInfoTab;
+
+	public void openTransfersInfoTabFun() {
+		clickButton(transfersInfoTab);
+	}
 
 	public void submitFunDes() {
 		clickButton(submitBtnDes);
