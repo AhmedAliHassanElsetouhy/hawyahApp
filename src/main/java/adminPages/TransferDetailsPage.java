@@ -64,6 +64,7 @@ public class TransferDetailsPage extends PageBase {
 		setTextElementText(designerTransferFeesTxtBox, feesAmount);
 		selectItemWithIndex(designerTransferList, transferIndex);
 		setTextElementText(designerTransferDateTxtBox, transferDate);
+		designerTransferNotesTxtBox.clear();
 		setTextElementText(designerTransferNotesTxtBox, transferNotes);
 	}
 

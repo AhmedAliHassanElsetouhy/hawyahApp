@@ -45,6 +45,9 @@ public class TransfersAdminPage extends PageBase {
 	@FindBy(xpath="//*[@class='danger']")
 	public List<WebElement> notTransfersRecords;
 	
+	@FindBy(xpath="//*[@class='success']")
+	public List<WebElement> transferedRecords;
+	
 	public void clearSearchTransfersFun() {
 		clickButton(transferFilterClearBtn);
 	}

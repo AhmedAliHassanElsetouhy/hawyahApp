@@ -109,7 +109,7 @@ public class TransfersAdminTest extends TestBase {
 		homePageAdminPage = new HomePageAdminPage(driver);
 		transferDetailsPage = new TransferDetailsPage(driver);
 		homePageAdminPage.adminSideMenuListItems.get(5).click();
-		transfersAdminPage.notTransfersRecords.get(1).click();
+		transfersAdminPage.notTransfersRecords.get(0).click();
 		transferDetailsPage.changeStatusDetailsToTransferresFun(transferIndex);
 		// transferDetailsPage.submitTransferDetailsDataFun();
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();",
@@ -118,7 +118,7 @@ public class TransfersAdminTest extends TestBase {
 		homePageAdminPage.adminSideMenuListItems.get(5).click();
 		transfersAdminPage.completedTransfersFun();
 		transfersAdminPage.searchFilterTransfersFun();
-		System.out.println(transfersAdminPage.notTransfersRecords.get(0).getText());
-		Assert.assertTrue(transfersAdminPage.notTransfersRecords.get(0).getText().contains("Transferred"));
+		// System.out.println(transfersAdminPage.notTransfersRecords.get(0).getText());
+		Assert.assertTrue(transfersAdminPage.transferedRecords.size() != 0);
 	}
 }
