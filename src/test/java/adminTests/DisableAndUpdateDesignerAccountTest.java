@@ -106,6 +106,9 @@ public class DisableAndUpdateDesignerAccountTest extends TestBase {
 		// Thread.sleep(500);
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("designer_account_status")));
+		// WebDriverWait wait = new WebDriverWait(driver, 15);
+		// wait.until(ExpectedConditions.presenceOfElementLocated((By)
+		// designerProfileAdminPage.statusListDes));
 		designerProfileAdminPage.designerProfileStatus();
 	}
 

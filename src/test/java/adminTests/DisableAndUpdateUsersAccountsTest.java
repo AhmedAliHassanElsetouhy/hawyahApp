@@ -53,7 +53,7 @@ public class DisableAndUpdateUsersAccountsTest extends TestBase {
 	int customerStatusIndex = 2;
 
 	@Test(priority = 1, alwaysRun = true)
-	public void openHomePageTest() throws IOException {
+	public void openDesignersPageTest() throws IOException {
 		ExcelReader ER = new ExcelReader();
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
 		homePageAdminPage = new HomePageAdminPage(driver);
