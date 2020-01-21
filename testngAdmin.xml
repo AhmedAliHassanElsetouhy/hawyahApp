@@ -12,6 +12,8 @@
 			<class name="adminTests.DisableAndUpdateUsersAccountsTest" />
 			<class name="adminTests.DesignersAdminTest" />
 			<class name="adminTests.DisableAndUpdateDesignerAccountTest" />
+			<class name="adminTests.PaymentsAdminTest" />
+			<class name="adminTests.TransfersAdminTest" />
 		</classes>
 	</test>
 </suite> 

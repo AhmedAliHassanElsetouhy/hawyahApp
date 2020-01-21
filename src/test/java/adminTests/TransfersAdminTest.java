@@ -1,9 +1,14 @@
 package adminTests;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.github.javafaker.Faker;
 
 import adminPages.HomePageAdminPage;
 import adminPages.TransferDetailsPage;
@@ -24,6 +29,10 @@ public class TransfersAdminTest extends TestBase {
 	String password = "11111111";
 	String transferAmount = "1399";
 	TransferDetailsPage transferDetailsPage;
+	Faker fakeData = new Faker();
+	int feesAmount = 1000;
+	int transferIndex = 0;
+	String transferNotes = fakeData.name().title();
 
 	@Test(priority = 1, alwaysRun = true)
 	public void openPaymentsPageTest() throws IOException {
@@ -68,13 +77,48 @@ public class TransfersAdminTest extends TestBase {
 		transferDetailsPage = new TransferDetailsPage(driver);
 		homePageAdminPage.adminSideMenuListItems.get(5).click();
 		transfersAdminPage.notTransfersRecords.get(1).click();
-//		Assert.assertTrue(!transferDetailsPage.designerNameDisableBox.isEnabled());
-//		Assert.assertTrue(!transferDetailsPage.designerAmountDisableBox.isEnabled());
-//		Assert.assertTrue(!transferDetailsPage.designerAccountDisableBox.isEnabled());
-//		Assert.assertTrue(!transferDetailsPage.designerRequestCountDisableBox.isEnabled());
-//		Assert.assertTrue(!transferDetailsPage.designerLastRequestDateTransferDisableBox.isEnabled());
+		Assert.assertTrue(transferDetailsPage.designerNameDisableBox.isDisplayed());
+		Assert.assertTrue(transferDetailsPage.designerAmountDisableBox.isDisplayed());
+		Assert.assertTrue(transferDetailsPage.designerAccountDisableBox.isDisplayed());
+		Assert.assertTrue(transferDetailsPage.designerRequestCountDisableBox.isDisplayed());
 		Assert.assertTrue(transferDetailsPage.designerLastRequestDateTransferDisableBox.isDisplayed());
 		Assert.assertTrue(transferDetailsPage.designerTransferNotesBox.isEnabled());
 	}
 
+	@Test(priority = 5)
+	public void sendTransfersDetailsTest() {
+		transfersAdminPage = new TransfersAdminPage(driver);
+		homePageAdminPage = new HomePageAdminPage(driver);
+		transferDetailsPage = new TransferDetailsPage(driver);
+		homePageAdminPage.adminSideMenuListItems.get(5).click();
+		transfersAdminPage.notTransfersRecords.get(1).click();
+		Date date = new Date();
+		SimpleDateFormat today = new SimpleDateFormat("yyyyMMdd");
+		System.out.println(today.format(date));
+		String todayDate = today.format(date);
+		transferDetailsPage.adminSendTransferRequestFun(feesAmount, 1, todayDate, transferNotes);
+		// transferDetailsPage.submitTransferDetailsDataFun();
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();",
+				transferDetailsPage.submitTransferDetailsBtn);
+		Assert.assertTrue(transferDetailsPage.confirmDetailsTransferMsg.isDisplayed());
+	}
+
+	@Test(priority = 6)
+	public void makeTransfersTest() {
+		transfersAdminPage = new TransfersAdminPage(driver);
+		homePageAdminPage = new HomePageAdminPage(driver);
+		transferDetailsPage = new TransferDetailsPage(driver);
+		homePageAdminPage.adminSideMenuListItems.get(5).click();
+		transfersAdminPage.notTransfersRecords.get(1).click();
+		transferDetailsPage.changeStatusDetailsToTransferresFun(transferIndex);
+		// transferDetailsPage.submitTransferDetailsDataFun();
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();",
+				transferDetailsPage.submitTransferDetailsBtn);
+		Assert.assertTrue(transferDetailsPage.confirmDetailsTransferMsg.isDisplayed());
+		homePageAdminPage.adminSideMenuListItems.get(5).click();
+		transfersAdminPage.completedTransfersFun();
+		transfersAdminPage.searchFilterTransfersFun();
+		System.out.println(transfersAdminPage.notTransfersRecords.get(0).getText());
+		Assert.assertTrue(transfersAdminPage.notTransfersRecords.get(0).getText().contains("Transferred"));
+	}
 }
