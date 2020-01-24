@@ -1,0 +1,158 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- <suite name="Regression Suite" verbose="2" thread-count="2" parallel="tests"> -->
+<suite name="Regression Suite" verbose="100" thread-count="3"
+	parallel="tests">
+	<test name="TestOnFirefox">
+		<parameter name="browser" value="firefox" />
+		<classes>
+			<!-- Client tests -->
+			<!-- <class name="clientTests.BasicIdentityClientTest" /> Not finished 
+				because of payment list not open -->
+			<class name="clientTests.LoginClientTest" />
+			<class name="clientTests.RegistrationClientTest" />
+			<class name="clientTests.RequestDesignAndSearchClientTest" />
+			<class name="clientTests.ForgetPasswordClientTest" />
+			<class name="clientTests.UpdateLoginDataClientTest" />
+			<class name="clientTests.UpdatePersonalDataClientTest" />
+			<class
+				name="clientTests.CompetitionsStatusListClientProfileTest" />
+			<class name="clientTests.PaymentsStatusListProfileClientTest" />
+			<class name="clientTests.FinishedCompetitionsDetailsClientTest" />
+			<class
+				name="clientTests.DeliverFinalWorkCompetitionsDetailsClientTest" />
+			<class
+				name="clientTests.MoveToRecieveDesignsCompetitionsClientTest" />
+			<class
+				name="clientTests.WaitingForTrasfersCompetitionsClientTest" />
+			<class name="clientTests.NotCompletedCompetitionsClientTest" />
+			<class name="clientTests.MyPageClientTest" />
+			<class name="clientTests.MessagesClientTest" />
+			<class name="clientTests.CommentsClientTest" />
+			<class name="clientTests.CompetitionDesignsClientTest" />
+			<class name="clientTests.CompetitionDetailsClientTest" />
+			<class name="clientTests.CompetitionsClientTest" />
+			<class name="clientTests.AddMessageClientTest" />
+			<class name="clientTests.DeleteMsgClientTest" />
+			<class name="clientTests.DeleteAllMsgsListClientTest" />
+			<class name="clientTests.RestoreMsgsClientTest" />
+
+			<!-- Designer tests -->
+			<!--<class name="designerTests.MyWorkDesignerTest"/> Not completed because 
+				of menu of design type open twice -->
+			<!-- <class name="designerTests.RequestDesignAndSearchDesignerTest"/> 
+				Not completed waiting because of list not selected -->
+			<class name="designerTests.LoginDesignerTest" />
+			<class name="designerTests.RegistrationDesignerTest" />
+			<class name="designerTests.UpdateLoginDataDesignerTest" />
+			<class name="designerTests.UpdatePersonalDataDesignerTest" />
+			<class name="designerTests.UpdateBankAccountDataDesignerTest" />
+			<class name="designerTests.MyStatsDesignerTest" />
+			<class name="designerTests.BankAccountsDesignerTest" />
+			<class name="designerTests.TransfersRequestsDesignerTest" />
+			<class name="designerTests.ForgetPasswordDesignerTest" />
+			<class name="designerTests.CompetitionDesignsDesignerTest" />
+			<class name="designerTests.CompetitionDetailsDesignerTest" />
+			<class name="designerTests.ContactUsDesignerTest" />
+			<class name="designerTests.ContractDesignerTest" />
+			<class
+				name="designerTests.FinishedCompetitionsDetailsDesignerTest" />
+			<class
+				name="designerTests.DeliverFinalWorkCompetitionsDetailsDesignerTest" />
+			<class
+				name="designerTests.UploadDesignForRecieveDesignsCompetitionsDesignerTest" />
+			<class name="designerTests.AddCommentsDesignerTest" />
+			<class name="designerTests.AddMessageDesignerTest" />
+			<class name="designerTests.DeleteMsgDesignerTest" />
+			<class name="designerTests.DeleteAllMsgsListDesignerTest" />
+			<class name="designerTests.RestoreMsgsDesignerTest" />
+
+			<!-- Admin tests -->
+			<class name="adminTests.LoginAdminTest" />
+			<class name="adminTests.ContestsAdminTest" />
+			<class name="adminTests.UsersAdminTest" />
+			<!--<class name="adminTests.SearchAdminTest" /> -->
+			<class name="adminTests.DisableAndUpdateUsersAccountsTest" />
+			<class name="adminTests.DesignersAdminTest" />
+			<class name="adminTests.DisableAndUpdateDesignerAccountTest" />
+			<class name="adminTests.PaymentsAdminTest" />
+			<class name="adminTests.TransfersAdminTest" />
+		</classes>
+	</test>
+
+	<test name="TestOnChrome">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<!-- Client tests -->
+			<!-- <class name="clientTests.BasicIdentityClientTest" /> Not finished 
+				because of payment list not open -->
+			<class name="clientTests.LoginClientTest" />
+			<class name="clientTests.RegistrationClientTest" />
+			<class name="clientTests.RequestDesignAndSearchClientTest" />
+			<class name="clientTests.ForgetPasswordClientTest" />
+			<class name="clientTests.UpdateLoginDataClientTest" />
+			<class name="clientTests.UpdatePersonalDataClientTest" />
+			<class
+				name="clientTests.CompetitionsStatusListClientProfileTest" />
+			<class name="clientTests.PaymentsStatusListProfileClientTest" />
+			<class name="clientTests.FinishedCompetitionsDetailsClientTest" />
+			<class
+				name="clientTests.DeliverFinalWorkCompetitionsDetailsClientTest" />
+			<class
+				name="clientTests.MoveToRecieveDesignsCompetitionsClientTest" />
+			<class
+				name="clientTests.WaitingForTrasfersCompetitionsClientTest" />
+			<class name="clientTests.NotCompletedCompetitionsClientTest" />
+			<class name="clientTests.MyPageClientTest" />
+			<class name="clientTests.MessagesClientTest" />
+			<class name="clientTests.CommentsClientTest" />
+			<class name="clientTests.CompetitionDesignsClientTest" />
+			<class name="clientTests.CompetitionDetailsClientTest" />
+			<class name="clientTests.CompetitionsClientTest" />
+			<class name="clientTests.AddMessageClientTest" />
+			<class name="clientTests.DeleteMsgClientTest" />
+			<class name="clientTests.DeleteAllMsgsListClientTest" />
+			<class name="clientTests.RestoreMsgsClientTest" />
+
+			<!-- Designer tests -->
+			<!--<class name="designerTests.MyWorkDesignerTest"/> Not completed because 
+				of menu of design type open twice -->
+			<!-- <class name="designerTests.RequestDesignAndSearchDesignerTest"/> 
+				Not completed waiting because of list not selected -->
+			<class name="designerTests.LoginDesignerTest" />
+			<class name="designerTests.RegistrationDesignerTest" />
+			<class name="designerTests.UpdateLoginDataDesignerTest" />
+			<class name="designerTests.UpdatePersonalDataDesignerTest" />
+			<class name="designerTests.UpdateBankAccountDataDesignerTest" />
+			<class name="designerTests.MyStatsDesignerTest" />
+			<class name="designerTests.BankAccountsDesignerTest" />
+			<class name="designerTests.TransfersRequestsDesignerTest" />
+			<class name="designerTests.ForgetPasswordDesignerTest" />
+			<class name="designerTests.CompetitionDesignsDesignerTest" />
+			<class name="designerTests.CompetitionDetailsDesignerTest" />
+			<class name="designerTests.ContactUsDesignerTest" />
+			<class name="designerTests.ContractDesignerTest" />
+			<class
+				name="designerTests.FinishedCompetitionsDetailsDesignerTest" />
+			<class
+				name="designerTests.DeliverFinalWorkCompetitionsDetailsDesignerTest" />
+			<class
+				name="designerTests.UploadDesignForRecieveDesignsCompetitionsDesignerTest" />
+			<class name="designerTests.AddCommentsDesignerTest" />
+			<class name="designerTests.AddMessageDesignerTest" />
+			<class name="designerTests.DeleteMsgDesignerTest" />
+			<class name="designerTests.DeleteAllMsgsListDesignerTest" />
+			<class name="designerTests.RestoreMsgsDesignerTest" />
+
+			<!-- Admin tests -->
+			<class name="adminTests.LoginAdminTest" />
+			<class name="adminTests.ContestsAdminTest" />
+			<class name="adminTests.UsersAdminTest" />
+			<!--<class name="adminTests.SearchAdminTest" /> -->
+			<class name="adminTests.DisableAndUpdateUsersAccountsTest" />
+			<class name="adminTests.DesignersAdminTest" />
+			<class name="adminTests.DisableAndUpdateDesignerAccountTest" />
+			<class name="adminTests.PaymentsAdminTest" />
+			<class name="adminTests.TransfersAdminTest" />
+		</classes>
+	</test>
+</suite> 

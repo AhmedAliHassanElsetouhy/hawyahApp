@@ -34,36 +34,6 @@
 			<class name="clientTests.DeleteMsgClientTest" />
 			<class name="clientTests.DeleteAllMsgsListClientTest" />
 			<class name="clientTests.RestoreMsgsClientTest" />
-
-			<!-- Designer tests -->
-			<!--<class name="designerTests.MyWorkDesignerTest"/> Not completed because 
-				of menu of design type open twice -->
-			<!-- <class name="designerTests.RequestDesignAndSearchDesignerTest"/> 
-				Not completed waiting because of list not selected -->
-			<class name="designerTests.LoginDesignerTest" />
-			<class name="designerTests.RegistrationDesignerTest" />
-			<class name="designerTests.UpdateLoginDataDesignerTest" />
-			<class name="designerTests.UpdatePersonalDataDesignerTest" />
-			<class name="designerTests.UpdateBankAccountDataDesignerTest" />
-			<class name="designerTests.MyStatsDesignerTest" />
-			<class name="designerTests.BankAccountsDesignerTest" />
-			<class name="designerTests.TransfersRequestsDesignerTest" />
-			<class name="designerTests.ForgetPasswordDesignerTest" />
-			<class name="designerTests.CompetitionDesignsDesignerTest" />
-			<class name="designerTests.CompetitionDetailsDesignerTest" />
-			<class name="designerTests.ContactUsDesignerTest" />
-			<class name="designerTests.ContractDesignerTest" />
-			<class
-				name="designerTests.FinishedCompetitionsDetailsDesignerTest" />
-			<class
-				name="designerTests.DeliverFinalWorkCompetitionsDetailsDesignerTest" />
-			<class
-				name="designerTests.UploadDesignForRecieveDesignsCompetitionsDesignerTest" />
-			<class name="designerTests.AddCommentsDesignerTest" />
-			<class name="designerTests.AddMessageDesignerTest" />
-			<class name="designerTests.DeleteMsgDesignerTest" />
-			<class name="designerTests.DeleteAllMsgsListDesignerTest" />
-			<class name="designerTests.RestoreMsgsDesignerTest" />
 		</classes>
 	</test>
 
