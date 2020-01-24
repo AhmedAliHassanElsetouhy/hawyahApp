@@ -52,7 +52,7 @@ public class TransfersAdminPage extends PageBase {
 		clickButton(transferFilterClearBtn);
 	}
 
-	public void completedTransfersFun() {
+	public void swapTransferAndNotTransferCheckBoxFun() {
 		clickButton(transferFilterSwapTransferingCheckBox);
 	}
 	

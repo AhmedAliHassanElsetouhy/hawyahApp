@@ -108,9 +108,9 @@ public class TestBase {
 
 	@AfterMethod
 	public void sleepMinute() throws InterruptedException {
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 	}
-	
+
 	@AfterClass
 	public void quitBrowserAfterClass() {
 		// driver.quit();

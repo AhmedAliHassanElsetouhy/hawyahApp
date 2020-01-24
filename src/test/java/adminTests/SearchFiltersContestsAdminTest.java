@@ -1,8 +1,8 @@
 package adminTests;
 
+import java.awt.AWTException;
 import java.io.IOException;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -16,7 +16,7 @@ import clientPages.LoginPage;
 import clientTests.TestBase;
 import data.ExcelReader;
 
-public class ContestsAdminTest extends TestBase {
+public class SearchFiltersContestsAdminTest extends TestBase {
 
 	HomePageAdminPage homePageAdminPage;
 	DefaultPage defaultAdminPage;
@@ -119,73 +119,16 @@ public class ContestsAdminTest extends TestBase {
 		contestsAdminPage.searchFun(contestTitle, designTypeItem, packageTypeItem, price, customerItem, statusItem,
 				launchedDate, endedDate, fromCreatedDate, toCreatedDate);
 		Assert.assertTrue(contestsAdminPage.recordsBody.getText().isEmpty());
-		
 		contestsAdminPage.clearFun();
 	}
 
 	@Test(priority = 10)
-	public void Phase1StatusTest() throws InterruptedException {
-		contestsAdminPage = new ContestsAdminPage(driver);
-		contestsAdminPage.phase1Status.get(0).click();
-		System.out.println(contestTitle + " " + orgName + " " + orgDesc + " " + conDesc + " " + addInfo);
-		contestsAdminPage.contestDetailsFormFun(contestTitle, orgName, orgDesc, conDesc, addInfo);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.submitBtn);
-		Assert.assertTrue(contestsAdminPage.openContestFormSuccessMsg.isDisplayed());
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.paymentsTab);
-		Assert.assertTrue(contestsAdminPage.paymentStatus.isDisplayed());
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.designsTab);
-		Thread.sleep(2000);
-		contestsAdminPage.openCancelContestFun();
-		contestsAdminPage.cancelContestFun(cancelationReason);
-		contestsAdminPage.cancelFun();
+	public void makeLogoutTest() throws AWTException {
+		homePageAdminPage = new HomePageAdminPage(driver);
+		defaultAdminPage = new DefaultPage(driver);
+		hoverAction = new Actions(driver);
+		hoverAction.moveToElement(homePageAdminPage.userAdminMenu).perform();
+		homePageAdminPage.logoutAdminFun();
+		Assert.assertTrue(defaultAdminPage.loginLink.isDisplayed());
 	}
-
-	@Test(priority = 11)
-	public void cancelContestTest() {
-		contestsAdminPage = new ContestsAdminPage(driver);
-		contestsAdminPage.CancelledByAdminStatus.get(0).click();
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.paymentsTab);
-		Assert.assertTrue(contestsAdminPage.paymentStatus.isDisplayed());
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.designsTab);
-		contestsAdminPage.cancelFun();
-		Assert.assertTrue(contestsAdminPage.CancelledByAdminStatus.get(0).isDisplayed());
-	}
-
-	@Test(priority = 12)
-	public void waitingForDepositTest() {
-		contestsAdminPage = new ContestsAdminPage(driver);
-		contestsAdminPage.waitingDepositStatus.get(0).click();
-		contestsAdminPage.contestDetailsFormFun(contestTitle, orgName, orgDesc, conDesc, addInfo);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.designsTab);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.paymentsTab);
-		// System.out.println(contestsAdminPage.paymentFormView.get(0).getText());
-		Assert.assertTrue(contestsAdminPage.paymentFormView.get(0).getText().contains("Pending"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.cancelBtn);
-	}
-
-	@Test(priority = 13)
-	public void deliverFinalWorkTest() {
-		contestsAdminPage = new ContestsAdminPage(driver);
-		contestsAdminPage.deliverFinalWorkStatus.get(0).click();
-		Assert.assertTrue(contestsAdminPage.contestStatusList.getText().contains("Signoff"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.cancelBtn);
-	}
-
-	@Test(priority = 14)
-	public void completedStatusTest() {
-		contestsAdminPage = new ContestsAdminPage(driver);
-		contestsAdminPage.completedStatus.get(0).click();
-		Assert.assertTrue(contestsAdminPage.contestStatusList.getText().contains("Completed"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.cancelBtn);
-	}
-
-	// @Test(priority = 15)
-	// public void makeLogoutTest() {
-	// homePageAdminPage = new HomePageAdminPage(driver);
-	// defaultAdminPage = new DefaultPage(driver);
-	// hoverAction = new Actions(driver);
-	// hoverAction.moveToElement(homePageAdminPage.userAdminMenu).perform();
-	// homePageAdminPage.logoutAdminFun();
-	// Assert.assertTrue(defaultAdminPage.loginLink.isDisplayed());
-	// }
 }

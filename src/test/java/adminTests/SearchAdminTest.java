@@ -1,8 +1,10 @@
 package adminTests;
 
+import java.awt.AWTException;
 import java.io.IOException;
 
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -51,12 +53,16 @@ public class SearchAdminTest extends TestBase {
 	}
 
 	@Test(priority = 3)
-	public void searchTest() throws IOException {
+	public void searchTest() throws IOException, AWTException {
 		homePageAdminPage = new HomePageAdminPage(driver);
 		homePageAdminPage.searchTxtBox.clear();
 		homePageAdminPage.searchTxtBoxFun(searchText);
 		homePageAdminPage.searchTxtBox.sendKeys(Keys.ENTER);
 		Assert.assertTrue(homePageAdminPage.searchResultCntainer.getText().contains(searchText));
+		
+		Actions hoverAction = new Actions(driver);
+		hoverAction.moveToElement(homePageAdminPage.adminMenu.get(1)).perform();
+		homePageAdminPage.logoutAdminFun();
 	}
 
 }

@@ -37,7 +37,7 @@ public class DesignersAdminPage extends PageBase {
 	WebElement createdToDateTxtBoxDes;
 
 	@FindBy(xpath = "//input[@value='search']")
-	public WebElement searchBtnDes;
+	public WebElement designerFilterSearchBtnDes;
 
 	@FindBy(xpath = "//a[@href='https://hawyah-dev.herokuapp.com/admin/designers?locale=en']")
 	WebElement clearBtnDes;
@@ -66,7 +66,7 @@ public class DesignersAdminPage extends PageBase {
 	public List<WebElement> deactivatedAccountBtnDes;
 
 	@FindBy(id = "q_confirmed_true")
-	WebElement confirmFCheckBoxDes;
+	public WebElement confirmFCheckBoxDes;
 
 	public void swapConfirmCheckBoxFunDes() {
 		clickButton(confirmFCheckBoxDes);
@@ -80,13 +80,16 @@ public class DesignersAdminPage extends PageBase {
 		selectSpecificIcon(deactivatedAccountBtnDes, deactivatedIndex);
 	}
 
-	public void searchFunDes() {
-		clickButton(searchBtnDes);
+	public void searchFilterFunDes() {
+		clickButton(designerFilterSearchBtnDes);
 	}
 
-	public void clearFunDes() {
+	public void clearFilterFunDes() {
 		clickButton(clearBtnDes);
 	}
+
+	@FindBy(id = "designer_account_status")
+	WebElement designerAccountFormStatusListDes;
 
 	public void searchUserFunDes(String fName, String lName, String displayName, String email, int statusIndex,
 			String fromdDate, String toDate) {
@@ -94,7 +97,7 @@ public class DesignersAdminPage extends PageBase {
 		setTextElementText(lastNameTxtBoxDes, lName);
 		setTextElementText(displayNameTxtBoxDes, displayName);
 		setTextElementText(emailTxtBoxDes, email);
-		selectItemWithIndex(accountStatusListDes, statusIndex);
+		selectItemWithIndex(designerAccountFormStatusListDes, statusIndex);
 		setTextElementText(createdFromDateTxtBoxDes, fromdDate);
 		setTextElementText(createdToDateTxtBoxDes, toDate);
 	}

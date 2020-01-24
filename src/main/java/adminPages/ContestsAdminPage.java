@@ -49,7 +49,7 @@ public class ContestsAdminPage extends PageBase {
 	WebElement clearBtn;
 
 	@FindBy(xpath = "//*[@type='submit']")
-	WebElement searchBtn;
+	WebElement searchContestsFilterBtn;
 
 	@FindBy(xpath = "//*[text()='Logo & brand identity pack']")
 	public WebElement logoAndBrand;
@@ -63,23 +63,29 @@ public class ContestsAdminPage extends PageBase {
 	@FindBy(xpath = "//div[@class='text-center']")
 	public WebElement recordsBody;
 
-	@FindBy(xpath = "//span[@class='label label-sm label-default']//span[@class='translation_missing']")
+	// @FindBy(xpath = "//*[@title='translation missing: en.phase_1']")
 	// @FindBy(xpath = "//*[text()='Phase 1']")
+	// @FindBy(xpath = "//td")
+	@FindBy(xpath = "//span[@class='label label-sm label-default']")
 	public List<WebElement> phase1Status;
 
-	// @FindBy(xpath = "//span[@class='label label-sm label-warning']")
-	@FindBy(xpath = "//*[text()=' Waiting for deposit payment ']")
+	// @FindBy(xpath = "//*[text()=' Waiting for deposit payment ']")
+	// @FindBy(xpath = "//td")
+	@FindBy(xpath = "//span[@class='label label-sm label-warning']")
 	public List<WebElement> waitingDepositStatus;
 
-	@FindBy(xpath = "//*[text()=' مرحلة تسليم العمل النهائي ']")
-	// @FindBy(xpath = "//span[@class='label label-sm label-default']")
+	// @FindBy(xpath = "//*[text()=' مرحلة تسليم العمل النهائي ']")
+	// @FindBy(xpath = "//td")
+	@FindBy(xpath = "//span[@class='label label-sm label-default']")
 	public List<WebElement> deliverFinalWorkStatus;
 
-	@FindBy(xpath = "//span[@class='label label-sm label-Info']")
+	// @FindBy(xpath = "//span[@class='label label-sm label-Info']")
+	@FindBy(xpath = "//td")
 	public List<WebElement> completedStatus;
 
-	// @FindBy(xpath="//span[@class='label label-sm label-default']")
-	@FindBy(xpath = "//*[text()=' Cancelled by admin ']")
+	// @FindBy(xpath = "//*[text()=' Cancelled by admin ']")
+	// @FindBy(xpath = "//td")
+	@FindBy(xpath = "//span[@class='label label-sm label-default']")
 	public List<WebElement> CancelledByAdminStatus;
 
 	@FindBy(xpath = "//div[@class='flash_alert']")
@@ -141,9 +147,6 @@ public class ContestsAdminPage extends PageBase {
 	@FindBy(xpath = "//img[@alt='Cancel icon']")
 	public WebElement cancelContestIcon;
 
-	// @FindBy(xpath = "//*[@title='Cancel']")
-	// public WebElement cancelContestIcon1;
-
 	@FindBy(id = "contest_cancel_reason")
 	WebElement cancelReasonTxtBox;
 
@@ -184,13 +187,11 @@ public class ContestsAdminPage extends PageBase {
 	}
 
 	public void submitSearchFun() {
-		clickButton(searchBtn);
+		clickButton(searchContestsFilterBtn);
 	}
 
 	public void clearFun() {
 		clickButton(clearBtn);
-		// ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-		// jsClickBtn);
 	}
 
 	public void contestFun(String contestTitle) {
@@ -261,14 +262,15 @@ public class ContestsAdminPage extends PageBase {
 	public void contestDetailsFormFun(String contestTitle, String orgName, String orgDesc, String conDesc,
 			String addInfo) {
 		detailsContestTitleTxtBox.clear();
-		setTextElementText(detailsContestTitleTxtBox, contestTitle);
 		detailsContestOrganizationNameTxtBox.clear();
-		setTextElementText(detailsContestOrganizationNameTxtBox, orgName);
 		detailsOrgDescTxtBox.clear();
-		setTextElementText(detailsOrgDescTxtBox, orgDesc);
 		detailsContestDescTxtBox.clear();
-		setTextElementText(detailsContestDescTxtBox, conDesc);
 		detailsContestAddInfoTxtBox.clear();
+
+		setTextElementText(detailsContestTitleTxtBox, contestTitle);
+		setTextElementText(detailsContestOrganizationNameTxtBox, orgName);
+		setTextElementText(detailsOrgDescTxtBox, orgDesc);
+		setTextElementText(detailsContestDescTxtBox, conDesc);
 		setTextElementText(detailsContestAddInfoTxtBox, addInfo);
 	}
 

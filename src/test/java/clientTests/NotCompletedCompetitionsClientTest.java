@@ -43,7 +43,7 @@ public class NotCompletedCompetitionsClientTest extends TestBase {
 	JavascriptExecutor jse;
 	CompetitionsClientPage competitionsClientPage;
 	CompetitionsDetailsClientPage competitionsDetailsClientPage;
-	int compititionItem = 1;
+	int compititionItem = 0;
 
 	@Test(priority = 1)
 	public void openHomePageTest() throws IOException {
@@ -55,7 +55,8 @@ public class NotCompletedCompetitionsClientTest extends TestBase {
 		Assert.assertTrue(loginClientPage.forgetPassLink.isDisplayed());
 	}
 
-	@Test(priority = 2, dependsOnMethods = { "openHomePageTest" })
+	@Test(priority = 2)
+	// @Test(priority = 2, dependsOnMethods = { "openHomePageTest" })
 	public void loginFun() throws IOException {
 		loginClientPage = new LoginPage(driver);
 		defaultClientPage = new DefaultPage(driver);
@@ -66,7 +67,8 @@ public class NotCompletedCompetitionsClientTest extends TestBase {
 		Assert.assertTrue(homeClientPage.loginConfirmMsgCli.getText().contains("تم تسجيل الدخول بنجاح"));
 	}
 
-	@Test(priority = 3, dependsOnMethods = { "loginFun" })
+	@Test(priority = 3)
+	// @Test(priority = 3, dependsOnMethods = { "loginFun" })
 	public void openRequestDesignsTest() {
 		defaultClientPage = new DefaultPage(driver);
 		requestDesignAndSearchClientPage = new RequestDesignAndSearchClientPage(driver);
@@ -76,7 +78,8 @@ public class NotCompletedCompetitionsClientTest extends TestBase {
 		Assert.assertTrue(designsClientPage.basicIdentityLinkCli.isDisplayed());
 	}
 
-	@Test(priority = 4, dependsOnMethods = { "openRequestDesignsTest" })
+	@Test(priority = 4)
+	// @Test(priority = 4, dependsOnMethods = { "openRequestDesignsTest" })
 	public void openDesignTest() {
 		designsClientPage = new DesignsClientPage(driver);
 		selectDesignsClientPage = new SelectDesignsClientPage(driver);
@@ -84,7 +87,8 @@ public class NotCompletedCompetitionsClientTest extends TestBase {
 		Assert.assertTrue(selectDesignsClientPage.designPageHeaderTxtCli.isDisplayed());
 	}
 
-	@Test(priority = 5, dependsOnMethods = { "openDesignTest" })
+	@Test(priority = 5)
+	// @Test(priority = 5, dependsOnMethods = { "openDesignTest" })
 	public void selectDesignsTest() {
 		designsClientPage = new DesignsClientPage(driver);
 		selectDesignsClientPage = new SelectDesignsClientPage(driver);
@@ -93,7 +97,8 @@ public class NotCompletedCompetitionsClientTest extends TestBase {
 		Assert.assertTrue(selectColorsClientPage.colorPageHeaderTxtCli.isDisplayed());
 	}
 
-	@Test(priority = 6, dependsOnMethods = { "selectDesignsTest" })
+	@Test(priority = 6)
+	// @Test(priority = 6, dependsOnMethods = { "selectDesignsTest" })
 	public void selectColorsTest() {
 		designsClientPage = new DesignsClientPage(driver);
 		selectDesignsClientPage = new SelectDesignsClientPage(driver);
@@ -104,7 +109,8 @@ public class NotCompletedCompetitionsClientTest extends TestBase {
 		Assert.assertTrue(moreDetailsClientPage.moreDetailsPageHeaderTextCli.isDisplayed());
 	}
 
-	@Test(priority = 7, dependsOnMethods = { "selectColorsTest" })
+	@Test(priority = 7)
+	// @Test(priority = 7, dependsOnMethods = { "selectColorsTest" })
 	public void emptyMoreDetailsTest() {
 		selectDesignsClientPage = new SelectDesignsClientPage(driver);
 		moreDetailsClientPage = new MoreDetailsClientPage(driver);
@@ -112,19 +118,21 @@ public class NotCompletedCompetitionsClientTest extends TestBase {
 		Assert.assertTrue(moreDetailsClientPage.activityClassificationValidationMsgCli.isDisplayed());
 	}
 
-	@Test(priority = 8, dependsOnMethods = { "emptyMoreDetailsTest" })
+	@Test(priority = 8)
+	// @Test(priority = 8, dependsOnMethods = { "emptyMoreDetailsTest" })
 	public void ValidMoreDetailsTest() throws InterruptedException, AWTException, IOException {
 		selectDesignsClientPage = new SelectDesignsClientPage(driver);
 		moreDetailsClientPage = new MoreDetailsClientPage(driver);
 		paymentClientPage = new PaymentClientPage(driver);
 		ExcelReader ER = new ExcelReader();
-		moreDetailsClientPage.moreDetailsFun(activityNameCli, activityDescCli, ER.getExcelData(2, 2)[1][1], contestCli, additionalInfoCli,
-				ER.getExcelData(2, 2)[0][1], titleCli);
+		moreDetailsClientPage.moreDetailsFun(activityNameCli, activityDescCli, ER.getExcelData(2, 2)[1][1], contestCli,
+				additionalInfoCli, ER.getExcelData(2, 2)[0][1], titleCli);
 		selectDesignsClientPage.nextFun();
 		Assert.assertTrue(paymentClientPage.paymentPageHeaderCli.isDisplayed());
 	}
 
-	@Test(priority = 9, dependsOnMethods = { "ValidMoreDetailsTest" })
+	@Test(priority = 9)
+	// @Test(priority = 9, dependsOnMethods = { "ValidMoreDetailsTest" })
 	public void openCompetitionsTest() {
 		homeClientPage = new HomeClientPage(driver);
 		competitionsClientPage = new CompetitionsClientPage(driver);
@@ -132,7 +140,8 @@ public class NotCompletedCompetitionsClientTest extends TestBase {
 		Assert.assertTrue(competitionsClientPage.competitionsCli.isDisplayed());
 	}
 
-	@Test(priority = 10, dependsOnMethods = { "openCompetitionsTest" })
+	@Test(priority = 10)
+	// @Test(priority = 10, dependsOnMethods = { "openCompetitionsTest" })
 	public void deliverFinalWorkCompetitionTest() {
 		competitionsClientPage = new CompetitionsClientPage(driver);
 		competitionsDetailsClientPage = new CompetitionsDetailsClientPage(driver);
@@ -142,7 +151,9 @@ public class NotCompletedCompetitionsClientTest extends TestBase {
 		competitionsDetailsClientPage.openCompleteDataFun();
 	}
 
-	@Test(priority = 11, dependsOnMethods = { "deliverFinalWorkCompetitionTest" })
+	@Test(priority = 11)
+	// @Test(priority = 11, dependsOnMethods = { "deliverFinalWorkCompetitionTest"
+	// })
 	public void makeLogoutTest() throws AWTException {
 		homeClientPage = new HomeClientPage(driver);
 		defaultClientPage = new DefaultPage(driver);

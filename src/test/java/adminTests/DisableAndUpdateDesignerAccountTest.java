@@ -1,15 +1,10 @@
 package adminTests;
 
 import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -69,7 +64,7 @@ public class DisableAndUpdateDesignerAccountTest extends TestBase {
 		loginAdminPage.loginFun(ER.getExcelData(10, 2)[1][1], password);
 		System.out.println(homePageAdminPage.adminSideMenuListItems.get(0).getText());
 		Assert.assertTrue(homePageAdminPage.adminSideMenuListItems.get(0).isDisplayed());
-		homePageAdminPage.adminSideMenuListItems.get(3).click();
+		// homePageAdminPage.adminSideMenuListItems.get(3).click();
 		// Thread.sleep(500);
 	}
 
@@ -78,78 +73,150 @@ public class DisableAndUpdateDesignerAccountTest extends TestBase {
 		designersAdminPage = new DesignersAdminPage(driver);
 		designerProfileAdminPage = new DesignerProfileAdminPage(driver);
 		homePageAdminPage = new HomePageAdminPage(driver);
-		int numOfPendingAcc = designersAdminPage.activateAccountBtnDes.size();
-		System.out.println(" Number of Activated accounts are: " + numOfPendingAcc);
-		int numOfActivateAcc = designersAdminPage.deactivatedAccountBtnDes.size();
-		System.out.println(" Number of notActivated accounts are: " + numOfActivateAcc);
-		if (numOfPendingAcc > 1) {
+		int activateAccountBtnNum = designersAdminPage.activateAccountBtnDes.size();
+		System.out.println(" Number of Activated accounts are: " + activateAccountBtnNum);
+		int deactivatedAccountBtnNum = designersAdminPage.deactivatedAccountBtnDes.size();
+		System.out.println(" Number of notActivated accounts are: " + deactivatedAccountBtnNum);
+		if (designersAdminPage.activateAccountBtnDes.size() > 1) {
 			designersAdminPage.activateAccountFunDes(0);
-		} else {
-			designersAdminPage.deActivateAccountFunDes(0);
+			System.out.println("activateAccountBtnDes" + designersAdminPage.activateAccountBtnDes.size());
+			designersAdminPage.openActiveStatusFunDes(0);
+			designerProfileAdminPage.designerProfileStatus();
+			if (designersAdminPage.deactivatedAccountBtnDes.size() > 0) {
+				designersAdminPage.deActivateAccountFunDes(0);
+				System.out.println("deActivateAccountFunDes" + designersAdminPage.deactivatedAccountBtnDes.size());
+				designersAdminPage.openPendingStatusFunDes(0);
+				designerProfileAdminPage.designerProfileStatus();
+			}
 		}
-		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_F5);
-		robot.keyRelease(KeyEvent.VK_F5);
-
-		int numOfPendingAcc1 = designersAdminPage.activateAccountBtnDes.size();
-		System.out.println(" Number of notActivated accounts are: " + numOfPendingAcc1);
-		if (numOfPendingAcc1 > 0) {
-			designersAdminPage.deActivateAccountFunDes(0);
-		} else {
-			designersAdminPage.activateAccountFunDes(0);
-		}
-		int numOfActivateAcc1 = designersAdminPage.deactivatedAccountBtnDes.size();
-		System.out.println(" Number of Activated accounts are: " + numOfActivateAcc1);
-		Assert.assertEquals(designersAdminPage.activeStatusDes.size(),
-				designersAdminPage.deactivatedAccountBtnDes.size());
-		designersAdminPage.openActiveStatusFunDes(0);
-		// Thread.sleep(500);
-		WebDriverWait wait = new WebDriverWait(driver, 30);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("designer_account_status")));
-		// WebDriverWait wait = new WebDriverWait(driver, 15);
-		// wait.until(ExpectedConditions.presenceOfElementLocated((By)
-		// designerProfileAdminPage.statusListDes));
-		designerProfileAdminPage.designerProfileStatus();
+		homePageAdminPage.adminSideMenuListItems.get(3).click();
+		System.out.println("activateAccountBtnDes" + designersAdminPage.activateAccountBtnDes.size());
+		System.out.println("deActivateAccountFunDes" + designersAdminPage.deactivatedAccountBtnDes.size());
 	}
 
-	@Test(priority = 3, dependsOnMethods = { "DisableTest" })
-	public void UpdateProfileDataTest() throws InterruptedException, AWTException {
+	@Test(priority = 3)
+	public void UpdateActivatedProfileDataTest() throws InterruptedException, AWTException {
 		designersAdminPage = new DesignersAdminPage(driver);
 		designerProfileAdminPage = new DesignerProfileAdminPage(driver);
 		homePageAdminPage = new HomePageAdminPage(driver);
+		defaultAdminPage = new DefaultPage(driver);
+		// Search for pending accounts
 		homePageAdminPage.adminSideMenuListItems.get(3).click();
-		designersAdminPage.searchStatus(1);
-		designersAdminPage.searchFunDes();
-		if (designersAdminPage.deactivatedAccountBtnDes.get(0).isDisplayed()) {
-			designersAdminPage.deActivateAccountFunDes(0);
-			int activated = designersAdminPage.activeStatusDes.size();
-			System.out.println(" Number of Activated accounts are: " + activated);
-			Thread.sleep(1000);
+		designersAdminPage.searchStatus(2);
+		if (designersAdminPage.confirmFCheckBoxDes.isSelected()) {
+			designersAdminPage.swapConfirmCheckBoxFunDes();
+			// Thread.sleep(1000);
+			designersAdminPage.searchFilterFunDes();
+			int activated1 = designersAdminPage.activeStatusDes.size();
+			System.out.println(" Number of Activated accounts are: " + activated1);
+			// Thread.sleep(1000);
+			designersAdminPage.activateAccountFunDes(0);
+			int activated2 = designersAdminPage.activeStatusDes.size();
+			System.out.println(" Number of Activated accounts are: " + activated2);
+
+			designersAdminPage.clearFilterFunDes();
+			designersAdminPage.searchStatus(1);
+			// Thread.sleep(1000);
+			designersAdminPage.searchFilterFunDes();
+
 			designersAdminPage.openActiveStatusFunDes(0);
 			designerProfileAdminPage.updateProfileFunDes(fNameDes, lNameDes, bioDes, countryIndexDes, regionDes,
-					cityDes, addDes, statusIndexDes);
+					cityDes, addDes, 2);
 			designerProfileAdminPage.openAccountInfoTabFun();
 			designerProfileAdminPage.openContestsInfoTabFun();
 			designerProfileAdminPage.openTransfersInfoTabFun();
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", designerProfileAdminPage.submitBtnDes);
 			Assert.assertTrue(designerProfileAdminPage.updateAlertSuccessMsgDes.isDisplayed());
 		} else {
+			// Thread.sleep(1000);
+			designersAdminPage.searchFilterFunDes();
+			int activated1 = designersAdminPage.activeStatusDes.size();
+			System.out.println(" Number of Activated accounts are: " + activated1);
+			// Thread.sleep(1000);
 			designersAdminPage.activateAccountFunDes(0);
-			int activated = designersAdminPage.activeStatusDes.size();
-			System.out.println(" Number of Activated accounts are: " + activated);
-			Thread.sleep(1000);
+			int activated2 = designersAdminPage.activeStatusDes.size();
+			System.out.println(" Number of Activated accounts are: " + activated2);
+
+			designersAdminPage.clearFilterFunDes();
+			designersAdminPage.searchStatus(1);
+			// Thread.sleep(1000);
+			designersAdminPage.searchFilterFunDes();
+
 			designersAdminPage.openActiveStatusFunDes(0);
 			designerProfileAdminPage.updateProfileFunDes(fNameDes, lNameDes, bioDes, countryIndexDes, regionDes,
-					cityDes, addDes, statusIndexDes);
+					cityDes, addDes, 2);
 			designerProfileAdminPage.openAccountInfoTabFun();
 			designerProfileAdminPage.openContestsInfoTabFun();
 			designerProfileAdminPage.openTransfersInfoTabFun();
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", designerProfileAdminPage.submitBtnDes);
 			Assert.assertTrue(designerProfileAdminPage.updateAlertSuccessMsgDes.isDisplayed());
 		}
-		Thread.sleep(1000);
-		Actions hoverAction;
+
+	}
+
+	@Test(priority = 4)
+	public void UpdateNotActivatedProfileDataTest() throws InterruptedException, AWTException {
+		designersAdminPage = new DesignersAdminPage(driver);
+		designerProfileAdminPage = new DesignerProfileAdminPage(driver);
+		homePageAdminPage = new HomePageAdminPage(driver);
 		defaultAdminPage = new DefaultPage(driver);
+		// Search for pending accounts
+		homePageAdminPage.adminSideMenuListItems.get(3).click();
+		// Search for active accounts
+		designersAdminPage.searchStatus(1);
+
+		if (designersAdminPage.confirmFCheckBoxDes.isSelected()) {
+			// Thread.sleep(1000);
+			designersAdminPage.searchFilterFunDes();
+			int activated = designersAdminPage.activeStatusDes.size();
+			System.out.println(" Number of Activated accounts are: " + activated);
+			// Thread.sleep(1000);
+			designersAdminPage.deActivateAccountFunDes(0);
+
+			designersAdminPage.clearFilterFunDes();
+			designersAdminPage.searchStatus(2);
+			// Thread.sleep(1000);
+			designersAdminPage.searchFilterFunDes();
+			int activated1 = designersAdminPage.activeStatusDes.size();
+			System.out.println(" Number of Activated accounts are: " + activated1);
+			designersAdminPage.openPendingStatusFunDes(0);
+			designerProfileAdminPage.updateProfileFunDes(fNameDes, lNameDes, bioDes, countryIndexDes, regionDes,
+					cityDes, addDes, 1);
+			designerProfileAdminPage.openAccountInfoTabFun();
+			designerProfileAdminPage.openContestsInfoTabFun();
+			designerProfileAdminPage.openTransfersInfoTabFun();
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", designerProfileAdminPage.submitBtnDes);
+			Assert.assertTrue(designerProfileAdminPage.updateAlertSuccessMsgDes.isDisplayed());
+		} else {
+			designersAdminPage.swapConfirmCheckBoxFunDes();
+			// Thread.sleep(1000);
+			designersAdminPage.searchFilterFunDes();
+			int activated = designersAdminPage.activeStatusDes.size();
+			System.out.println(" Number of Activated accounts are: " + activated);
+			// Thread.sleep(1000);
+			designersAdminPage.deActivateAccountFunDes(0);
+
+			designersAdminPage.clearFilterFunDes();
+			designersAdminPage.searchStatus(2);
+			// Thread.sleep(1000);
+			designersAdminPage.searchFilterFunDes();
+			int activated1 = designersAdminPage.activeStatusDes.size();
+			System.out.println(" Number of Activated accounts are: " + activated1);
+			designersAdminPage.openPendingStatusFunDes(0);
+			designerProfileAdminPage.updateProfileFunDes(fNameDes, lNameDes, bioDes, countryIndexDes, regionDes,
+					cityDes, addDes, 1);
+			designerProfileAdminPage.openAccountInfoTabFun();
+			designerProfileAdminPage.openContestsInfoTabFun();
+			designerProfileAdminPage.openTransfersInfoTabFun();
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", designerProfileAdminPage.submitBtnDes);
+			Assert.assertTrue(designerProfileAdminPage.updateAlertSuccessMsgDes.isDisplayed());
+		}
+	}
+
+	@Test(priority = 5)
+	public void logoutFun() throws AWTException {
+		homePageAdminPage = new HomePageAdminPage(driver);
+		Actions hoverAction;
 		hoverAction = new Actions(driver);
 		hoverAction.moveToElement(homePageAdminPage.userAdminMenu).perform();
 		homePageAdminPage.logoutAdminFun();

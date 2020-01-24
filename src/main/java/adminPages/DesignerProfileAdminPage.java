@@ -74,6 +74,12 @@ public class DesignerProfileAdminPage extends PageBase {
 
 	public void updateProfileFunDes(String fNameDes, String lNameDes, String bioDes, int countryIndexDes,
 			String regionDes, String cityDes, String addDes, int statusIndexDes) {
+		fNameTxtBoxDes.clear();
+		lNameTxtBoxDes.clear();
+		bioTxtBoxDes.clear();
+		regionTxtBoxDes.clear();
+		cityTxtBoxDes.clear();
+		addTxtBoxDes.clear();
 		setTextElementText(fNameTxtBoxDes, fNameDes);
 		setTextElementText(lNameTxtBoxDes, lNameDes);
 		setTextElementText(bioTxtBoxDes, bioDes);

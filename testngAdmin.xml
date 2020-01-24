@@ -6,7 +6,8 @@
 		<classes>
 			<!-- Admin tests -->
 			<class name="adminTests.LoginAdminTest" />
-			<class name="adminTests.ContestsAdminTest" />
+			<class name="adminTests.SearchFiltersContestsAdminTest" />
+			<class name="adminTests.ContestsStatusAdminTest" />
 			<class name="adminTests.UsersAdminTest" />
 			<!--<class name="adminTests.SearchAdminTest" /> -->
 			<class name="adminTests.DisableAndUpdateUsersAccountsTest" />

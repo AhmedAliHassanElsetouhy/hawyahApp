@@ -76,10 +76,10 @@ public class DesignersAdminTest extends TestBase {
 		String todayDate = today.format(date);
 		designersAdminPage.fromToDateFunDes(todayDate);
 		designersAdminPage.swapConfirmCheckBoxFunDes();
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.searchBtnDes);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.designerFilterSearchBtnDes);
 		System.out.println(designersAdminPage.pendingStatusDes.size());
 		Assert.assertTrue(designersAdminPage.pendingStatusDes.size() != 0);
-		designersAdminPage.clearFunDes();
+		designersAdminPage.clearFilterFunDes();
 	}
 
 	@Test(priority = 2)
@@ -114,19 +114,19 @@ public class DesignersAdminTest extends TestBase {
 	@Test(priority = 3)
 	public void searchTest() throws InterruptedException {
 		designersAdminPage = new DesignersAdminPage(driver);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.searchBtnDes);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.designerFilterSearchBtnDes);
 		Assert.assertTrue(
 				designersAdminPage.pendingStatusDes.size() != 0 || designersAdminPage.activeStatusDes.size() != 0);
-		designersAdminPage.clearFunDes();
+		designersAdminPage.clearFilterFunDes();
 	}
 
 	@Test(priority = 4)
 	public void searchActivatedTest() throws InterruptedException {
 		designersAdminPage = new DesignersAdminPage(driver);
 		designersAdminPage.accountStatusFunDes(1);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.searchBtnDes);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.designerFilterSearchBtnDes);
 		Assert.assertEquals(designersAdminPage.pendingStatusDes.size(), 0);
-		designersAdminPage.clearFunDes();
+		designersAdminPage.clearFilterFunDes();
 		Thread.sleep(2000);
 	}
 
@@ -135,9 +135,9 @@ public class DesignersAdminTest extends TestBase {
 		designersAdminPage = new DesignersAdminPage(driver);
 		designersAdminPage.accountStatusFunDes(2);
 		designersAdminPage.swapConfirmCheckBoxFunDes();
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.searchBtnDes);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.designerFilterSearchBtnDes);
 		Assert.assertEquals(designersAdminPage.activeStatusDes.size(), 0);
-		designersAdminPage.clearFunDes();
+		designersAdminPage.clearFilterFunDes();
 	}
 
 	@Test(priority = 6)
@@ -148,7 +148,7 @@ public class DesignersAdminTest extends TestBase {
 		String todayDate = today.format(date);
 		designersAdminPage.fromToDateFunDes(todayDate);
 		designersAdminPage.swapConfirmCheckBoxFunDes();
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.searchBtnDes);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", designersAdminPage.designerFilterSearchBtnDes);
 		Assert.assertTrue(designersAdminPage.pendingStatusDes.size() != 0);
 		Actions hoverAction = new Actions(driver);
 		hoverAction.moveToElement(homePageAdminPage.adminMenu.get(1)).perform();

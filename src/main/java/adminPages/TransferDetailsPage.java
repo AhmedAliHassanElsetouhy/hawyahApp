@@ -68,6 +68,10 @@ public class TransferDetailsPage extends PageBase {
 		setTextElementText(designerTransferNotesTxtBox, transferNotes);
 	}
 
+	public void changeTransferTypeFun(int transferIndex) {
+		selectItemWithIndex(designerTransferList, transferIndex);
+	}
+	
 	public void submitTransferDetailsDataFun() {
 		clickButton(submitTransferDetailsBtn);
 	}

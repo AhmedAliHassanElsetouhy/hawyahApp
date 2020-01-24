@@ -45,10 +45,10 @@ public class UsersAdminTest extends TestBase {
 	// String password = fake.number().digits(8);
 	String usPassword = "P@55word";
 
-	@Test(priority = 0)
+	@Test(priority = 0, alwaysRun = true)
 	public void EnsuringClientRegisterSubmittedtAdminTest() throws IOException, AWTException, InterruptedException {
 		ExcelReader ER = new ExcelReader();
-		Thread.sleep(1000);
+		// Thread.sleep(1000);
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
 		defaultAdminPage = new DefaultPage(driver);
 		registrationPage = new RegistrationClientPage(driver);
@@ -62,7 +62,6 @@ public class UsersAdminTest extends TestBase {
 		registrationPage.submitRegisterfun();
 		System.out.println(registerConfirmPage.registerClientConfirmMsgCli.getText());
 		Assert.assertTrue(registerConfirmPage.registerClientConfirmMsgCli.getText().contains("شكرا"));
-
 		driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
 		homePageAdminPage = new HomePageAdminPage(driver);
 		loginAdminPage = new LoginPage(driver);
@@ -85,11 +84,12 @@ public class UsersAdminTest extends TestBase {
 		Assert.assertTrue(usersAdminPage.pendingStatus.size() != 0);
 		Actions hoverAction = new Actions(driver);
 		hoverAction.moveToElement(homePageAdminPage.adminMenu.get(1)).perform();
+		Thread.sleep(1000);
 		homePageAdminPage.logoutAdminFun();
 	}
 
-	@Test(priority = 1, alwaysRun = true)
-	public void openHomePageTest() throws IOException {
+	@Test(priority = 1)
+	public void openHomePageTest() throws IOException, InterruptedException {
 		ExcelReader ER = new ExcelReader();
 		// driver.navigate().to(ER.getExcelData(0, 2)[0][1]);
 		homePageAdminPage = new HomePageAdminPage(driver);
@@ -106,28 +106,28 @@ public class UsersAdminTest extends TestBase {
 	@Test(priority = 2)
 	public void Activate_Deactivate_Test() throws InterruptedException, AWTException {
 		usersAdminPage = new UsersAdminPage(driver);
-		int numOfActiveAcc = usersAdminPage.activateAccountBtn.size();
-		System.out.println(" Number of Activated accounts are: " + numOfActiveAcc);
-		int numOfDeactivatedAcc = usersAdminPage.deactivatedAccountBtn.size();
-		System.out.println(" Number of notActivated accounts are: " + numOfDeactivatedAcc);
-		if (numOfActiveAcc > 0) {
-			usersAdminPage.deActivateAccountFun(0);
-		} else {
+		int numOfActivateBtn = usersAdminPage.activateAccountBtn.size();
+		System.out.println(" Number of Activate btn accounts are: " + numOfActivateBtn);
+		int numOfDeactivateBtn = usersAdminPage.deactivatedAccountBtn.size();
+		System.out.println(" Number of notActivate btn accounts are: " + numOfDeactivateBtn);
+		if (numOfActivateBtn > 0) {
 			usersAdminPage.activateAccountFun(0);
+		} else {
+			usersAdminPage.deActivateAccountFun(0);
 		}
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_F5);
 		robot.keyRelease(KeyEvent.VK_F5);
 
-		int numOfDeactiveAcc1 = usersAdminPage.activateAccountBtn.size();
-		System.out.println(" Number of notActivated accounts are: " + numOfDeactiveAcc1);
-		if (numOfDeactiveAcc1 > 0) {
-			usersAdminPage.activateAccountFun(0);
-		} else {
+		int numOfDeactiveAccBtn1 = usersAdminPage.activateAccountBtn.size();
+		System.out.println(" Number of notActivated account btn are: " + numOfDeactiveAccBtn1);
+		if (numOfDeactiveAccBtn1 > 0) {
 			usersAdminPage.deActivateAccountFun(0);
+		} else {
+			usersAdminPage.activateAccountFun(0);
 		}
 		int numOfActivatedAcc1 = usersAdminPage.deactivatedAccountBtn.size();
-		System.out.println(" Number of notActivated accounts are: " + numOfActivatedAcc1);
+		System.out.println(" Number of Activate account btn are: " + numOfActivatedAcc1);
 		// Assert.assertEquals(usersAdminPage.pendingStatus.size(),
 		// usersAdminPage.activateAccountBtn.size());
 		Assert.assertEquals(usersAdminPage.activeStatus.size(), usersAdminPage.deactivatedAccountBtn.size());
@@ -176,5 +176,4 @@ public class UsersAdminTest extends TestBase {
 		hoverAction.moveToElement(homePageAdminPage.adminMenu.get(1)).perform();
 		homePageAdminPage.logoutAdminFun();
 	}
-
 }
