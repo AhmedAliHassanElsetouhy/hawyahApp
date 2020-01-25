@@ -49,6 +49,12 @@ public class MoreDetailsClientPage extends PageBase {
 
 	public void moreDetailsFun(String activityName, String activityDesc, String activityOption, String contest,
 			String additionalInfo, String folderName, String title) throws InterruptedException, AWTException {
+		activityNameTxtFieldCli.clear();
+		descriptionTxtFieldCli.clear();
+		activityOptionTxtFieldCli.clear();
+		contestTxtFieldCli.clear();
+		additionalInfoTxtFieldCli.clear();
+		titleTxtFieldCli.clear();
 		setTextElementText(activityNameTxtFieldCli, activityName);
 		setTextElementText(descriptionTxtFieldCli, activityDesc);
 		clickButton(activityTypeLstCli);

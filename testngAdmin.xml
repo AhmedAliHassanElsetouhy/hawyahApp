@@ -7,14 +7,22 @@
 			<!-- Admin tests -->
 			<class name="adminTests.LoginAdminTest" />
 			<class name="adminTests.SearchFiltersContestsAdminTest" />
+
 			<class name="adminTests.ContestsStatusAdminTest" />
+
 			<class name="adminTests.UsersAdminTest" />
+
 			<!--<class name="adminTests.SearchAdminTest" /> -->
 			<class name="adminTests.DisableAndUpdateUsersAccountsTest" />
+
 			<class name="adminTests.DesignersAdminTest" />
+
 			<class name="adminTests.DisableAndUpdateDesignerAccountTest" />
+
 			<class name="adminTests.PaymentsAdminTest" />
+
 			<class name="adminTests.TransfersAdminTest" />
+			<class name="adminTests.MoneyAdminTest" />
 		</classes>
 	</test>
 </suite> 

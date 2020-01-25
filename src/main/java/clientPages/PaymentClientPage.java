@@ -17,11 +17,23 @@ public class PaymentClientPage extends PageBase {
 	public WebElement paymentPageHeaderCli;
 
 	// @FindBy(xpath = "//*[text()='الفئة الفضية']")
-	@FindBy(xpath = "//div[@class='contest-image-frame package_option']")
-	WebElement silverTypeCli;
+	// @FindBy(xpath = "//div[@class='contest-image-frame package_option']")
+	@FindBy(xpath = "//div[@class='col m4 s12 wow fadeIn']")
+	WebElement silverPrizeTypeCli;
 
-	@FindBy(xpath = "//img[@class='icon']")
-	WebElement correctIconCli;
+	@FindBy(xpath = "//div[@class='col m4 s12 wow fadeIn full-width']")
+	WebElement goldenPrizeTypeCli;
+
+	// @FindBy(xpath = "//img[@class='icon']")
+	@FindBy(xpath = "//*[@src='/assets/uncheckmark-ebf98565f8229ee815d774943a8d15a208f9a6af6a55a591539072f32a6a4786.svg']")
+	List<WebElement> correctIconsCli;
+
+	// @FindBy(xpath =
+	// "//*[@src='/assets/checkmark-3b519427250e38ccb755782c11a98a529aac2129f11e327c4706b5a2b81c3b80.svg']")
+	// @FindBy(xpath =
+	// "//*[@src='/assets/uncheckmark-ebf98565f8229ee815d774943a8d15a208f9a6af6a55a591539072f32a6a4786.svg']")
+	@FindBy(xpath = "//div[@class='icon-background']")
+	List<WebElement> displayCorrectIconsCli;
 
 	// @FindBy(xpath = "//*[text()='إختر طريقة الدفع']")
 	// @FindBy(xpath = "//a[@class='chosen-single']")
@@ -31,51 +43,39 @@ public class PaymentClientPage extends PageBase {
 	@FindBy(xpath = "//div[@class='chosen-container chosen-container-single chosen-rtl chosen-container-single-nosearch chosen-with-drop chosen-container-active']")
 	public WebElement paymentLstCli;
 
-	@FindBy(xpath = "//*[@class='contest-image-frame package_option']")
-	public WebElement silverElmCli;
-
 	@FindBy(id = "contest_payment_type")
 	WebElement paymentOptionCli;
 
 	@FindBy(xpath = "//*[@class='chosen-drop']//*[@class='chosen-results']")
 	public WebElement ulCli;
 
-	public void silverPrize() {
-		clickButton(silverTypeCli);
-		// clickButton(correctIcon);
+	public void silverPrizeFun() {
+		clickButton(silverPrizeTypeCli);
+		selectSpecificIcon(correctIconsCli, 0);
 	}
 
-	// @FindBy(xpath = "//ul[@class='chosen-results']")
-	// @FindBy(xpath = "//li[@class='active-result']")
-	// @FindBy(className = "active-result")
-	@FindBy(id = "contest_payment_type")
-	WebElement a;
+	public void goldenPrizeFun() {
+		clickButton(goldenPrizeTypeCli);
+		selectSpecificIcon(correctIconsCli, 1);
+	}
+
+	public void ContestDisplayOptionsFun() {
+		selectSpecificIcon(displayCorrectIconsCli, 0);
+		// selectSpecificIcon(displayCorrectIconsCli, 3);
+		// selectSpecificIcon(displayCorrectIconsCli, 4);
+	}
 
 	@FindBy(xpath = "//div[@class='chosen-drop']//ul[@class=chosen-results]")
 	public WebElement openPaymentListCli;
 
-	@FindBy(className = "active-result")
-	List<WebElement> la;
+	@FindBy(id = "contest_payment_type_chosen")
+	List<WebElement> paymentListOptions;
 
-	@FindBy(xpath = "/html[1]/body[1]/div[2]/form[1]/div[2]/div[6]/div[1]/div[1]/div[1]/ul[1]/li[2]")
-	WebElement test;
+	public void paymentOptionFun(int paymentIndex) {
+		selectSpecificIcon(paymentListOptions, paymentIndex);
+	}
 
 	public void bankDepositFun() throws InterruptedException {
-		// System.out.println(paymentLst.getLocation());
-		// clickButton(paymentLst);
-		// payment000.sendKeys(Keys.ARROW_DOWN);
-		// paymentLst.sendKeys(Keys.ENTER);
-		// Assert.assertTrue(paymentLst.isDisplayed());
-		// Assert.assertTrue(ul.isDisplayed());
-		Thread.sleep(10000);
-		// explicit wait - to wait for the compose button to be click-able
-
-		// WebDriverWait wait = new WebDriverWait(driver, 30);
-		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='chosen-drop']//ul[@class=chosen-results]")));
-		//
-		// click on the compose button as soon as the "compose" button is visible
-		// openPaymentList.click();
-
 		System.out.println(openPaymentListCli);
 		List<WebElement> a = openPaymentListCli.findElements(By.className("active-result"));
 		a.get(1).click();
@@ -83,10 +83,6 @@ public class PaymentClientPage extends PageBase {
 		// electItemByValue(paymentOption, "DEPOSIT");
 		// selectItemByValue(menuItem, selectedElement);
 		// clickButton(paymentOptions);
-
-		// clickButton(test);
-
 		// selectSpecificIcon(paymentOptions, index);
-
 	}
 }

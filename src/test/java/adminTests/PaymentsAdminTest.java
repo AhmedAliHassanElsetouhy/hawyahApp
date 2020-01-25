@@ -42,44 +42,55 @@ public class PaymentsAdminTest extends TestBase {
 	}
 
 	@Test(priority = 2)
-	public void filterDepositPaymentTypeTest() {
+	public void filterDepositPaymentTypeTest() throws InterruptedException {
 		paymentsAdminPage = new PaymentsAdminPage(driver);
+		homePageAdminPage = new HomePageAdminPage(driver);
+		homePageAdminPage.adminSideMenuListItems.get(4).click();
 		paymentsAdminPage.searchPaymentTypePaymentsFilterFun(1);
 		paymentsAdminPage.searchFilterPaymentsFun();
 		Assert.assertTrue(paymentsAdminPage.paymentsFilterPaymentRecordsList.get(1).getText().contains("Deposit"));
 	}
 
 	@Test(priority = 3)
-	public void filterCreditCardPaymentTypeTest() {
+	public void filterCreditCardPaymentTypeTest() throws InterruptedException {
 		paymentsAdminPage = new PaymentsAdminPage(driver);
+		homePageAdminPage = new HomePageAdminPage(driver);
+		homePageAdminPage.adminSideMenuListItems.get(4).click();
 		paymentsAdminPage.searchPaymentTypePaymentsFilterFun(2);
 		paymentsAdminPage.searchFilterPaymentsFun();
 		Assert.assertTrue(paymentsAdminPage.paymentsFilterPaymentRecordsList.get(2).getText().contains("Credit card"));
 	}
 
 	@Test(priority = 4)
-	public void filterSadadPaymentTypeTest() {
+	public void filterSadadPaymentTypeTest() throws InterruptedException {
 		paymentsAdminPage = new PaymentsAdminPage(driver);
+		homePageAdminPage = new HomePageAdminPage(driver);
+		homePageAdminPage.adminSideMenuListItems.get(4).click();
 		paymentsAdminPage.searchPaymentTypePaymentsFilterFun(3);
 		paymentsAdminPage.searchFilterPaymentsFun();
 		Assert.assertTrue(paymentsAdminPage.paymentsFilterTotalPaymentsAmount.getText().contains("0 Saudi Riyal"));
-		paymentsAdminPage.clearSearchPaymentFun();
 	}
 
 	@Test(priority = 5)
-	public void searchAmountPaymentTypeTest() {
+	public void searchAmountPaymentTypeTest() throws InterruptedException {
 		paymentsAdminPage = new PaymentsAdminPage(driver);
+		homePageAdminPage = new HomePageAdminPage(driver);
+		homePageAdminPage.adminSideMenuListItems.get(4).click();
+		paymentsAdminPage.searchPaymentTypePaymentsFilterFun(0);
 		paymentsAdminPage.searchPaymentsFilterAmountFun(paymentAmount);
+		paymentsAdminPage.searchFilterPaymentsFun();
 		Assert.assertTrue(paymentsAdminPage.paymentsFilterPaymentRecordsList.get(1).getText().contains("1999"));
-		paymentsAdminPage.clearSearchPaymentFun();
 	}
 
 	@Test(priority = 6)
-	public void searchTransactionNumberTypeTest() {
+	public void searchTransactionNumberTypeTest() throws InterruptedException {
 		paymentsAdminPage = new PaymentsAdminPage(driver);
+		homePageAdminPage = new HomePageAdminPage(driver);
+		homePageAdminPage.adminSideMenuListItems.get(4).click();
+		paymentsAdminPage.searchPaymentTypePaymentsFilterFun(0);
 		paymentsAdminPage.searchTransactionPaymentsFilterAmountFun(transactionAmount);
-		Assert.assertTrue(paymentsAdminPage.paymentsFilterPaymentRecordsList.get(2).getText().contains("157"));
-		paymentsAdminPage.clearSearchPaymentFun();
+		paymentsAdminPage.searchFilterPaymentsFun();
+		Assert.assertTrue(paymentsAdminPage.paymentsFilterPaymentRecordsList.get(1).getText().contains("157"));
 	}
 
 	@Test(priority = 7)
