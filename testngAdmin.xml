@@ -23,6 +23,9 @@
 
 			<class name="adminTests.TransfersAdminTest" />
 			<class name="adminTests.MoneyAdminTest" />
+			<class name="adminTests.GeneralSettingsSuperAdminTest" />
+			<class name="adminTests.DesignsAndPricingSuperAdminTest" />
+			<class name="adminTests.SettingsAdminTest" />
 		</classes>
 	</test>
 </suite> 

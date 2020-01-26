@@ -121,17 +121,17 @@ public class BasicIdentityClientTest extends TestBase {
 		Assert.assertTrue(paymentClientPage.paymentPageHeaderCli.isDisplayed());
 	}
 
-	@Test(priority = 9)
-	public void ValidPaymentTest() throws InterruptedException, AWTException {
-		selectDesignsClientPage = new SelectDesignsClientPage(driver);
-		paymentClientPage = new PaymentClientPage(driver);
-		paymentClientPage.silverPrizeFun();
-		paymentClientPage.goldenPrizeFun();
-		// paymentClientPage.bankDepositFun();
-		paymentClientPage.paymentOptionFun(1);
-		// selectDesignsPage.nextFun();
-		// Assert.assertTrue(paymentPage.paymentPageHeader.isDisplayed());
-	}
+//	@Test(priority = 9)
+//	public void ValidPaymentTest() throws InterruptedException, AWTException {
+//		selectDesignsClientPage = new SelectDesignsClientPage(driver);
+//		paymentClientPage = new PaymentClientPage(driver);
+//		paymentClientPage.silverPrizeFun();
+//		paymentClientPage.goldenPrizeFun();
+//		// paymentClientPage.bankDepositFun();
+//		paymentClientPage.paymentOptionFun(1);
+//		// selectDesignsPage.nextFun();
+//		// Assert.assertTrue(paymentPage.paymentPageHeader.isDisplayed());
+//	}
 
 	// @Test(priority = 10)
 	// public void makeLogoutTest() throws AWTException {

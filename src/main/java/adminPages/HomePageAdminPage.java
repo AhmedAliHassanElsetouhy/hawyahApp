@@ -24,6 +24,20 @@ public class HomePageAdminPage extends PageBase {
 	@FindBy(xpath = "//*[text()='Dashboard']")
 	public WebElement adminHomePageTitle;
 
+	@FindBy(xpath = "//*[@href='/admin/design_types?locale=en']")
+	WebElement designsAndPricingBtn;
+
+	public void openDesignsAndPricingFun() {
+		clickButton(designsAndPricingBtn);
+	}
+
+	@FindBy(xpath = "//*[@href='javascript:;']")
+	WebElement generalSettingsBtn;
+
+	public void openGeneralSettingsFun() {
+		clickButton(generalSettingsBtn);
+	}
+
 	@FindBy(xpath = "//span[@class='username username-hide-on-mobile']")
 	public WebElement userAdminMenu;
 

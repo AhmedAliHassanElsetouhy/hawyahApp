@@ -42,8 +42,6 @@ public class MoneyAdminPage extends PageBase {
 	@FindBy(xpath = "//*[@value='search']")
 	WebElement moneyReportSearchFilterBtn;
 
-	// @FindBy(xpath =
-	// "//*[@href='https://hawyah-dev.herokuapp.com/admin/money?locale=en']")
 	@FindBy(xpath = "//*[text()='Clear']")
 	WebElement moneyReportClearFilterBtn;
 
@@ -55,9 +53,6 @@ public class MoneyAdminPage extends PageBase {
 
 	@FindBy(xpath = "//*[@class='text-center well label-danger']")
 	WebElement transfersLabel;
-
-	// @FindBy(xpath = "//*[@class='text-center well']")
-	// public WebElement moneyLabel;
 
 	@FindBy(xpath = "//strong")
 	public List<WebElement> moneyLabel;
