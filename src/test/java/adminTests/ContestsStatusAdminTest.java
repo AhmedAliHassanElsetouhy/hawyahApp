@@ -41,7 +41,7 @@ public class ContestsStatusAdminTest extends TestBase {
 	String orgDesc = fakeData.company().industry();
 	String conDesc = fakeData.name().title();
 	String addInfo = fakeData.name().name();
-	String cancelationReason = fakeData.nation().capitalCity();
+	String cancellationReason = fakeData.nation().capitalCity();
 
 	@Test(priority = 1, alwaysRun = true)
 	public void openHomePageTest() throws IOException {
@@ -128,7 +128,7 @@ public class ContestsStatusAdminTest extends TestBase {
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", contestsAdminPage.paymentsTab);
 		Assert.assertTrue(contestsAdminPage.paymentStatus.isDisplayed());
 		contestsAdminPage.openCancelContestFun();
-		contestsAdminPage.cancelContestFun(cancelationReason);
+		contestsAdminPage.cancelContestFun(cancellationReason);
 		contestsAdminPage.cancelFun();
 		Thread.sleep(1000);
 	}

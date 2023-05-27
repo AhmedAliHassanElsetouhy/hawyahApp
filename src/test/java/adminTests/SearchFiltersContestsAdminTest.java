@@ -39,7 +39,7 @@ public class SearchFiltersContestsAdminTest extends TestBase {
 	String orgDesc = fakeData.company().name();
 	String conDesc = fakeData.name().title();
 	String addInfo = fakeData.name().name();
-	String cancelationReason = fakeData.name().title();
+	String cancellationReason = fakeData.name().title();
 
 	@Test(priority = 1, alwaysRun = true)
 	public void openHomePageTest() throws IOException {
